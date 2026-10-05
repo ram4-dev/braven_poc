@@ -46,9 +46,18 @@ def test_domain_and_ports_import_no_adapters_or_io_modules():
 
 
 def test_importing_domain_does_not_load_io_modules():
+    # Re-import the pure packages from a CLEAN state, but only remove the
+    # forbidden I/O roots and domain/ports submodules. Purging every
+    # email_classifier* module would orphan class objects other tests already
+    # imported (e.g. ScoreError), breaking `except ScoreError` identity.
     for module_name in list(sys.modules):
         root = module_name.split(".")[0]
-        if module_name.startswith("email_classifier") or root in FORBIDDEN_ROOTS:
+        if root in FORBIDDEN_ROOTS or module_name in (
+            "email_classifier",
+            "email_classifier.domain",
+            "email_classifier.domain.models",
+            "email_classifier.ports",
+        ):
             del sys.modules[module_name]
 
     importlib.import_module("email_classifier.domain.models")

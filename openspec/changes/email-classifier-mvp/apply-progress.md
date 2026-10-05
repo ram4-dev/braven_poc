@@ -1,5 +1,56 @@
 # Apply Progress: email-classifier-mvp (PR 1 — work units 1–2; PR 2 — units 3–5; PR 3 — units 6–7)
 
+---
+# PR 6 — Work Units 11–12 (worktree braven_poc.pr6-pipeline, branch pr6-pipeline)
+
+Strict TDD active (`.venv/bin/python -m pytest -q`). Unit 11 (tasks 7.1–7.2) was completed by a prior timed-out run and orchestrator-verified; its checkboxes are marked here with the evidence it left behind. Unit 12 (tasks 7.3–7.4) completed this run.
+
+## Work Unit 11 — Pipeline orchestration (tasks 7.1–7.2, prior run, checkboxes marked this run)
+
+- [x] 7.1/7.2 RED→GREEN `tests/pipeline/test_pipeline.py` (8 tests) + `src/email_classifier/pipeline/pipeline.py`. RED verbatim: `ModuleNotFoundError` (8 failed) → GREEN: 8 passed. Scenarios: one scoring request per email, engine swap without policy changes, source replacement, no silent drop, empty-run counts.
+
+## Work Unit 12 — Replay under new thresholds (tasks 7.3–7.4, this run)
+
+- [x] 7.3 RED `tests/pipeline/test_replay.py` — 7 tests, real SqliteRepository on `tmp_path`, seeded by pipeline runs over `tests/fixtures/inbox_small.json` with `FakeDeterministicScorer`, T2 = `dataclasses.replace(ThresholdConfig.mvp(), version="th-t2")`. RED verbatim: `ModuleNotFoundError: No module named 'email_classifier.pipeline.replay'`, `7 failed in 0.17s`. Scenarios: relabels from stored scores under T2 (new records carry `th-t2` + byte-identical raw_scores + unchanged engine/question-set versions), ZERO engine requests (CountingScorer spy asserts requests stay 4 after replay), replay preserves history (T2 current, T1 retrievable, exactly 2 records — append-only), relabeling appends new rows, idempotent re-run with the SAME threshold-set version appends nothing and reports `replayed == 0`, labels recomputed through the same pure `decide()` path (T2_STRICT variant `th-t99` asserted field-by-field against direct `decide()` output).
+- [x] 7.4 GREEN `src/email_classifier/pipeline/replay.py` — module-level `replay(repository, thresholds, email_ids, now=None)` + `ReplayReport(replayed, email_ids)`. Feeds each stored email's latest verbatim raw_scores through the pure `decide()` (engine + question-set versions carried over from the stored record), appends via `append_classified` with the new `ThresholdConfig`; zero engine access. Idempotency: skips emails whose history already carries the target `threshold_set_version` with the same raw_scores (duplicates reported as already processed); the repository dedup key is the second net. Focused: 7 passed. Full suite: 163 passed, 1 failed (pre-existing test pollution, see Issues). Ruff clean.
+
+### Design deviation (unit 12)
+
+- `replay` takes `email_ids` explicitly instead of enumerating storage: `SqliteRepository` exposes no email-listing API and `adapters/**` was outside this work unit's edit surface. The classification-storage port has no enumeration requirement; the caller passes ids (e.g. from a prior `RunReport.email_ids`). Flagged for verify/design review.
+
+## TDD Cycle Evidence (PR 6)
+
+| Work unit | Task | RED | GREEN | REFACTOR |
+|---|---|---|---|---|
+| 11 | 7.1 | `ModuleNotFoundError`, 8 failed (prior run) | 8 passed (orchestrator-verified) | N/A |
+| 12 | 7.3 | `ModuleNotFoundError: No module named 'email_classifier.pipeline.replay'`, 7 failed | 7 passed; intermediate failures fixed: `AttributeError: list_email_ids` (API redesign → email_ids param), duplicate-rerun counted `replayed == 4` → skip-already-replayed check → `replayed == 0` | Import order cleanup; ruff clean |
+
+## Work Unit Evidence (PR 6)
+
+| Evidence | Required value |
+|---|---|
+| Focused test command and exact result (unit 12) | `.venv/bin/python -m pytest tests/pipeline/test_replay.py` → 7 passed (exit 0) |
+| Focused test command and exact result (unit 11) | `.venv/bin/python -m pytest tests/pipeline/test_pipeline.py` → 8 passed |
+| Runtime harness command and exact result (unit 12) | Real SQLite file per test in `tmp_path`; pipeline run (fixture, 4 emails) → replay → history/current read model asserted end to end; zero-engine asserted via CountingScorer spy |
+| Rollback boundary (unit 12) | Delete `src/email_classifier/pipeline/replay.py` + `tests/pipeline/test_replay.py`; pipeline.py and adapters untouched |
+
+## Files Changed (PR 6, this run)
+
+| File | Action |
+|---|---|
+| `tests/pipeline/test_replay.py` | Created (7 tests) |
+| `src/email_classifier/pipeline/replay.py` | Created (`replay`, `ReplayReport`) |
+| `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 7.1–7.4 marked |
+
+## Issues Found (PR 6)
+
+- **Pre-existing full-suite test pollution (NOT introduced by this run):** `.venv/bin/python -m pytest -q` (full suite) → `1 failed, 163 passed` — `test_pipeline.py::TestNoSilentDrop::test_engine_failure_stored_failed_and_queued` fails only when `tests/domain/test_import_graph.py` runs first. Reproduced with my two new files removed: double-import of `email_classifier.domain.models` after the import-graph purge makes the test's `ScoreError` a different class object than the one `pipeline.py` catches. `tests/pipeline/` and `tests/domain/` are outside this work unit's edit surface; flagged for a targeted fix batch.
+
+## Remaining Tasks (out of this batch)
+
+- [ ] 8.x, 9.x, 10.x (Phases 8–10, next PR slices); Phase 11 is parent-owned (review + delivery gates)
+
+---
 Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-domain`, branch `pr1-harness-domain` (Worktrunk-managed, base f144e01). Worktree (units 3–5): `/Users/ramiro/Desktop/projects/braven_poc.pr2-rules-core`, branch `pr2-rules-core`. Worktree (units 6–7): `/Users/ramiro/Desktop/projects/braven_poc.pr3-questions-adapters`, branch `pr3-questions-adapters` (stacked on pr2-rules-core). Delivery: chained stacked-to-main slices, PRs 1→7 of 17. Mode: Strict TDD (`.venv/bin/python -m pytest -q`).
 
 ## Work Unit 6 — Versioned 28-Question Set Config + Loader (PR 3)
