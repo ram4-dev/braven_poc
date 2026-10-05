@@ -1,0 +1,189 @@
+schema: spec-driven
+
+project:
+  name: Clasificador Inteligente de Emails para Aseguradoras
+  slug: braven_poc
+  artifact_store: openspec
+  stage: greenfield-poc
+  initialized: 2026-10-05
+  source_of_truth: PROD.md
+
+context: |
+  Product: automatic classification of inbound emails for an insurance
+  company.
+  Engine: JEV is the semantic engine. It receives many small binary YES/NO
+  questions about email content and returns one probability per question; it
+  is never asked "what is this?" against a giant category list.
+  Core principle: JEV yields probabilistic content signals only; a separate
+  rules engine owned by the insurer turns those signals into decisions.
+  Pipeline: ingest -> extract/normalize -> JEV -> rules/thresholds -> DB ->
+  dashboard.
+  Stack: UNDECIDED - no source manifests in repo; fixed in the first change's
+  design phase.
+
+# Dimensions stored for every classified email (PROD.md sections 4 and 13).
+output_dimensions:
+  - primary_category        # single, from primary_categories
+  - secondary_categories    # list, multi-label
+  - sensitivity             # list, multi-label
+  - actions                 # list, multi-label, may coexist
+  - priority                # single, from priority
+  - confidence              # float 0..1, from JEV decision scores
+  - requires_human_review   # bool, derived from confidence bands
+  - classifier_version      # e.g. insurance-email-v1
+  - raw_scores              # decision question -> probability, verbatim
+
+# MVP taxonomy, transcribed verbatim from PROD.md section 17.
+# Downstream phases MUST use these exact label strings; do not rename them.
+taxonomy_mvp:
+  sensitivity:
+    - PUBLIC
+    - INTERNAL
+    - CONFIDENTIAL
+    - HIGHLY_CONFIDENTIAL
+    - PERSONAL_DATA
+    - SENSITIVE_PERSONAL_DATA
+  primary_categories:
+    - NEW_LEAD
+    - QUOTE_REQUEST
+    - NEW_POLICY
+    - POLICY_RENEWAL
+    - POLICY_CHANGE
+    - POLICY_CANCELLATION
+    - CLAIM_NEW
+    - CLAIM_UPDATE
+    - CLAIM_DOCUMENTATION
+    - PAYMENT_BILLING
+    - COMPLAINT
+    - FRAUD_SUSPICION
+    - LEGAL
+    - REGULATORY
+    - PARTNERSHIP
+    - OTHER
+  deferred_categories: # defined in PROD.md, out of MVP scope
+    - CLAIM_PAYMENT
+    - CLAIM_REJECTION
+    - UNDERWRITING
+    - BROKER_AGENT
+    - REINSURANCE
+    - SUPPLIER
+  actions:
+    - NO_ACTION
+    - REPLY_REQUIRED
+    - DOCUMENT_REQUIRED
+    - APPROVAL_REQUIRED
+    - ESCALATE
+    - URGENT
+  priority:
+    - LOW
+    - NORMAL
+    - HIGH
+    - CRITICAL
+  # PROD.md section 11: auto-classify these only at >= 0.95 confidence.
+  sensitive_high_threshold_categories:
+    - FRAUD_SUSPICION
+    - HIGHLY_CONFIDENTIAL
+    - LEGAL
+
+workflow:
+  # Binding repo convention from AGENTS.md (shared-skills orchestration rule).
+  design_gate: required-before-implementation
+  entry_skills:
+    - humanlayer-task-workflow
+    - humanlayer-rpi-workflow
+    - humanlayer-prd-tdd-workflow
+    - humanlayer-design-control-loop
+  # SDD is the implementation route once the design gate is approved.
+  implementation_route: sdd
+
+delivery:
+  # Use `wt switch --create <branch>`; never raw `git worktree add`.
+  worktrees: worktrunk
+  worktree_root: <repo-parent>/<repo-name>-worktrees/<task-slug>
+  default_strategy: ask-on-risk
+
+testing:
+  # Strict TDD session marker is active. Runner resolved by design.md
+  # (Python 3.12 / pytest): see Testing Strategy commands table.
+  strict_tdd: true
+  runner_status: resolved
+  test_command: "python -m pytest -q"
+  build_command: "python -m pip install -e ."
+  lint_command: "ruff check ."
+  typecheck_command: ""
+  coverage_command: "python -m pytest --cov=email_classifier"
+  note: >-
+    Runner resolved in the email-classifier-mvp design phase: pytest
+    (Python 3.12), ruff for lint, pytest-cov for coverage. The first work
+    unit of that change lands the harness (pyproject.toml, ruff config,
+    smoke test) RED before feature code.
+
+rules:
+  proposal:
+    - Scope the first slice to the MVP boundary in PROD.md sections 17-18;
+      list everything else as a non-goal.
+    - Keep engine capability (JEV scoring) and product policy (taxonomy,
+      thresholds, routing) as separate concerns in every requirement.
+    - Include a rollback plan for any change that alters already-stored
+      classification output.
+    - Never assert a technology stack that the design phase has not yet
+      decided.
+  specs:
+    - Use Given/When/Then for scenarios.
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY).
+    - Taxonomies are enumerated data, not prose; each spec MUST list the
+      exact label set it covers, using taxonomy_mvp strings.
+    - Specify confidence-to-label behaviour as an explicit threshold table,
+      including higher per-category thresholds for sensitive classes.
+    - Label the confidence bands by their PROD.md names (automatic /
+      UNCERTAIN / HUMAN_REVIEW); do not invent new band names.
+  design:
+    - Record the JEV-to-rules-engine boundary as an architecture decision
+      with rationale and an explicit anti-corruption boundary.
+    - Design MUST name the test runner plus concrete test, build, lint, and
+      coverage commands before apply starts.
+    - Define how JEV is called (transport, batching, timeout, retry, failure
+      mode) and what happens when it is unavailable.
+    - Define the classifier versioning scheme and how stored scores are
+      replayed under new thresholds.
+    - Define the decision-question set (the binary questions fed to JEV) as
+      versioned configuration, not scattered literals.
+    - Include sequence diagrams for the ingest-to-label flow and the human
+      review correction flow.
+  tasks:
+    - Group by phase, use hierarchical numbering.
+    - Keep tasks completable in one session.
+    - The first work unit of any change that touches classification MUST
+      land the test harness before feature code.
+    - Keep tasks within the MVP label set; deferred categories are out of
+      scope.
+  apply:
+    guidelines:
+      - Follow existing code patterns once a stack exists.
+      - Thresholds are versioned configuration, never hardcoded in decision
+        paths.
+      - Persist raw JEV scores and classifier_version alongside derived
+        labels; never store derived labels alone.
+      - Keep each decision question independently testable.
+    tdd: true
+    test_command: "python -m pytest -q"
+  verify:
+    test_command: "python -m pytest -q"
+    build_command: ""
+    coverage_threshold: 0
+    checks:
+      - Verify false negatives explicitly for sensitive classes
+        (FRAUD_SUSPICION, LEGAL, PERSONAL_DATA, SENSITIVE_PERSONAL_DATA,
+        HIGHLY_CONFIDENTIAL).
+      - Verify stored output contains raw JEV scores and classifier_version,
+        not only derived labels.
+      - Verify threshold behaviour at and around each band boundary (0.65 and
+        0.90, plus per-category overrides).
+      - Verify that changing thresholds alone can relabel stored emails
+        without re-running JEV.
+  archive:
+    - Warn before merging destructive deltas.
+    - Confirm the taxonomy label set in the archived spec matches the labels
+      the code actually emits.
+    - Confirm no unresolved runner_status remains if the change touched
+      executable code.
