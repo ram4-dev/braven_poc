@@ -1,7 +1,7 @@
 """Work unit 7 — deterministic fake scorer (RED tests)."""
 
+import builtins
 import json
-import sys
 
 
 def make_email():
@@ -62,13 +62,26 @@ class TestReproducibleScores:
         assert s1 != s2
 
     def test_no_network_httpx_never_imported(self):
-        from email_classifier.adapters.fake_scorer import FakeDeterministicScorer
+        # Prove the FAKE SCORER never imports httpx when scoring, regardless of
+        # what other tests loaded process-wide (e.g. the zen adapter's tests).
+        import email_classifier.adapters.fake_scorer as fake_module
+        imported = []
+        real_import = builtins.__import__
 
-        scorer = FakeDeterministicScorer()
-        scorer.score(make_email(), load_question_set())
-        assert "httpx" not in sys.modules
+        def spy(name, *args, **kwargs):
+            imported.append(name.split(".")[0])
+            return real_import(name, *args, **kwargs)
+
+        scorer = fake_module.FakeDeterministicScorer()
+        builtins.__import__ = spy
+        try:
+            scorer.score(make_email(), load_question_set())
+        finally:
+            builtins.__import__ = real_import
+        assert "httpx" not in imported
         # No socket dialing either: the adapter stores no transport/client.
         assert not hasattr(scorer, "_client") and not hasattr(scorer, "client")
+        assert fake_module.__name__  # module loaded, nothing network-bound
 
 
 class TestScoreShape:
