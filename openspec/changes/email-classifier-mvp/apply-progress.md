@@ -390,3 +390,58 @@ Strict TDD active (`.venv/bin/python -m pytest -q`). Documented `size:exception`
 - [ ] 10.4 full verification commands (unit 17)
 - [ ] 10.5 README (unit 17)
 - [ ] 10.6 optional live Zen smoke (gated, parent-owned)
+
+---
+
+# PR 9 — Work Unit 17: End-to-End Corpus Run, Verification, Docs (worktree braven_poc.pr9-e2e, branch pr9-e2e — FINAL apply slice)
+
+Strict TDD active (`.venv/bin/python -m pytest -q`). Work units 1–16 already present on this branch (242 tests before this slice). Tasks 10.6 left untouched (parent-owned, optional, gated on `OPENCODE_API_KEY`).
+
+## Work Unit 17 — tasks 10.3–10.5
+
+- [x] 10.3 RED then GREEN `tests/e2e/test_corpus_run.py` — the full corpus (125 emails) through the complete pipeline (`InboxDatasetSource` → `FakeDeterministicScorer` → pure rules → tmp `SqliteRepository`): item count (125 ingested, 125 email_ids, no duplicates), exactly one current classification per email (history length 1 on first run), zero silent drops (every email whose stored raw scores place a sensitive-tier label at/above its review floor — computed independently from stored `raw_scores` × `ThresholdConfig` — is present in the review queue; `report.queued == len(queue)`), failed emails stored + queued (ExplodingScorer forces `ScoreError` on `em-0044` → status FAILED, no fabricated primary category, present in queue with reason `scoring_failed`, classified == 124, failed == 1), run report counts consistent (ingested == processed == classified + failed; repo email count == 125), replay under a modified threshold config (`replace(thresholds, default_auto_threshold=0.99, default_review_floor=0.99, version="th-e2e-strict")`) over the full corpus with ZERO engine calls (SpyEngine asserts exactly 125 requests total — only the initial run) and history preserved (exactly 2 records per email, current carries `th-e2e-strict`, raw_scores unchanged). RED verbatim: initial run before file existed → `ModuleNotFoundError: No module named 'tests.e2e'` (collection); after first draft, 1 assertion failure (`report.email_ids` corpus-order vs sorted — test-expectation bug, fixed in test). GREEN: 5 passed in 1.43s.
+- [x] 10.4 Full verification battery (recorded below in Verification Battery).
+- [x] 10.5 `README.md` at repo root: purpose paragraph, install (uv venv / pip install -e .), run-pipeline example, run API (uvicorn) + endpoint summary, run tests, fake-vs-live scorer switch (`FakeDeterministicScorer` vs `ZenJevScorer` + `OPENCODE_API_KEY`), replay explanation with zero-engine-calls + idempotency. English, concise.
+
+## TDD Cycle Evidence (unit 17)
+
+| Work unit | Task | RED | GREEN | REFACTOR |
+|---|---|---|---|---|
+| 17 | 10.3 | `ModuleNotFoundError: No module named 'tests.e2e'` at collection; then 1 failed (`email_ids` order assertion — test bug, not source) | 5 passed (focused, 1.43s); 247 passed full suite | Removed unused `import pytest` (ruff F401); extracted `SpyEngine`/helpers; ruff clean |
+
+## Work Unit Evidence (unit 17)
+
+| Evidence | Required value |
+|---|---|
+| Focused test command and exact result | `.venv/bin/python -m pytest tests/e2e/test_corpus_run.py` → 5 passed (exit 0, 1.43s) |
+| Runtime harness command and exact result | Full battery (below) — full corpus (125 real dataset emails) runs through the real pipeline into a real SQLite file in tmp_path with no mocks; coverage suite re-runs the e2e path |
+| Rollback boundary | Delete `tests/e2e/test_corpus_run.py` and `README.md`; no source, dataset, config, or other-test files touched |
+
+## Verification Battery (task 10.4, exact results)
+
+- `.venv/bin/python -m pytest -q` → **247 passed**, 1 warning (pre-existing benign warning summary), 4.06s.
+- `.venv/bin/python -m pytest --cov=email_classifier --cov-report=term-missing -q` → 247 passed; **TOTAL 1025 stmts, 33 miss, 97%**. Highlights: pipeline.py 100%, fake_scorer 100%, sqlite_repo 97%, zen_jev 97%, api/app.py 98%, rules.py 98%, config/loader.py 87% (validation error branches), metrics.py 95%.
+- `.venv/bin/ruff check .` → **All checks passed!** (after removing one unused import in the new test file).
+- Editable install: `.venv/bin/python -m pip install -e .` → pip module absent (uv-managed venv); equivalent `uv pip install -e . --python .venv/bin/python` → `~ email-classifier==0.1.0` installed; `.venv/bin/python -c "import email_classifier"` → `0.1.0`. Package importable.
+
+## Files Changed (PR 9, this run)
+
+| File | Action |
+|---|---|
+| `tests/e2e/test_corpus_run.py` | Created (5 e2e tests over the full 125-email corpus) |
+| `README.md` | Created (repo root docs) |
+| `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 10.3–10.5 marked |
+| `openspec/changes/email-classifier-mvp/apply-progress.md` | Merged final PR 9 section |
+
+## Deviations from Design
+
+- None in source. Test-side notes: (1) the independent "expected sensitive queue set" helper reads the repo connection directly (`repo._conn`) to enumerate all email_ids — the storage port has no email-enumeration method by design (same latitude `replay` documents for its caller-supplied ids); (2) `pip install -e .` was executed via its exact uv equivalent because the worktree's `.venv` is uv-managed (no pip module) — same artifact, editable install proven.
+
+## Issues Found
+
+- None blocking. No source bugs surfaced during the e2e run: the full corpus passes through pipeline, rules, storage, queue, and replay cleanly. Full suite grew 242 → 247.
+
+## Remaining Tasks (out of this batch)
+
+- [ ] 10.6 optional live Zen smoke test (gated on `OPENCODE_API_KEY` present) — parent-owned; checkbox left untouched.
+- Phase 11 (review + delivery gates) — parent-owned.
