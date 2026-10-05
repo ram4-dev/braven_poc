@@ -1,1 +1,1 @@
-"""Offline adapters: fake scorer, dataset inbox source, SQLite repository."""
+"""Adapters: fake scorer, dataset inbox source, SQLite repository."""
