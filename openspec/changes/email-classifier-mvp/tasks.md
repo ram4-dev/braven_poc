@@ -91,10 +91,10 @@ Unit numbering = PR numbering. Units 2–17 are stacked on the previous one; `fe
 
 ## Phase 7: Pipeline and Replay (work units 11–12)
 
-- [ ] 7.1 RED `tests/pipeline/test_pipeline.py`: ingest → score → rules → append over the fixture, exactly one scoring request per email, Engine replaced without policy changes (swap fake/zen, same `Decision` shape), Source replacement leaves the pipeline unchanged, No silent drop (failed email present in storage, review queue and run counts), Empty-run counts. <!-- sdd-owner: implementation -->
-- [ ] 7.2 GREEN `src/email_classifier/pipeline/pipeline.py` (orchestration, `FAILED` status + review routing, run report counts). <!-- sdd-owner: implementation -->
-- [ ] 7.3 RED `tests/pipeline/test_replay.py`: Replay relabels from stored scores under T2 (new rows carry T2 + unchanged raw scores + engine version), zero engine requests (spy asserts 0), Replay preserves history (T2 current, T1 retrievable, same raw scores), Relabeling appends. <!-- sdd-owner: implementation -->
-- [ ] 7.4 GREEN `src/email_classifier/pipeline/replay.py`. <!-- sdd-owner: implementation -->
+- [x] 7.1 RED `tests/pipeline/test_pipeline.py`: ingest → score → rules → append over the fixture, exactly one scoring request per email, Engine replaced without policy changes (swap fake/zen, same `Decision` shape), Source replacement leaves the pipeline unchanged, No silent drop (failed email present in storage, review queue and run counts), Empty-run counts. <!-- sdd-owner: implementation -->
+- [x] 7.2 GREEN `src/email_classifier/pipeline/pipeline.py` (orchestration, `FAILED` status + review routing, run report counts). <!-- sdd-owner: implementation -->
+- [x] 7.3 RED `tests/pipeline/test_replay.py`: Replay relabels from stored scores under T2 (new rows carry T2 + unchanged raw scores + engine version), zero engine requests (spy asserts 0), Replay preserves history (T2 current, T1 retrievable, same raw scores), Relabeling appends. <!-- sdd-owner: implementation -->
+- [x] 7.4 GREEN `src/email_classifier/pipeline/replay.py`. <!-- sdd-owner: implementation -->
 
 ## Phase 8: API (work units 13–14)
 
