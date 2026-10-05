@@ -129,3 +129,62 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 
 - [ ] 3.1 RED `tests/domain/test_rules_banding.py` (Phase 3, work unit 3 — next PR slice)
 - [ ] All tasks in Phases 3–10; Phase 11 is parent-owned (review + delivery gates)
+
+---
+
+# PR 4 — Work Units 8–9 (Lane B; worktree braven_poc.pr4-storage, branch pr4-storage stacked on pr2-rules-core)
+
+Strict TDD active (`.venv/bin/python -m pytest -q`; venv editable install re-pointed to this worktree via `uv pip install -e . --no-deps -p .venv/bin/python`).
+
+## Work Unit 8 — Append-only schema + classification write/read (tasks 6.5–6.6)
+
+- [x] 6.5 RED `tests/adapters/test_sqlite_repo.py` — 22 tests, real `tmp_path` SQLite (no mocks). RED verbatim: `ModuleNotFoundError: No module named 'email_classifier.adapters'` (all 22 collection errors). Scenarios covered: 6-table DDL presence, `message_id` UNIQUE constraint (schema-level, raw SQL), CHECK constraints on `classifications.status` / `extraction_status` / NOT NULL `raw_scores`, email round-trip + idempotent re-ingest, composite `classifier_version` stored verbatim (`tax-mvp1+qs-v1+eng-jev-1.13+th-35d4c41e`) and differing versions distinguishable from records alone, raw scores complete + full float precision (0.1234567891234567 round-trips exactly) + `engine_request_id` retained, rejected-label audit (score 0.50 vs threshold_applied 0.95, selected=0, threshold_set_version visible), selected-label record, relabeling appends + history, latency chain (received/ingested/scored/classified, per-stage and total computable), failed scoring still timestamped + distinguishable, 3 records → latest current + full history, repeated run idempotent (same email + same outcome → same id, counts unchanged), review does not mutate the original (record byte-equal before/after).
+- [x] 6.6 GREEN `src/email_classifier/adapters/sqlite_repo.py` — DDL exactly per design.md (all six tables with CHECK constraints, `emails.message_id UNIQUE NOT NULL`); `append_email` (idempotent by message_id, persists attachments), `append_classified`/`append_failed` (append-only; dedup key = email_id + classifier_version + status + raw_scores + engine_request_id so relabel/replay append while repeated identical runs are idempotent), per-label decision records from raw_scores with threshold_applied + selected flags, latest-record read model (`get_current_classification`), `get_classification_history`, `get_email`, `counts`. Focused: 22 passed. Full suite: 106 passed.
+
+## Work Unit 9 — Review persistence + queue read/filter (tasks 6.7–6.8)
+
+- [x] 6.7 RED `tests/adapters/test_sqlite_reviews.py` — 12 tests. RED verbatim: `NotImplementedError` (list_review_queue stub) + projection assertions failing, `11 failed, 1 passed`. Scenarios: CONFIRMED leaves queue, single-dimension correction (one delta, others unchanged via projection), multi-dimension correction (one review, 3 deltas), add secondary label (`operation=add`), remove sensitivity label (`operation=remove`), original automated record preserved with reviewer/timestamp/status retrievable, review history retained and ordered (2 reviews, latest wins in projection), queue entry exposes email/dimensions/band/confidence/reason, AUTOMATIC email not queued, failed scoring queued with `scoring_failed`, filter by reason (totals unchanged).
+- [x] 6.8 GREEN — `append_review` (append-only reviews + deltas), `list_review_queue(reason=None)` (latest requires_human_review record per email, entry closed by any review on it, optional reason filter), `_project` (current = latest review's deltas over automated values; set/add/remove semantics per dimension). Focused: 12 passed. Full suite: 118 passed. Ruff clean.
+
+## TDD Cycle Evidence (PR 4)
+
+| Work unit | Task | RED | GREEN | REFACTOR |
+|---|---|---|---|---|
+| 8 | 6.5 | `ModuleNotFoundError: No module named 'email_classifier.adapters'` (22 errors) | 22 passed; 106 total | Ruff I001/E501 fixes + test rewrites (engine_request_id moved from Decision to repo arg; UNIQUE proven via raw SQL); suite stayed green |
+| 9 | 6.7 | `NotImplementedError` + projection failures (11 failed, 1 passed) | 12 passed; 118 total | Ruff F841 fix; suite stayed green |
+
+## Work Unit Evidence (PR 4)
+
+| Evidence | Required value |
+|---|---|
+| Focused test command and exact result (unit 8) | `.venv/bin/python -m pytest tests/adapters/test_sqlite_repo.py` → 22 passed (exit 0) |
+| Runtime harness command and exact result (unit 8) | Real SQLite file in `tmp_path` exercised by every test (no mocks); CHECK/UNIQUE constraints proven via raw `sqlite3` INSERT rejection |
+| Rollback boundary (unit 8) | Remove `sqlite_repo.py` classification surface (all but review methods) + `tests/adapters/test_sqlite_repo.py`; DB file is throwaway |
+| Focused test command and exact result (unit 9) | `.venv/bin/python -m pytest tests/adapters/test_sqlite_reviews.py` → 12 passed (exit 0) |
+| Runtime harness command and exact result (unit 9) | Real SQLite file in `tmp_path`; queue + projection read model exercised end to end |
+| Rollback boundary (unit 9) | Remove review tables access (append_review/list_reviews/list_review_queue/_project) from `sqlite_repo.py` + `tests/adapters/test_sqlite_reviews.py` |
+
+## Files Changed (PR 4, this worktree)
+
+| File | Action |
+|---|---|
+| `src/email_classifier/adapters/__init__.py` | Created (docstring only) |
+| `src/email_classifier/adapters/sqlite_repo.py` | Created (DDL + append-only writes + read model + review persistence/queue/projection) |
+| `tests/adapters/test_sqlite_repo.py` | Created (22 tests) |
+| `tests/adapters/test_sqlite_reviews.py` | Created (12 tests) |
+| `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 6.5–6.8 marked |
+
+## Deviations from Design (PR 4)
+
+- Added nullable `queue_reason TEXT` column to `classifications` (not in the design DDL). The human-review spec requires each queue entry to state its queue reason; the design DDL has no column for it and `Decision.queue_reason` must be persisted somewhere. Single minimal, additive, nullable deviation; flagged here for the verify phase.
+- `engine_request_id` is a `append_classified`/`append_failed` parameter (comes from `ScoreResult`, not `Decision` — the domain `Decision` has no such field, so the repo takes it alongside the decision).
+
+## Issues Found (PR 4)
+
+- None blocking. Lane A's units 6–7 files (fake_scorer, inbox_dataset, their tests) were untouched; adapters `__init__.py` created here may conflict textually with lane A's if both add it — merge note for the parent: keep one docstring-only version.
+
+## Remaining Tasks (out of this batch)
+
+- [ ] 6.1–6.4 (lane A, PR 3 — on the other worktree)
+- [ ] 6.9–6.10 (work unit 10, Zen JEV adapter)
+- [ ] All tasks in Phases 7–10; Phase 11 is parent-owned (review + delivery gates)
