@@ -46,16 +46,16 @@ Unit numbering = PR numbering. Units 2–17 are stacked on the previous one; `fe
 
 ## Phase 1: Test Harness (work unit 1 — must land before feature code)
 
-- [ ] 1.1 Create the worktree with `wt switch --create email-classifier-mvp` (config `delivery.worktrees: worktrunk`; never raw `git worktree add`). <!-- sdd-owner: implementation -->
-- [ ] 1.2 RED: write `tests/test_smoke.py` asserting `email_classifier.__version__` exists; run `python -m pytest -q` and record the collection/import failure verbatim. <!-- sdd-owner: implementation -->
-- [ ] 1.3 GREEN: add `pyproject.toml` (PEP 621, `src/` layout, deps fastapi/httpx/pydantic/PyYAML, dev pytest/pytest-cov/ruff, ruff config) + `src/email_classifier/__init__.py`; `python -m pip install -e .`, `python -m pytest -q` passes, `ruff check .` clean. <!-- sdd-owner: implementation -->
-- [ ] 1.4 Verify `openspec/config.yaml` testing block (`test_command`, `build_command`, `lint_command`, `coverage_command`, `strict_tdd: true`) matches the landed harness; edit only on drift. <!-- sdd-owner: implementation -->
+- [x] 1.1 Create the worktree with `wt switch --create email-classifier-mvp` (config `delivery.worktrees: worktrunk`; never raw `git worktree add`). <!-- sdd-owner: implementation --> (Note: orchestrator-created worktree `braven_poc.pr1-harness-domain`, branch `pr1-harness-domain` at f144e01; verified via `git worktree list`.)
+- [x] 1.2 RED: write `tests/test_smoke.py` asserting `email_classifier.__version__` exists; run `python -m pytest -q` and record the collection/import failure verbatim. <!-- sdd-owner: implementation --> (RED evidence: `ModuleNotFoundError: No module named 'email_classifier'` — `1 error during collection`.)
+- [x] 1.3 GREEN: add `pyproject.toml` (PEP 621, `src/` layout, deps fastapi/httpx/pydantic/PyYAML, dev pytest/pytest-cov/ruff, ruff config) + `src/email_classifier/__init__.py`; `python -m pip install -e .`, `python -m pytest -q` passes, `ruff check .` clean. <!-- sdd-owner: implementation --> (Installed into local Python 3.12 venv via uv; pytest 1 passed, ruff `All checks passed!`.)
+- [x] 1.4 Verify `openspec/config.yaml` testing block (`test_command`, `build_command`, `lint_command`, `coverage_command`, `strict_tdd: true`) matches the landed harness; edit only on drift. <!-- sdd-owner: implementation --> (No drift — all commands match the landed harness; no edit made.)
 
 ## Phase 2: Domain Contracts and Ports (work unit 2)
 
-- [ ] 2.1 RED `tests/domain/test_models.py` + `tests/ports/test_ports.py`: `EmailMessage`/`Attachment` carry subject, body, sender, recipients, received_at, thread_id, attachment names + extracted text + status (ingestion: Normalized email intake, Missing optional fields); `Band` is exactly `AUTOMATIC`/`UNCERTAIN`/`HUMAN_REVIEW` and never a taxonomy label; label sets equal `taxonomy_mvp`; `ScoreResult`, `ThresholdConfig`, `QuestionSet`, `Decision` shapes; fake classes satisfy `EmailSource`/`ScoringEngine`/`ClassificationRepository`/`AttachmentExtractor` (§A: Anti-corruption scoring boundary). <!-- sdd-owner: implementation -->
-- [ ] 2.2 GREEN `src/email_classifier/domain/models.py` (pure dataclasses/enums, zero I/O) + `src/email_classifier/ports/__init__.py` (4 Protocols + port errors). <!-- sdd-owner: implementation -->
-- [ ] 2.3 Verification: import graph test proves `domain/` and `ports/` import no adapter/httpx/sqlite modules; `ruff check .` clean. <!-- sdd-owner: implementation -->
+- [x] 2.1 RED `tests/domain/test_models.py` + `tests/ports/test_ports.py`: `EmailMessage`/`Attachment` carry subject, body, sender, recipients, received_at, thread_id, attachment names + extracted text + status (ingestion: Normalized email intake, Missing optional fields); `Band` is exactly `AUTOMATIC`/`UNCERTAIN`/`HUMAN_REVIEW` and never a taxonomy label; label sets equal `taxonomy_mvp`; `ScoreResult`, `ThresholdConfig`, `QuestionSet`, `Decision` shapes; fake classes satisfy `EmailSource`/`ScoringEngine`/`ClassificationRepository`/`AttachmentExtractor` (§A: Anti-corruption scoring boundary). <!-- sdd-owner: implementation -->
+- [x] 2.2 GREEN `src/email_classifier/domain/models.py` (pure dataclasses/enums, zero I/O) + `src/email_classifier/ports/__init__.py` (4 Protocols + port errors). <!-- sdd-owner: implementation -->
+- [x] 2.3 Verification: import graph test proves `domain/` and `ports/` import no adapter/httpx/sqlite modules; `ruff check .` clean. <!-- sdd-owner: implementation -->
 
 ## Phase 3: Rules — Banding and Review Routing (work unit 3)
 

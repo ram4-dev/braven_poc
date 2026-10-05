@@ -1,0 +1,8 @@
+pyproject.toml
+src/email_classifier/__init__.py
+src/email_classifier.egg-info/PKG-INFO
+src/email_classifier.egg-info/SOURCES.txt
+src/email_classifier.egg-info/dependency_links.txt
+src/email_classifier.egg-info/requires.txt
+src/email_classifier.egg-info/top_level.txt
+tests/test_smoke.py
