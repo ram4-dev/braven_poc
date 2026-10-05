@@ -1,0 +1,19 @@
+# Versioned threshold table (classification-rules spec: configuration, not code).
+# Every label whose auto threshold is raised above the default MUST carry a paired
+# review floor strictly below the default review floor (0.65).
+default:
+  auto_threshold: 0.90
+  review_floor: 0.65
+elevated:
+  - dimension: primary_category
+    label: FRAUD_SUSPICION
+    auto_threshold: 0.95
+    review_floor: 0.40
+  - dimension: primary_category
+    label: LEGAL
+    auto_threshold: 0.95
+    review_floor: 0.40
+  - dimension: sensitivity
+    label: HIGHLY_CONFIDENTIAL
+    auto_threshold: 0.95
+    review_floor: 0.40
