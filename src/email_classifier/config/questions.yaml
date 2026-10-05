@@ -1,0 +1,298 @@
+# Versioned decision-question set for the MVP taxonomy (jev-scoring spec:
+# "Versioned decision-question set"). One binary (noul) question per primary
+# category, sensitivity label and action label — 16 + 6 + 6 = 28.
+#
+# Any change to wording or criteria changes the file bytes and therefore the
+# question-set version (SHA-256 prefix computed by load_questions).
+#
+# Disambiguation boundaries are encoded in the true/false criteria of the
+# paired questions: COMPLAINT/LEGAL, CLAIM_NEW/CLAIM_UPDATE/
+# CLAIM_DOCUMENTATION, NEW_LEAD/QUOTE_REQUEST.
+
+questions:
+  # ---- Primary categories (16) ----
+  - question_id: primary_category/NEW_LEAD
+    type: noul
+    instructions: Does the email open a new commercial relationship (a first-time inquiry about contracting insurance), rather than requesting a priced quote?
+    criteria_true: >
+      The email is a first contact from a prospective client or broker expressing
+      interest in contracting an insurance product for the first time, without
+      asking for a specific priced quotation (see quote request for that case).
+    criteria_false: >
+      The email asks for a priced quotation, concerns an existing policy or
+      claim, or is about any subject other than a first-time interest in
+      contracting insurance.
+  - question_id: primary_category/QUOTE_REQUEST
+    type: noul
+    instructions: Does the email ask for a priced quotation for one or more insurance products?
+    criteria_true: >
+      The email explicitly requests a price, quote or tariff for a coverage
+      scenario, as a first quote or a re-quote, and is not an existing client
+      asking to change a current policy.
+    criteria_false: >
+      The email expresses generic interest without asking for pricing (see new
+      lead), or concerns an existing policy, claim, payment or complaint.
+  - question_id: primary_category/NEW_POLICY
+    type: noul
+    instructions: Does the email document or confirm the issuance of a brand-new insurance policy?
+    criteria_true: >
+      The email communicates the creation or issuance of a new policy for a
+      client who did not previously hold this coverage (policy issuance,
+      welcome, or first policy documentation).
+    criteria_false: >
+      The email concerns renewals, changes or cancellations of existing
+      policies, or any claim, payment, complaint or quote matter.
+  - question_id: primary_category/POLICY_RENEWAL
+    type: noul
+    instructions: Does the email concern the renewal of an existing insurance policy?
+    criteria_true: >
+      The email references an existing policy reaching its expiration or its
+      renewal period, including renewal notices, renewal confirmations or
+      renewal reminders.
+    criteria_false: >
+      The email concerns first-time issuance, mid-term changes, cancellations,
+      or any claim, payment, complaint, quote or lead matter.
+  - question_id: primary_category/POLICY_CHANGE
+    type: noul
+    instructions: Does the email request or document a mid-term modification of an existing policy?
+    criteria_true: >
+      The email requests or confirms a change to an existing in-force policy
+      (coverage, insured values, beneficiaries, address, endorsement) without
+      cancelling it.
+    criteria_false: >
+      The email concerns a new policy, a renewal, a cancellation, or any claim,
+      payment, complaint or quote matter.
+  - question_id: primary_category/POLICY_CANCELLATION
+    type: noul
+    instructions: Does the email request or confirm the cancellation of an existing policy?
+    criteria_true: >
+      The email requests, communicates or confirms the termination or
+      cancellation of an existing policy, by the client or the insurer.
+    criteria_false: >
+      The email concerns issuance, renewal, or mid-term changes that keep the
+      policy in force, or any claim, payment, complaint or quote matter.
+  - question_id: primary_category/CLAIM_NEW
+    type: noul
+    instructions: Does the email open a brand-new insurance claim for an incident?
+    criteria_true: >
+      The email reports an incident and requests that a claim be opened for the
+      first time for that incident, and does not reference an existing claim
+      file (for existing claims see claim update and claim documentation).
+    criteria_false: >
+      The email adds information, documents or follows up on an already-opened
+      claim (claim update or claim documentation), or concerns any policy,
+      payment, complaint, quote or lead matter.
+  - question_id: primary_category/CLAIM_UPDATE
+    type: noul
+    instructions: Does the email provide a status update or follow-up on an already-opened claim?
+    criteria_true: >
+      The email references an existing claim number or previously reported
+      incident and communicates progress, status, adjuster decisions or next
+      steps, without primarily attaching new documentation.
+    criteria_false: >
+      The email opens a new claim (see claim new), mainly delivers documents
+      for an existing claim (see claim documentation), or concerns any policy,
+      payment, complaint, quote or lead matter.
+  - question_id: primary_category/CLAIM_DOCUMENTATION
+    type: noul
+    instructions: Does the email primarily deliver documents, evidence or forms for an existing claim?
+    criteria_true: >
+      The email's main content is documentation (photos, invoices, reports,
+      forms, certificates) supporting an existing claim, rather than a status
+      narrative or a first report of the incident.
+    criteria_false: >
+      The email opens a new claim (see claim new), gives a status update without
+      documentation as its core content (see claim update), or concerns any
+      policy, payment, complaint, quote or lead matter.
+  - question_id: primary_category/PAYMENT_BILLING
+    type: noul
+    instructions: Does the email concern payment, invoices, instalments, chargebacks or billing for premiums or services?
+    criteria_true: >
+      The email deals with money collection or billing: invoice copies, payment
+      confirmations, instalment plans, declined cards, direct-debit issues or
+      billing disputes over premiums.
+    criteria_false: >
+      The email concerns claims, policy lifecycle events, complaints, quotes,
+      leads or any topic where billing is not the main subject.
+  - question_id: primary_category/COMPLAINT
+    type: noul
+    instructions: Does the email express dissatisfaction or a formal complaint about service, treatment or outcomes?
+    criteria_true: >
+      The email expresses dissatisfaction, denunciation or a formal complaint
+      about service quality, delays, treatment or outcomes, requesting
+      corrective action; if it also threatens or announces judicial or
+      administrative legal action, it must also be read against the legal
+      question and legal takes precedence when the action itself is the core.
+    criteria_false: >
+      The email is a neutral request, information update or commercial matter
+      without expressed dissatisfaction, or it is primarily a judicial or
+      regulatory legal communication (see legal).
+  - question_id: primary_category/FRAUD_SUSPICION
+    type: noul
+    instructions: Does the email present signals of possible fraud or misrepresentation?
+    criteria_true: >
+      The email contains indications of falsified documents, staged incidents,
+      identity misuse, inconsistent testimonies or other deception attempts
+      against the insurer.
+    criteria_false: >
+      The email shows no deception signals; ordinary claims, complaints or
+      policy matters are not fraud by themselves.
+  - question_id: primary_category/LEGAL
+    type: noul
+    instructions: Is the email a judicial, administrative or formal legal communication?
+    criteria_true: >
+      The email is issued by or addressed to courts, regulators' legal areas or
+      lawyers: summons, lawsuits, official notifications, demands, or formal
+      legal notices asserting rights; a dissatisfied client email without such
+      formal legal action stays a complaint (see complaint).
+    criteria_false: >
+      The email is ordinary correspondence, even if dissatisfied (see
+      complaint), and carries no judicial, administrative or formal legal
+      action.
+  - question_id: primary_category/REGULATORY
+    type: noul
+    instructions: Does the email concern regulatory compliance matters with supervisory authorities?
+    criteria_true: >
+      The email deals with insurance regulators, supervisory bodies, compliance
+      requirements, mandatory reporting or audit requests from authorities
+      (distinct from a lawsuit or legal notice, which is legal).
+    criteria_false: >
+      The email is a client or broker communication without a regulatory or
+      supervisory-authority compliance subject.
+  - question_id: primary_category/PARTNERSHIP
+    type: noul
+    instructions: Does the email propose or advance a business partnership, alliance or intermediary agreement?
+    criteria_true: >
+      The email proposes or negotiates commercial alliances, broker networks,
+      bancassurance deals, white-label schemes or other B2B cooperation.
+    criteria_false: >
+      The email is an end-client insurance matter (lead, quote, policy, claim)
+      or internal/administrative communication.
+  - question_id: primary_category/OTHER
+    type: noul
+    instructions: Does the email fail to fit any defined insurance category?
+    criteria_true: >
+      The email does not match any of the other primary-category questions'
+      true criteria: it is out of the insurance workflow's defined scope.
+    criteria_false: >
+      The email matches at least one other primary-category question's true
+      criteria and therefore belongs to that category.
+  # ---- Sensitivity (6) ----
+  - question_id: sensitivity/PUBLIC
+    type: noul
+    instructions: Is the email content publicly shareable without any restriction?
+    criteria_true: >
+      The email contains only public information (marketing, publicly available
+      rates, general inquiries) that could be disclosed without harm.
+    criteria_false: >
+      The email contains internal, confidential, personal or otherwise
+      restricted information of any kind.
+  - question_id: sensitivity/INTERNAL
+    type: noul
+    instructions: Is the email internal-use information not meant for external disclosure?
+    criteria_true: >
+      The email contains operational, procedural or commercial information
+      intended for the insurer's staff or intermediaries, without personal or
+      secret data.
+    criteria_false: >
+      The email is public information, or carries confidential, highly
+      confidential or personal data beyond mere internal use.
+  - question_id: sensitivity/CONFIDENTIAL
+    type: noul
+    instructions: Is the email confidential business information?
+    criteria_true: >
+      The email carries commercially sensitive material (contracts, tariffs,
+      negotiations, audit material) whose disclosure would harm the insurer,
+      without reaching the highest secrecy tier or containing personal data.
+    criteria_false: >
+      The email is internal-only material of lower impact, public, or contains
+      personal data or highly confidential content (see those questions).
+  - question_id: sensitivity/HIGHLY_CONFIDENTIAL
+    type: noul
+    instructions: Is the email highly confidential, warranting the strictest handling?
+    criteria_true: >
+      The email involves fraud investigations, legal strategy, executive
+      deliberations, security incidents or material whose disclosure would
+      cause severe damage; this label demands the strictest handling tier.
+    criteria_false: >
+      The email's confidentiality needs are ordinary (see confidential) or it
+      is internal or public material without severe-damage content.
+  - question_id: sensitivity/PERSONAL_DATA
+    type: noul
+    instructions: Does the email contain personal data of identifiable individuals?
+    criteria_true: >
+      The email includes names, identification numbers, addresses, contact
+      details, health or financial data of identifiable individuals protected
+      by data-protection rules.
+    criteria_false: >
+      The email references no identifiable natural person's data; aggregated or
+      company-level information does not count.
+  - question_id: sensitivity/SENSITIVE_PERSONAL_DATA
+    type: noul
+    instructions: Does the email contain specially protected (sensitive) personal data?
+    criteria_true: >
+      The email includes specially protected categories: health records,
+      biometric data, criminal records, union membership, religion, or similar
+      specially protected personal data requiring heightened safeguards.
+    criteria_false: >
+      The email contains ordinary personal data only (see personal data) or no
+      personal data at all.
+  # ---- Actions (6) ----
+  - question_id: action/NO_ACTION
+    type: noul
+    instructions: Does the email require no action beyond filing?
+    criteria_true: >
+      The email is informational or confirmatory, expects no response and
+      triggers no follow-up task.
+    criteria_false: >
+      The email requests or will predictably require a reply, a document, an
+      approval, an escalation or urgent handling of any kind.
+  - question_id: action/REPLY_REQUIRED
+    type: noul
+    instructions: Does the email require a response to its sender?
+    criteria_true: >
+      The email asks a question, requests information or a confirmation, or in
+      any way expects an answer back to the sender.
+    criteria_false: >
+      The email expects no answer (notification only); required documents,
+      approvals, escalations or urgent handling without an expected reply do
+      not count here.
+  - question_id: action/DOCUMENT_REQUIRED
+    type: noul
+    instructions: Does the email make it necessary to produce or request documents?
+    criteria_true: >
+      Handling the email requires obtaining, completing or issuing documents:
+      forms, evidence, certificates, policy endorsements or claim paperwork.
+    criteria_false: >
+      The email can be handled without any document being produced or
+      requested.
+  - question_id: action/APPROVAL_REQUIRED
+    type: noul
+    instructions: Does the email require an approval decision from an authorized role?
+    criteria_true: >
+      The email's handling requires an explicit approval, authorization or
+      sign-off from an authorized person (underwriting exceptions, payment
+      approvals, exception authorizations).
+    criteria_false: >
+      The email can be resolved by standard procedures without any approval
+      gate.
+  - question_id: action/ESCALATE
+    type: noul
+    instructions: Does the email require escalation beyond the standard handling tier?
+    criteria_true: >
+      The email's subject requires routing to a senior team, committee or
+      management because standard handling is insufficient (legal threats,
+      regulatory contacts, fraud indications, unresolved serious complaints).
+    criteria_false: >
+      The email fits standard first-line handling even if it requires a reply,
+      documents or approval.
+  - question_id: action/URGENT
+    type: noul
+    instructions: Does the email require urgent, time-critical handling?
+    criteria_true: >
+      The email states or implies a deadline or imminent harm requiring
+      immediate attention (accidents in progress, court deadlines within hours,
+      active security incidents).
+    criteria_false: >
+      The email can be handled within normal service levels without imminent
+      deadline or harm.

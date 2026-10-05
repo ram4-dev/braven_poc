@@ -1,7 +1,60 @@
-# Apply Progress: email-classifier-mvp (PR 1 — work units 1–2; continued PR 2 — work units 3–5)
+# Apply Progress: email-classifier-mvp (PR 1 — work units 1–2; PR 2 — units 3–5; PR 3 — units 6–7)
 
-Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-domain`, branch `pr1-harness-domain` (Worktrunk-managed, base f144e01). Worktree (units 3–5): `/Users/ramiro/Desktop/projects/braven_poc.pr2-rules-core`, branch `pr2-rules-core`. Delivery: chained stacked-to-main slices, PRs 1→5 of 17. Mode: Strict TDD (`.venv/bin/python -m pytest -q`).
+Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-domain`, branch `pr1-harness-domain` (Worktrunk-managed, base f144e01). Worktree (units 3–5): `/Users/ramiro/Desktop/projects/braven_poc.pr2-rules-core`, branch `pr2-rules-core`. Worktree (units 6–7): `/Users/ramiro/Desktop/projects/braven_poc.pr3-questions-adapters`, branch `pr3-questions-adapters` (stacked on pr2-rules-core). Delivery: chained stacked-to-main slices, PRs 1→7 of 17. Mode: Strict TDD (`.venv/bin/python -m pytest -q`).
 
+## Work Unit 6 — Versioned 28-Question Set Config + Loader (PR 3)
+
+- [x] 5.3 RED `tests/config/test_questions_loader.py` (17 tests): 28 questions one per MVP label, noul type + instructions + true/false criteria per question, shipped YAML loads, SHA-256-prefix version reported, wording change bumps version, disambiguation criteria present between COMPLAINT/LEGAL, CLAIM triple, NEW_LEAD/QUOTE_REQUEST (asserted against the shipped YAML), deferred labels rejected naming each of the 6, missing label rejected, duplicate rejected, non-noul rejected, missing criteria rejected. RED verbatim: `ImportError: cannot import name 'load_questions' from 'email_classifier.config.loader'`, 17 failed.
+- [x] 5.4 GREEN `src/email_classifier/config/questions.yaml` (28 nouls with real insurance-domain criteria; paired questions cross-reference their counterpart in criteria) + `load_questions` in `src/email_classifier/config/loader.py` (dimension/label validation against the frozen taxonomy, deferred-label rejection, duplicate rejection, non-empty criteria, missing/extra label rejection, version = SHA-256(raw)[:8]). Focused: 17 passed. Runtime harness: `28 8439d61e`.
+
+## Work Unit 7 — Offline Adapters: Fake Scorer + Dataset Inbox (PR 3)
+
+- [x] 6.1/6.3 RED `tests/adapters/test_fake_scorer.py` (7 tests) + `tests/adapters/test_inbox_dataset.py` (7 tests) + `tests/fixtures/inbox_small.json` (4 synthetic Argentine-Spanish emails: claim w/ extracted PDF + image-only photo, lead, payment, legal demand). RED verbatim: `ModuleNotFoundError: No module named 'email_classifier.adapters'`, 14 failed.
+- [x] 6.2 GREEN `src/email_classifier/adapters/fake_scorer.py`: `FakeDeterministicScorer` — SHA-256 hash-seeded probability per question (question_id + full normalized email content as seed), same email → byte-identical `ScoreResult`, no network, no httpx import (asserted), feeds the same `decide()` rules path. Focused: 7 passed.
+- [x] 6.4 GREEN `src/email_classifier/adapters/inbox_dataset.py`: `InboxDatasetSource` per design D6 schema (`message_id`, `expected`, attachment `extracted_text`/`status: extracted|not_text_extractable|failed`), `from_file`/`list_emails` normalizing to frozen `EmailMessage` (thread_id optional), `expected_for` frozen ground truth (D7), `ingest()` idempotent by message_id with `IngestResult(ingested_count, rejected)`; non-synthetic items rejected and reported, never silently skipped; empty source → zero ingested, no error. Focused: 7 passed.
+
+## TDD Cycle Evidence (units 6–7, this worktree)
+
+| Work unit | Task | RED | GREEN | REFACTOR |
+|---|---|---|---|---|
+| 6 | 5.3 | `ImportError: cannot import name 'load_questions'`, 17 failed | 17 passed; runtime `28 8439d61e` | Disambiguation-criteria assertion moved to the shipped YAML (synthetic fixture intentionally lacks cross-references); ruff clean |
+| 7 | 6.1/6.3 | `ModuleNotFoundError: No module named 'email_classifier.adapters'`, 14 failed | 14 passed | Synthetic-detection rule simplified to explicit `synthetic: false` flag (dataset is synthetic by construction); ruff F841/UP037 fixes |
+
+## Work Unit Evidence (units 6–7)
+
+| Evidence | Required value |
+|---|---|
+| Focused test command and exact result (unit 6) | `.venv/bin/python -m pytest tests/config/test_questions_loader.py` → 17 passed (exit 0) |
+| Runtime harness command and exact result (unit 6) | `python -c "...load_questions('src/email_classifier/config/questions.yaml'); print(len(qs.questions), qs.version)"` → `28 8439d61e` |
+| Rollback boundary (unit 6) | Delete `src/email_classifier/config/questions.yaml` + `load_questions` from `config/loader.py` + `tests/config/test_questions_loader.py` (thresholds loader stays) |
+| Focused test command and exact result (unit 7) | `.venv/bin/python -m pytest tests/adapters/` → 14 passed (exit 0) |
+| Runtime harness command and exact result (unit 7) | Fixture end-to-end: ingest → `ingested 4 rejected () replay 0`; fake scorer → `scores 28 qs-version 8439d61e` |
+| Rollback boundary (unit 7) | Delete `src/email_classifier/adapters/` (fake_scorer.py, inbox_dataset.py) + `tests/adapters/test_fake_scorer.py`, `tests/adapters/test_inbox_dataset.py`, `tests/fixtures/inbox_small.json` |
+
+## Files Changed (PR 3, pr3-questions-adapters worktree)
+
+| File | Action |
+|---|---|
+| `tests/config/test_questions_loader.py` | Created (17 tests) |
+| `src/email_classifier/config/questions.yaml` | Created (28 nouls + disambiguation criteria) |
+| `src/email_classifier/config/loader.py` | Modified (added `load_questions`, `ACTION_LABELS`/`DEFERRED_CATEGORY_LABELS` imports) |
+| `tests/adapters/test_fake_scorer.py` | Created (7 tests) |
+| `tests/adapters/test_inbox_dataset.py` | Created (7 tests) |
+| `tests/fixtures/inbox_small.json` | Created (4 synthetic emails) |
+| `src/email_classifier/adapters/__init__.py` | Created |
+| `src/email_classifier/adapters/fake_scorer.py` | Created |
+| `src/email_classifier/adapters/inbox_dataset.py` | Created |
+| `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 5.3–5.4, 6.1–6.4 marked |
+
+## Deviations from Design
+
+- None for units 6–7. Note: the venv editable install in the stacked worktree pointed at pr2-rules-core's src (copied venv); reinstalled editable via `uv pip install -e . --no-deps -p .venv/bin/python` from this worktree.
+
+## Issues Found
+
+- Worktree venv inherits the parent checkout's editable path; every new stacked worktree needs one `uv pip install -e . --no-deps -p .venv/bin/python` before pytest resolves the right sources.
+
+---
 ## Work Unit 3 — Banding + Review Routing (PR 2, prior continuation run)
 
 - [x] 3.1 RED `tests/domain/test_rules_banding.py` — 19 tests incl. 7×2 boundary matrix (0.40/0.6499/0.65/0.8999/0.90/0.9499/0.95, default + elevated tiers). RED: `ModuleNotFoundError: No module named 'email_classifier.domain.rules'`.

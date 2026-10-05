@@ -1,0 +1,93 @@
+{
+  "dataset_version": "inbox_small_v1",
+  "emails": [
+    {
+      "message_id": "em-0001",
+      "sender": "cliente@example.com",
+      "recipients": ["seguros@ejemplo.com"],
+      "subject": "Reclamo por choque en Av. Rivadavia",
+      "body": "Hola, necesito abrir un reclamo por un choque ocurrido ayer en Av. Rivadavia 4500. Mi póliza es AA-123456.",
+      "thread_id": "th-0001",
+      "received_at": "2026-10-05T14:32:00Z",
+      "attachments": [
+        {
+          "filename": "denuncia.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Denuncia policial N° 12345432, choque con daños en el paragolpes delantero.",
+          "status": "extracted"
+        },
+        {
+          "filename": "foto_danio.jpg",
+          "mime": "image/jpeg",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        }
+      ],
+      "expected": {
+        "primary_category": "CLAIM_NEW",
+        "secondary_categories": ["CLAIM_DOCUMENTATION"],
+        "sensitivity": ["PERSONAL_DATA"],
+        "actions": ["REPLY_REQUIRED", "DOCUMENT_REQUIRED"],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0002",
+      "sender": "consultas@empresa.com",
+      "recipients": ["seguros@ejemplo.com"],
+      "subject": "Consulta sobre cobertura para flota",
+      "body": "Buenas, queríamos saber si manejan cobertura para flotas de camiones. Quedamos a la espera de su respuesta.",
+      "thread_id": null,
+      "received_at": "2026-10-05T15:10:00Z",
+      "attachments": [],
+      "expected": {
+        "primary_category": "NEW_LEAD",
+        "secondary_categories": [],
+        "sensitivity": ["PUBLIC"],
+        "actions": ["REPLY_REQUIRED"],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0003",
+      "sender": "noreply@notificaciones.com",
+      "recipients": ["seguros@ejemplo.com"],
+      "subject": "Confirmación de pago de cuota",
+      "body": "Su pago de la cuota 5 de la póliza BB-654321 fue acreditado correctamente. Este mensaje es informativo.",
+      "thread_id": null,
+      "received_at": "2026-10-06T09:00:00Z",
+      "attachments": [],
+      "expected": {
+        "primary_category": "PAYMENT_BILLING",
+        "secondary_categories": [],
+        "sensitivity": ["INTERNAL"],
+        "actions": ["NO_ACTION"],
+        "priority": "LOW"
+      }
+    },
+    {
+      "message_id": "em-0004",
+      "sender": "rabajante@terceros.com",
+      "recipients": ["seguros@ejemplo.com"],
+      "subject": "ESTUDIO JURIDICO - Notificación de demanda",
+      "body": "Por medio de la presente se notifica la promoción de demanda civil contra la compañía, expediente 1234/2026 del Juzgado Civil 5.",
+      "thread_id": "th-0004",
+      "received_at": "2026-10-06T11:45:00Z",
+      "attachments": [
+        {
+          "filename": "escrito_demanda.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Escrito inicial de demanda daños y perjuicios, expediente 1234/2026.",
+          "status": "extracted"
+        }
+      ],
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": ["COMPLAINT"],
+        "sensitivity": ["CONFIDENTIAL", "HIGHLY_CONFIDENTIAL"],
+        "actions": ["ESCALATE", "DOCUMENT_REQUIRED"],
+        "priority": "CRITICAL"
+      }
+    }
+  ]
+}
