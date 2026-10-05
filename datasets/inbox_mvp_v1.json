@@ -1,0 +1,3583 @@
+{
+  "dataset_version": "v1",
+  "emails": [
+    {
+      "message_id": "em-0001",
+      "sender": "mvaldez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Consulta por seguro para auto 0km",
+      "body": "Hola, estoy por comprar un Toyota Corolla 0km y quisiera saber que opciones de seguro manejan y a que valor aproximado. Mi nombre es Marcela Valdez.",
+      "thread_id": null,
+      "received_at": "2026-09-01T10:05:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_LEAD",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0002",
+      "sender": "lquintero@outlook.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Informacion sobre seguros de vida",
+      "body": "Buenas tardes, me interesaria recibir informacion sobre sus seguros de vida. Soy Luciano Quintero, tengo 41 anos y trabajo en relacion de dependencia.",
+      "thread_id": null,
+      "received_at": "2026-09-01T11:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_LEAD",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0003",
+      "sender": "contacto@estudiovg.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cotizacion para seguro de flota comercial",
+      "body": "Buen dia, representamos a una empresa de transportes con 18 camiones. Quisieramos conocer las opciones de cobertura para flota. Quedamos a disposicion para coordinar una reunion.",
+      "thread_id": null,
+      "received_at": "2026-09-02T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_LEAD",
+        "secondary_categories": [
+          "QUOTE_REQUEST"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0004",
+      "sender": "graciela.mendez@hotmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Consulta seguros hogar",
+      "body": "Hola, me mudo a un departamento en Palermo y quiero asegurar los bienes del hogar. Me pueden asesorar? Gracias, Graciela Mendez.",
+      "thread_id": null,
+      "received_at": "2026-09-03T09:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_LEAD",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0005",
+      "sender": "ruben.ortiz@estudiocb.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Seguro de caucion para licitacion",
+      "body": "Buen dia, participamos de una licitacion publica y necesitamos un seguro de caucion. Trabajan con ese producto? Ruben Ortiz, Estudio Contable Ortiz & Asociados.",
+      "thread_id": null,
+      "received_at": "2026-09-03T16:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_LEAD",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0006",
+      "sender": "silvina.cabral@protonmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Consulta por seguro de viaje",
+      "body": "Hola, viajo a Europa en noviembre por 30 dias y quisiera saber que coberturas de seguro de viaje ofrecen. Silvina Cabral.",
+      "thread_id": null,
+      "received_at": "2026-09-04T08:55:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_LEAD",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0007",
+      "sender": "fdelgado@yahoo.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cuanto cuesta el seguro de mi moto",
+      "body": "Hola, quiero saber cuanto me saldria el seguro de una Honda CG 150, patente A123BCD, modelo 2021. Necesito el precio para decidir esta semana.",
+      "thread_id": null,
+      "received_at": "2026-09-04T14:45:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "QUOTE_REQUEST",
+        "secondary_categories": [
+          "NEW_LEAD"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0008",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Pedido de cotizacion seguro auto",
+      "body": "Hola, solicito cotizacion para un VW Gol Trend 2019, patente AB123CD, uso particular. Soy Javier Paez, DNI 31.456.789. Gracias.",
+      "thread_id": null,
+      "received_at": "2026-09-05T10:15:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "QUOTE_REQUEST",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0009",
+      "sender": "cotizaciones@transportesandina.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cotizacion flota 10 utilitarios",
+      "body": "Buen dia, necesitamos cotizacion para 10 utilitarios Renault Kangoo modelo 2022, uso comercial. Adjuntamos listado de dominios.",
+      "thread_id": null,
+      "received_at": "2026-09-05T13:40:00Z",
+      "attachments": [
+        {
+          "filename": "dominios_flota.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "extracted_text": "Listado de dominios: AE123FG, AF234GH, AG345HJ y 7 unidades mas.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "QUOTE_REQUEST",
+        "secondary_categories": [
+          "NEW_LEAD"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0010",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cuanto sale un seguro todo riesgo",
+      "body": "Buenas, quiero comparar precios de todo riesgo para una Toyota Hilux 2020, patente AC456DE. Puedo enviar la cedula verde si la necesitan. Veronica Gomez.",
+      "thread_id": null,
+      "received_at": "2026-09-06T08:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "QUOTE_REQUEST",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0011",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Presupuesto seguro integral de consorcio",
+      "body": "Buen dia, administramos un consorcio de 42 unidades funcionales en CABA y necesitamos presupuesto de seguro integral. Favor de enviar propuesta con vigencia de 60 dias.",
+      "thread_id": null,
+      "received_at": "2026-09-06T15:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "QUOTE_REQUEST",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0012",
+      "sender": "martin.echeverria@udesa.edu.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cotizacion responsabilidad civil",
+      "body": "Hola, dicto clases particulares y me piden RC para dar clase en un colegio privado. Me pueden cotizar una poliza de responsabilidad civil? Martin Echeverria.",
+      "thread_id": null,
+      "received_at": "2026-09-07T09:50:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "QUOTE_REQUEST",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0013",
+      "sender": "alquileres@inmobiliarialumen.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Presupuesto seguro de alquiler",
+      "body": "Hola, necesitamos presupuesto para seguros de alquiler de dos departamentos en Belgrano, inquilinos con recibo de sueldo. Inmobiliaria Lumen.",
+      "thread_id": null,
+      "received_at": "2026-09-07T16:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "QUOTE_REQUEST",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0014",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Pedido de cotizacion seguro auto",
+      "body": "Gracias por la respuesta. Ademas del Gol Trend, me interesaria saber si manejan seguro tecnico para mi taller mecanico en Avellaneda. Saludos, Javier.",
+      "thread_id": "th-0008",
+      "received_at": "2026-09-08T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_LEAD",
+        "secondary_categories": [
+          "QUOTE_REQUEST"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0015",
+      "sender": "emisiones@braven.com.ar",
+      "recipients": [
+        "jpaez@gmail.com"
+      ],
+      "subject": "Poliza emitida - Seguro automotor",
+      "body": "Estimado cliente: le confirmamos la emision de la poliza nro 98765432 para el vehiculo patente AD678FG, con vigencia desde el 10/09/2026 al 09/03/2027. Adjuntamos la poliza y el merito digital.",
+      "thread_id": null,
+      "received_at": "2026-09-09T11:00:00Z",
+      "attachments": [
+        {
+          "filename": "poliza_98765432.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Poliza nro 98765432, asegurado Javier Paez, DNI 31.456.789, cobertura todo riesgo.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_POLICY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0016",
+      "sender": "emisiones@braven.com.ar",
+      "recipients": [
+        "cotizaciones@transportesandina.com.ar"
+      ],
+      "subject": "Emision de endosos de alta de flota",
+      "body": "Se confirmo la emision de los endosos de alta para las 10 unidades cotizadas, poliza matriz 88112233. Adjuntamos los certificados de cobertura por unidad.",
+      "thread_id": null,
+      "received_at": "2026-09-09T16:30:00Z",
+      "attachments": [
+        {
+          "filename": "certificados_flota.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Certificados de cobertura unidades AE123FG a AJ890KL, poliza matriz 88112233.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_POLICY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0017",
+      "sender": "nkirsch@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Contratacion confirmada - seguro de vida",
+      "body": "Hola, les escribo para confirmar que complete la contratacion online del seguro de vida con suma asegurada de $5.000.000. Cuando recibo la documentacion? Nora Kirsch, DNI 27.890.123.",
+      "thread_id": null,
+      "received_at": "2026-09-10T10:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_POLICY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0018",
+      "sender": "emisiones@braven.com.ar",
+      "recipients": [
+        "admin@consorcio9dejulio.com.ar"
+      ],
+      "subject": "Poliza consorcio emitida",
+      "body": "Informamos la emision de la poliza nro 99001122 para el consorcio de Av. Jaramillo 1245, vigencia anual desde el 15/09/2026. Adjuntamos poliza, certificado y cupon de pago.",
+      "thread_id": null,
+      "received_at": "2026-09-14T09:15:00Z",
+      "attachments": [
+        {
+          "filename": "poliza_consorcio.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Poliza 99001122, asegurado Consorcio Jaramillo 1245, CUIT 30-71234567-9.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_POLICY",
+        "secondary_categories": [
+          "PAYMENT_BILLING"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0019",
+      "sender": "emisiones@braven.com.ar",
+      "recipients": [
+        "rsoto@gmail.com"
+      ],
+      "subject": "Poliza emitida - documentacion a conformar",
+      "body": "Confirmamos la emision de la poliza 91234567 para Rodrigo Soto (DNI 34.567.891). Queda pendiente de conformacion la ficha de datos personales y la constancia de CUIL. Adjuntamos la poliza.",
+      "thread_id": null,
+      "received_at": "2026-09-15T10:00:00Z",
+      "attachments": [
+        {
+          "filename": "poliza_91234567.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Poliza 91234567, asegurado Rodrigo Soto, DNI 34.567.891.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_POLICY",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0020",
+      "sender": "contratos@cooperativaelforjar.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Confirmacion de alta de poliza colectiva",
+      "body": "Buen dia, confirmamos el alta de la poliza colectiva de accidentes personales nro 94567890 para nuestros 60 asociados. Quedamos atentos a los certificados individuales.",
+      "thread_id": null,
+      "received_at": "2026-09-16T08:45:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_POLICY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0021",
+      "sender": "emisiones@braven.com.ar",
+      "recipients": [
+        "vgomez@fibertel.com.ar"
+      ],
+      "subject": "Poliza emitida - Hilux todo riesgo",
+      "body": "Estimada Veronica: le confirmamos la emision de la poliza 96789012 para la Hilux patente AC456DE, con franquicia ajustada. Adjuntamos la poliza y el merito digital.",
+      "thread_id": null,
+      "received_at": "2026-09-17T12:00:00Z",
+      "attachments": [
+        {
+          "filename": "poliza_hilux.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Poliza 96789012, asegurada Veronica Gomez, DNI 29.123.456.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "NEW_POLICY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0022",
+      "sender": "renovaciones@braven.com.ar",
+      "recipients": [
+        "jpaez@gmail.com"
+      ],
+      "subject": "Poliza 98765432 proxima a vencer",
+      "body": "Le recordamos que su poliza 98765432 vence el 09/03/2027. Adjuntamos la propuesta de renovacion con las nuevas condiciones y valores.",
+      "thread_id": null,
+      "received_at": "2026-02-10T10:00:00Z",
+      "attachments": [
+        {
+          "filename": "propuesta_renovacion.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Propuesta de renovacion poliza 98765432, prima anual $890.450.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_RENEWAL",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0023",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Poliza 98765432 proxima a vencer",
+      "body": "Confirmo la renovacion con las mismas condiciones. Adelanto el pago por transferencia esta semana. Javier Paez.",
+      "thread_id": "th-0022",
+      "received_at": "2026-02-12T09:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_RENEWAL",
+        "secondary_categories": [
+          "PAYMENT_BILLING"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0024",
+      "sender": "renovaciones@braven.com.ar",
+      "recipients": [
+        "admin@consorcio9dejulio.com.ar"
+      ],
+      "subject": "Renovacion automatica poliza consorcio 99001122",
+      "body": "Informamos que la poliza 99001122 se renovara automaticamente por un periodo anual a partir del 15/09/2027, conforme condiciones vigentes. Adjuntamos propuesta informativa.",
+      "thread_id": null,
+      "received_at": "2026-08-01T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_RENEWAL",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0025",
+      "sender": "lmolina@empresaagro.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Renovacion de poliza agro con nuevos bienes",
+      "body": "Buen dia, para la renovacion de la poliza 87345612 queremos incorporar un silo nuevo ubicado en Herrera (Santiago del Estero). Adjuntamos detalle de bienes. Laura Molina.",
+      "thread_id": null,
+      "received_at": "2026-08-02T11:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_RENEWAL",
+        "secondary_categories": [
+          "POLICY_CHANGE"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0026",
+      "sender": "renovaciones@braven.com.ar",
+      "recipients": [
+        "lmolina@empresaagro.com.ar"
+      ],
+      "subject": "Renovacion poliza ART 87345612 - documentacion faltante",
+      "body": "Para poder renovar la poliza 87345612 necesitamos que nos remitan la nomina de personal actualizada al ultimo mes y el ultimo F.931 presentado.",
+      "thread_id": null,
+      "received_at": "2026-08-03T10:15:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_RENEWAL",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0027",
+      "sender": "scastro@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "No deseo renovar mi poliza de vida",
+      "body": "Hola, les informo que no deseo renovar la poliza de vida 91234567 que vence el mes proximo. Agradezco confirmar la no renovacion. Silvia Castro.",
+      "thread_id": null,
+      "received_at": "2026-08-04T14:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_RENEWAL",
+        "secondary_categories": [
+          "POLICY_CANCELLATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0028",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Renovacion Hilux con cambio de cobertura",
+      "body": "Para la renovacion de la poliza 96789012 quiero bajar de todo riesgo a terceros completo. Me pasan la diferencia de prima? Veronica.",
+      "thread_id": "th-0021",
+      "received_at": "2026-08-05T09:40:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_RENEWAL",
+        "secondary_categories": [
+          "POLICY_CHANGE"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0029",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cambio de domicilio en mi poliza",
+      "body": "Hola, necesito actualizar el domicilio de riesgos de la poliza 98765432: me mude a Av. Triunvirato 4300, CABA. Gracias, Javier.",
+      "thread_id": null,
+      "received_at": "2026-09-18T10:05:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CHANGE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0030",
+      "sender": "cotizaciones@transportesandina.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Baja de unidad en flota",
+      "body": "Buen dia, vendimos la unidad patente AE123FG. Solicitamos la baja del endoso correspondiente en la poliza matriz 88112233 a partir del 01/10.",
+      "thread_id": null,
+      "received_at": "2026-09-18T14:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CHANGE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0031",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Agregar chofer adicional a la poliza",
+      "body": "Hola, quiero agregar a mi hijo Franco Gomez (DNI 45.678.901) como chofer adicional en la poliza 96789012. Que datos necesitan? Veronica.",
+      "thread_id": null,
+      "received_at": "2026-09-19T09:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CHANGE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0032",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Actualizar suma asegurada consorcio",
+      "body": "Buen dia, tras la obra de pintura integral la suma asegurada del consorcio quedo desactualizada. Solicitamos endoso de incremento de suma asegurada en la poliza 99001122.",
+      "thread_id": null,
+      "received_at": "2026-09-19T15:45:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CHANGE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0033",
+      "sender": "lmolina@empresaagro.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cambio de maquinaria asegurada",
+      "body": "Vendimos el tractor John Deere 6110J asegurado bajo poliza 87345612 y compramos un Case IH Farmall 100A, dominio AF987UV. Pedimos el reemplazo por endoso. Laura Molina.",
+      "thread_id": null,
+      "received_at": "2026-09-20T08:55:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CHANGE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0034",
+      "sender": "nkirsch@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cambio de beneficiario en seguro de vida",
+      "body": "Hola, necesito cambiar el beneficiario de mi poliza de vida 91567890: quiero dejar a mi hermana Ana Kirsch (DNI 30.456.111) como beneficiaria unica. Nora Kirsch.",
+      "thread_id": null,
+      "received_at": "2026-09-20T16:20:00Z",
+      "attachments": [
+        {
+          "filename": "formulario_beneficiario.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Formulario de actualizacion de beneficiarios, asegurada Nora Kirsch, DNI 27.890.123.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CHANGE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0035",
+      "sender": "scastro@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Quitar cobertura cristales de mi poliza",
+      "body": "Hola, no quiero cancelar la poliza 91234567, solo quitar la cobertura de cristales para bajar la prima. Como hago? Silvia.",
+      "thread_id": "th-0027",
+      "received_at": "2026-09-21T10:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CHANGE",
+        "secondary_categories": [
+          "POLICY_CANCELLATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0036",
+      "sender": "fdelgado@yahoo.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cancelacion definitiva de mi poliza de moto",
+      "body": "Hola, solicito la cancelacion definitiva de la poliza 90123456 (moto Honda CG 150, patente A123BCD). Vendi la moto. Favor de indicar el procedimiento. Fernando Delgado.",
+      "thread_id": null,
+      "received_at": "2026-09-21T14:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CANCELLATION",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0037",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "No renovar / cancelar poliza consorcio",
+      "body": "El consorcio resolvio cambiar de aseguradora. Solicitamos la cancelacion de la poliza 99001122 al vencimiento del periodo en curso, sin renovacion automatica.",
+      "thread_id": null,
+      "received_at": "2026-09-22T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CANCELLATION",
+        "secondary_categories": [
+          "POLICY_RENEWAL"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0038",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Baja de poliza por venta del vehiculo",
+      "body": "Hola, vendi la Hilux y necesito dar de baja la poliza 96789012. Me pueden informar que documentacion piden para tramitar la baja? Veronica Gomez.",
+      "thread_id": null,
+      "received_at": "2026-09-22T15:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CANCELLATION",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0039",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cancelacion de poliza y devolucion de prima",
+      "body": "Hola, cancele la poliza 98765432 por formulario hace dos semanas y aun no recibo respuesta ni la devolucion proporcional de prima. Exijo una respuesta. Javier Paez.",
+      "thread_id": null,
+      "received_at": "2026-09-23T11:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CANCELLATION",
+        "secondary_categories": [
+          "COMPLAINT"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0040",
+      "sender": "scastro@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Demora en la devolucion tras cancelar",
+      "body": "Hace un mes que pedi la baja de la poliza 91234567 y nadie me responde sobre la devolucion de la prima no consumida. Si no hay respuesta esta semana voy a hacer el reclamo formal ante la SSN. Silvia Castro.",
+      "thread_id": "th-0036",
+      "received_at": "2026-09-23T16:40:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "COMPLAINT",
+        "secondary_categories": [
+          "POLICY_CANCELLATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0041",
+      "sender": "cotizaciones@transportesandina.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cancelacion de endoso de unidad dada de baja",
+      "body": "Buen dia, la unidad AF234GH fue vendida en agosto y ya lo informamos. Verificamos que el endoso sigue activo en la poliza matriz 88112233. Solicitamos su cancelacion retroactiva.",
+      "thread_id": null,
+      "received_at": "2026-09-24T09:15:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CANCELLATION",
+        "secondary_categories": [
+          "POLICY_CHANGE"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0042",
+      "sender": "contratos@cooperativaelforjar.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Rescision de poliza colectiva AP",
+      "body": "Por reestructuracion interna, la cooperativa resolvio la rescision anticipada de la poliza colectiva 94567890 a partir del 30/09. Adjuntamos acta de resolucion directorio.",
+      "thread_id": null,
+      "received_at": "2026-09-24T14:50:00Z",
+      "attachments": [
+        {
+          "filename": "acta_rescision.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Acta de directorio nro 214: resolucion de rescision anticipada poliza 94567890.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CANCELLATION",
+        "secondary_categories": [],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "APPROVAL_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0043",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Choque en Av. Rivadavia - quiero abrir un siniestro",
+      "body": "Hola, ayer tuve un choque en Av. Rivadavia 4500 con mi Gol Trend patente AB123CD. Hay un tercero involucrado. Quiero abrir un reclamo. Javier Paez, poliza 98765432.",
+      "thread_id": null,
+      "received_at": "2026-09-25T08:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_NEW",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0044",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Robo de la Hilux",
+      "body": "Urgente: me robaron la camioneta patente AC456DE anoche en Quilmes. Ya hice la denuncia policial. Necesito iniciar el siniestro de robo total de la poliza 96789012.",
+      "thread_id": null,
+      "received_at": "2026-09-25T09:05:00Z",
+      "attachments": [
+        {
+          "filename": "denuncia_robo.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Denuncia policial por robo de vehiculo patente AC456DE, comisaria 5ta de Quilmes.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_NEW",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED",
+          "URGENT"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0045",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "siniestros@braven.com.ar"
+      ],
+      "subject": "Ingreso de agua en el edificio - siniestro",
+      "body": "Buen dia, anoche hubo un ingreso de agua por rotura de cañeria en el 4to piso con daños en tres unidades. Solicitamos abrir el siniestro de la poliza 99001122. Adjuntamos fotos.",
+      "thread_id": null,
+      "received_at": "2026-09-25T10:40:00Z",
+      "attachments": [
+        {
+          "filename": "foto_siniestro_1.jpg",
+          "mime": "image/jpeg",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_NEW",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0046",
+      "sender": "lmolina@empresaagro.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Granizo dañó el cultivo",
+      "body": "Buen dia, el granizo de anoche dañó 80 hectareas de soja aseguradas bajo la poliza 87345612. Solicitamos apertura de siniestro y visita del peritador. Laura Molina.",
+      "thread_id": null,
+      "received_at": "2026-09-26T07:50:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_NEW",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0047",
+      "sender": "nkirsch@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Quiero iniciar un siniestro de vida",
+      "body": "Hola, falleció mi padre asegurado bajo la poliza 91567890 y necesito iniciar el siniestro de fallecimiento. Agradezco me indiquen la documentacion necesaria. Nora Kirsch.",
+      "thread_id": null,
+      "received_at": "2026-09-26T11:25:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_NEW",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0048",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Ingreso de agua en el edificio - siniestro",
+      "body": "Adjuntamos el informe del perito asignado al siniestro del ingreso de agua. El peritaje confirma daños por $4.200.000 en pisos y paredes de las tres unidades.",
+      "thread_id": "th-0045",
+      "received_at": "2026-09-28T09:30:00Z",
+      "attachments": [
+        {
+          "filename": "informe_perito.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Informe pericial siniestro 77100233: daños por $4.200.000, causa rotura de cañeria.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0049",
+      "sender": "fdelgado@yahoo.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Siniestro moto - quiero agregar una factura de casco",
+      "body": "Hola, en el marco del siniestro de mi moto ya abierto, quiero agregar una factura de casco dañado que no incluí al inicio. Fernando.",
+      "thread_id": "th-0043",
+      "received_at": "2026-09-28T14:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0050",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Robo de la Hilux - aparece la camioneta",
+      "body": "Novedades del siniestro: apareció la camioneta en un deposito policial de Lanus. Adjuntamos el acta. Como sigue el tramite?",
+      "thread_id": "th-0044",
+      "received_at": "2026-09-29T10:00:00Z",
+      "attachments": [
+        {
+          "filename": "acta_deposito.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Acta de secuestro vehiculo patente AC456DE en deposito judicial de Lanus.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0051",
+      "sender": "siniestros@braven.com.ar",
+      "recipients": [
+        "admin@consorcio9dejulio.com.ar"
+      ],
+      "subject": "Siniestro 77100233 - estado del tramite",
+      "body": "Le informamos que su siniestro 77100233 (ingreso de agua) se encuentra en estado de peritacion finalizada, a la espera de la orden de pago. Le notificaremos cuando este aprobado.",
+      "thread_id": null,
+      "received_at": "2026-09-29T15:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0052",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Choque en Av. Rivadavia - cambio de telefono de contacto",
+      "body": "Les aviso que cambie de numero de celular: ahora es 11-5555-3311. Quiero que lo actualicen en el siniestro en trámite.",
+      "thread_id": "th-0043",
+      "received_at": "2026-09-30T08:45:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0053",
+      "sender": "lmolina@empresaagro.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Granizo - peritaje reprogramado",
+      "body": "Buen dia, el peritador nos confirmo que reprogramó la visita al campo para el jueves. Se los reenvio para que quede registrado en el expediente del siniestro.",
+      "thread_id": "th-0046",
+      "received_at": "2026-09-30T13:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0054",
+      "sender": "siniestros@braven.com.ar",
+      "recipients": [
+        "nkirsch@gmail.com"
+      ],
+      "subject": "Re: Siniestro fallecimiento - avance del tramite",
+      "body": "Estimada Nora: el tramite del siniestro 77100288 avanza conforme previsto. Recibimos el partida de defuncion y quedan pendientes las CDI de los beneficiarios.",
+      "thread_id": null,
+      "received_at": "2026-10-01T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0055",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Ingreso de agua - rechazo de presupuesto de reparacion",
+      "body": "El consorcio rechaza el primer presupuesto de reparacion por considerar que la suma no cubre los daños reales. Pedimos que el perito revise los montos.",
+      "thread_id": "th-0045",
+      "received_at": "2026-10-01T14:35:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [
+          "COMPLAINT"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0056",
+      "sender": "scastro@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Demora en la devolucion - siniestro vinculado",
+      "body": "Quiero saber si el siniestro vinculado a mi poliza cancelada afecta la devolucion de prima. Nadie me responde del caso.",
+      "thread_id": "th-0040",
+      "received_at": "2026-10-02T09:50:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_UPDATE",
+        "secondary_categories": [
+          "COMPLAINT",
+          "POLICY_CANCELLATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0057",
+      "sender": "siniestros@braven.com.ar",
+      "recipients": [
+        "admin@consorcio9dejulio.com.ar"
+      ],
+      "subject": "Siniestro 77100233 - documentacion faltante",
+      "body": "Para avanzar con el siniestro 77100233 necesitamos: DNI del denunciante, factura original de la cañeria y presupuesto de reparacion firmado por el plomero matriculado.",
+      "thread_id": null,
+      "received_at": "2026-10-02T11:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_DOCUMENTATION",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0058",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Envio de documentacion del choque",
+      "body": "Hola, adjunto la documentacion que me pidieron del siniestro: denuncia, fotos del daño y presupeusto del chasista. Cualquier cosa me avisan.",
+      "thread_id": "th-0043",
+      "received_at": "2026-10-02T16:00:00Z",
+      "attachments": [
+        {
+          "filename": "denuncia_choque.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Denuncia de choque Av. Rivadavia 4500, caratula Paez c/ Gonzalez.",
+          "status": "extracted"
+        },
+        {
+          "filename": "presupuesto_chapa.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Presupuesto de chapa y pintura $1.850.000, taller Lopez.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_DOCUMENTATION",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0059",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Fotos del robo - documentacion siniestro",
+      "body": "Adjunto fotos de la camioneta previas al robo y el comprobante de la denuncia, como me pidieron para el legajo del siniestro.",
+      "thread_id": "th-0058",
+      "received_at": "2026-10-03T09:20:00Z",
+      "attachments": [
+        {
+          "filename": "foto_siniestro_1.jpg",
+          "mime": "image/jpeg",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        },
+        {
+          "filename": "foto_siniestro_2.png",
+          "mime": "image/png",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_DOCUMENTATION",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0060",
+      "sender": "pagos@braven.com.ar",
+      "recipients": [
+        "jpaez@gmail.com"
+      ],
+      "subject": "Vencimiento de cuota poliza 98765432",
+      "body": "Le recordamos que la 2da cuota de la poliza 98765432 vence el 10/10 por $148.400. Puede abonarla por debito automatico, PagoFacil o transferencia.",
+      "thread_id": null,
+      "received_at": "2026-10-03T10:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PAYMENT_BILLING",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0061",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Vencimiento de cuota - comprobante de pago",
+      "body": "Hola, les adjunto el comprobante de transferencia de la cuota de la poliza 98765432. Favor de imputar el pago. Javier.",
+      "thread_id": "th-0060",
+      "received_at": "2026-10-04T09:30:00Z",
+      "attachments": [
+        {
+          "filename": "comprobante_transferencia.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Transferencia $148.400, CBU destino aseguradora, referencia poliza 98765432.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PAYMENT_BILLING",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0062",
+      "sender": "pagos@braven.com.ar",
+      "recipients": [
+        "vgomez@fibertel.com.ar"
+      ],
+      "subject": "Rechazo de debito automatico poliza 96789012",
+      "body": "Informamos que el debito automatico de la poliza 96789012 fue rechazado por falta de fondos. Tiene 5 dias para regularizar y evitar la suspension de cobertura.",
+      "thread_id": null,
+      "received_at": "2026-10-04T11:15:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PAYMENT_BILLING",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "URGENT"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0063",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Facturacion con CUIT incorrecto",
+      "body": "Buen dia, la factura de la poliza 99001122 salio con un CUIT erroneo (30-71234567-8 en lugar de 30-71234567-9). Pedimos reemitirla, la necesitamos para contabilidad.",
+      "thread_id": null,
+      "received_at": "2026-10-04T15:40:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PAYMENT_BILLING",
+        "secondary_categories": [
+          "COMPLAINT"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0064",
+      "sender": "lmolina@empresaagro.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Consulta sobre retenciones IB en factura",
+      "body": "Hola, en la ultima factura de la poliza 87345612 nos retuvieron ingresos brutos Santa Fe cuando estamos inscriptos en el convenio multilateral. Como lo reclamamos?",
+      "thread_id": null,
+      "received_at": "2026-10-05T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PAYMENT_BILLING",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0065",
+      "sender": "pagos@braven.com.ar",
+      "recipients": [
+        "cotizaciones@transportesandina.com.ar"
+      ],
+      "subject": "Reversion de pago duplicado poliza 88112233",
+      "body": "Detectamos un pago duplicado en la poliza matriz 88112233. Generamos una nota de credito por $1.240.000 a favor de la empresa, la cual se aplicara a la proxima emision.",
+      "thread_id": null,
+      "received_at": "2026-10-05T14:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PAYMENT_BILLING",
+        "secondary_categories": [],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0066",
+      "sender": "contabilidad@cooperativaelforjar.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Pedido de factura A de la poliza colectiva",
+      "body": "Buen dia, necesitamos la factura A de la poliza colectiva 94567890 con discriminacion de IVA, la necesitamos antes del cierre contable del mes.",
+      "thread_id": null,
+      "received_at": "2026-10-06T08:40:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PAYMENT_BILLING",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0067",
+      "sender": "scastro@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Reclamo formal por falta de respuesta",
+      "body": "Hace 3 semanas que reclamo la devolucion de prima de la poliza cancelada 91234567 y no obtengo respuesta. Exijo una solucion inmediata o iniciare acciones ante la SSN. Silvia Castro, DNI 25.678.341.",
+      "thread_id": null,
+      "received_at": "2026-10-06T10:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "COMPLAINT",
+        "secondary_categories": [
+          "POLICY_CANCELLATION"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0068",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Muy mal atendimento en la sucursal Palermo",
+      "body": "Quiero dejar constancia del mal atendimento que recibí en la sucursal Palermo: me hicieron volver tres veces por el mismo tramite del siniestro. Espero una disculpa y una solucion.",
+      "thread_id": null,
+      "received_at": "2026-10-06T15:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "COMPLAINT",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0069",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Reclamo por demora en la orden de pago",
+      "body": "El siniestro 77100233 tiene la peritacion finalizada hace 3 semanas y aun no hay orden de pago. El edificio sigue con daños. Reclamamos una fecha compromiso inmediata.",
+      "thread_id": "th-0051",
+      "received_at": "2026-10-07T09:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "COMPLAINT",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0070",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Reclamo por suspension indebida de cobertura",
+      "body": "Me suspendieron la cobertura de la poliza 96789012 por un debito rechazado que YO NO debia pagar, ya habia cambiado el CBU. Exijo reactivacion inmediata y explicacion.",
+      "thread_id": null,
+      "received_at": "2026-10-07T14:25:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "COMPLAINT",
+        "secondary_categories": [
+          "PAYMENT_BILLING"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0071",
+      "sender": "fdelgado@yahoo.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Reclamo por trato inadecuado telefonicamente",
+      "body": "Fui maltratado por telefono por un representante al consultar por la cancelacion de mi poliza 90123456. Quiero que se revise la grabacion y se tome medidas. Fernando Delgado.",
+      "thread_id": null,
+      "received_at": "2026-10-08T09:45:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "COMPLAINT",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0072",
+      "sender": "rsoto@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Ultima notificacion antes de acciones legales",
+      "body": "Por la presente intimo a la compañia a responder el reclamo por daños del siniestro 77100301 en 48 horas. Caso contrario, mi abogado iniciara demanda civil por daños y perjuicios. Rodrigo Soto.",
+      "thread_id": null,
+      "received_at": "2026-10-08T15:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": [
+          "COMPLAINT",
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0073",
+      "sender": "reclamos@ssn.gob.ar",
+      "recipients": [
+        "legal@braven.com.ar"
+      ],
+      "subject": "Reclamo SSN expediente 55667 - descargo",
+      "body": "Se notifica el ingreso del reclamo ante la Superintendencia de Seguros de la Nacion, expediente 55667, radicado por Silvia Castro contra la compañía. Se otorgan 15 dias para el descargo.",
+      "thread_id": null,
+      "received_at": "2026-10-09T10:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [
+          "COMPLAINT"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0074",
+      "sender": "siniestros@braven.com.ar",
+      "recipients": [
+        "fraud@braven.com.ar"
+      ],
+      "subject": "Alerta interna - siniestro 77100233 patrón inusual",
+      "body": "Equipo: el siniestro 77100233 presenta un patron inusual: la rotura de cañeria fue reportada 48h despues de la renovacion, con presupuestos ya armados previos al evento. Revisar antecedentes del consorcio.",
+      "thread_id": null,
+      "received_at": "2026-10-09T11:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "FRAUD_SUSPICION",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL",
+          "HIGHLY_CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0075",
+      "sender": "fraud@braven.com.ar",
+      "recipients": [
+        "legal@braven.com.ar"
+      ],
+      "subject": "Posible siniestro simulado - caso 77100288",
+      "body": "Se detectaron inconsistencias en el siniestro 77100288: el partida de defuncion presentado tiene numeracion que no corresponde al registro civil informado. Derivar a investigacion.",
+      "thread_id": null,
+      "received_at": "2026-10-09T16:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "FRAUD_SUSPICION",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "HIGHLY_CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0076",
+      "sender": "siniestros@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Denuncia anónima sobre taller vinculado a siniestros",
+      "body": "Recibimos una denuncia anonima señalando que el taller Lopez presenta los mismos daños en siniestros distintos (casos 77100233 y 77100301). Verificar peritajes y presupuestos.",
+      "thread_id": null,
+      "received_at": "2026-10-10T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "FRAUD_SUSPICION",
+        "secondary_categories": [],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0077",
+      "sender": "fraud@braven.com.ar",
+      "recipients": [
+        "fraud@braven.com.ar"
+      ],
+      "subject": "Cliente con 4 siniestros en 2 meses",
+      "body": "El asegurado de la poliza 90123456 acumula 4 siniestros de moto en 2 meses, todos con daños leves y presupuestos del mismo taller. Sugerimos investigacion previa al pago.",
+      "thread_id": null,
+      "received_at": "2026-10-10T14:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "FRAUD_SUSPICION",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0078",
+      "sender": "denuncias@consumidorfinanciero.org",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Denuncia pública por estafa de un asegurado",
+      "body": "Desde nuestra organizacion recibimos una denuncia publica de un tercero que afirma haber sido estafado por un presunto asegurado que uso un certificado de cobertura falsificado de la compañía.",
+      "thread_id": null,
+      "received_at": "2026-10-11T10:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "FRAUD_SUSPICION",
+        "secondary_categories": [
+          "COMPLAINT"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0079",
+      "sender": "fraud@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Alerta interna - confirmación de fraude",
+      "body": "Confirmado: los presupuestos del taller Lopez fueron emitidos con la misma plantilla en siniestros de asegurados distintos. Documentamos la evidencia y derivamos a asuntos legales.",
+      "thread_id": "th-0076",
+      "received_at": "2026-10-11T15:45:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "FRAUD_SUSPICION",
+        "secondary_categories": [
+          "LEGAL"
+        ],
+        "sensitivity": [
+          "HIGHLY_CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0080",
+      "sender": "siniestros@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Consulta interna sobre doble cobro de deducible",
+      "body": "Detectamos que a un asegurado se le cobró el deducible dos veces por el mismo siniestro y reclamo el reintegro con capturas editadas. Evaluar si hay intencion de defraudar.",
+      "thread_id": null,
+      "received_at": "2026-10-12T09:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "FRAUD_SUSPICION",
+        "secondary_categories": [
+          "PAYMENT_BILLING"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0081",
+      "sender": "legal@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "CD: demanda civil por siniestro 77100301",
+      "body": "Se notifica la presentacion de demanda civil por daños y perjuicios derivados del siniestro 77100301. Plazo para contestar la demanda: 15 dias. Elevamos el expediente al estudio externo.",
+      "thread_id": null,
+      "received_at": "2026-10-12T10:45:00Z",
+      "attachments": [
+        {
+          "filename": "demanda_civil.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Demanda civil contra la compañía por siniestro 77100301, Juzgado Civil 45.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0082",
+      "sender": "abogado@estudiompr.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Carta documento del asegurado RSoto",
+      "body": "Adjuntamos carta documento recibida del asegurado Rodrigo Soto intimando respuesta por el siniestro 77100301 bajo apercibimiento de acciones legales. Se eleva a la gerencia.",
+      "thread_id": null,
+      "received_at": "2026-10-12T16:00:00Z",
+      "attachments": [
+        {
+          "filename": "carta_documento.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Carta documento telegráfica, intimación por siniestro 77100301.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0083",
+      "sender": "legal@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Consulta jurídica - cláusula de cañeria",
+      "body": "El estudio externo consulta nuestra posición sobre la cláusula de daños por cañeria de la poliza 99001122: ¿la rotura fue por falta de mantenimiento declarado? Necesitamos el legajo de emision.",
+      "thread_id": null,
+      "received_at": "2026-10-13T09:15:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0084",
+      "sender": "notificaciones@poderjudicial.gob.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Oficio judicial - bloqueo de fondos",
+      "body": "Por oficio del Juzgado Civil 45 se ordena el bloqueo de fondos por $12.000.000 sobre cuentas de la compañía en el marco de la causa caratulada Soto c/ Aseguradora. Cumplir en 48h.",
+      "thread_id": null,
+      "received_at": "2026-10-13T14:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": [
+          "PAYMENT_BILLING"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "APPROVAL_REQUIRED",
+          "URGENT"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0085",
+      "sender": "legal@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Acuerdo extrajudicial propuesto - caso Soto",
+      "body": "El estudio externo propone un acuerdo extrajudicial por $4.500.000 en el caso Soto (siniestro 77100301). Se requiere aprobacion de gerencia antes del 20/10. Documento adjunto bajo reserva.",
+      "thread_id": null,
+      "received_at": "2026-10-14T09:50:00Z",
+      "attachments": [
+        {
+          "filename": "propuesta_acuerdo.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Propuesta de acuerdo extrajudicial caso Soto, monto $4.500.000, cláusula de confidencialidad.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": [
+          "PAYMENT_BILLING"
+        ],
+        "sensitivity": [
+          "HIGHLY_CONFIDENTIAL",
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "APPROVAL_REQUIRED"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0086",
+      "sender": "notificaciones@ssn.gob.ar",
+      "recipients": [
+        "legal@braven.com.ar"
+      ],
+      "subject": "Intimacion SSN - falta de respuesta a asegurados",
+      "body": "La Superintendencia de Seguros de la Nacion intima a la compañía a presentar descargo por demoras reiteradas en la respuesta a asegurados, conforme art. de la ley 20.091. Plazo: 10 dias.",
+      "thread_id": null,
+      "received_at": "2026-10-14T15:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [
+          "LEGAL"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0087",
+      "sender": "legal@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Acuerdo extrajudicial - aprobado con condiciones",
+      "body": "Gerencia aprueba el acuerdo extrajudicial del caso Soto por $4.500.000, condicionado a la cláusula de confidencialidad plena y al levantamiento de la amenaza de difusión. Notificar al estudio.",
+      "thread_id": "th-0085",
+      "received_at": "2026-10-15T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": [],
+        "sensitivity": [
+          "HIGHLY_CONFIDENTIAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0088",
+      "sender": "normativa@ssn.gob.ar",
+      "recipients": [
+        "normativa@braven.com.ar"
+      ],
+      "subject": "Nueva resolución SSN - reporte de siniestralidad",
+      "body": "Se publica la nueva resolución de la SSN que modifica los reportes de siniestralidad trimestrales. El área normativa debe implementar el nuevo formato antes del proximo cierre.",
+      "thread_id": null,
+      "received_at": "2026-10-15T11:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0089",
+      "sender": "normativa@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cumplimiento de la resolución SSN - plan de acción",
+      "body": "Adjuntamos el plan de accion para cumplir la nueva resolución SSN sobre reportes: actualizacion de sistemas, asignacion de responsables y cronograma de implementacion.",
+      "thread_id": null,
+      "received_at": "2026-10-15T16:10:00Z",
+      "attachments": [
+        {
+          "filename": "plan_de_accion.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Plan de accion cumplimiento resolucion SSN, cronograma octubre-noviembre 2026.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "INTERNAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0090",
+      "sender": "auditorias@ssn.gob.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cronograma de inspección SSN 2026",
+      "body": "Se comunica que la SSN inspeccionará la compañía entre el 03/11 y el 07/11. Deben estar disponibles los legajos de siniestros y las politicas de datos personales solicitadas.",
+      "thread_id": null,
+      "received_at": "2026-10-16T09:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0091",
+      "sender": "normativa@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Informe interno de cumplimiento datos personales",
+      "body": "El area legal y sistemas completaron la revision de cumplimiento de la ley 25.326: se detectaron dos accesos a datos personales sin registro de audit trail. Adjuntamos el informe con el plan de remediación.",
+      "thread_id": null,
+      "received_at": "2026-10-16T14:00:00Z",
+      "attachments": [
+        {
+          "filename": "informe_cumplimiento.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Informe de cumplimiento ley 25.326: 2 hallazgos menores, plan de remediacion 30 dias.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "INTERNAL"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0092",
+      "sender": "reclamos@defensadelconsumidor.gob.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Audiencia de conciliacion - caso Castro",
+      "body": "Se convoca a audiencia de conciliacion en el marco del reclamo de Silvia Castro ante la Oficina de Defensa del Consumidor. Fecha: 25/10, 10:00hs. Presentarse con legajo completo.",
+      "thread_id": null,
+      "received_at": "2026-10-17T09:45:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [
+          "COMPLAINT"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0093",
+      "sender": "normativa@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Audiencia de conciliacion - quien asiste",
+      "body": "Asistira el area legal junto con el estudio externo. Solicitamos a siniestros el legajo completo del caso Castro antes del 22/10. Registrar la convocatoria en el repertorio regulatorio.",
+      "thread_id": "th-0092",
+      "received_at": "2026-10-17T15:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [
+          "LEGAL",
+          "COMPLAINT"
+        ],
+        "sensitivity": [
+          "INTERNAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0094",
+      "sender": "auditorias@ssn.gob.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Resultado de inspección - observaciones menores",
+      "body": "La SSN emite el acta de inspeccion con dos observaciones menores sobre documentacion de siniestros. Plazo de subsanacion: 30 dias. Sin sanciones.",
+      "thread_id": null,
+      "received_at": "2026-10-18T10:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "REGULATORY",
+        "secondary_categories": [],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0095",
+      "sender": "alianzas@fintechpagos.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Propuesta de alianza comercial",
+      "body": "Buen dia, somos una fintech de pagos con 200.000 usuarios y queremos explorar una alianza para distribuir seguros embebidos en nuestra app. Proponemos una reunion la proxima semana.",
+      "thread_id": null,
+      "received_at": "2026-10-18T14:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PARTNERSHIP",
+        "secondary_categories": [
+          "NEW_LEAD"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0096",
+      "sender": "alianzas@fintechpagos.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Propuesta de alianza - NDA antes de datos",
+      "body": "Perfecto, antes de compartir volumenes y condiciones enviamos nuestro NDA para firma. Adjuntamos el borrador de acuerdo de confidencialidad mutua.",
+      "thread_id": null,
+      "received_at": "2026-10-19T09:20:00Z",
+      "attachments": [
+        {
+          "filename": "nda_borrador.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Borrador de acuerdo de confidencialidad mutua entre la fintech y la aseguradora.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PARTNERSHIP",
+        "secondary_categories": [
+          "LEGAL"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "APPROVAL_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0097",
+      "sender": "desarrollo@bancohindu.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Banco interesado en co-branding de seguros",
+      "body": "Buen dia, desde el banco evaluamos un programa de co-branding de seguros de vida para nuestros clientes premium. Solicitamos reunion con el area comercial y condiciones referenciales.",
+      "thread_id": null,
+      "received_at": "2026-10-19T15:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PARTNERSHIP",
+        "secondary_categories": [
+          "NEW_LEAD"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0098b",
+      "sender": "alianzas@fintechpagos.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Propuesta de alianza - volumen anual proyectado",
+      "body": "Compartimos el volumen anual proyectado de pólizas embebidas: 18.000 emisiones estimadas, prima media $95.000. Estos numeros son confidenciales hasta la firma del acuerdo marco.",
+      "thread_id": "th-0095",
+      "received_at": "2026-10-20T10:40:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PARTNERSHIP",
+        "secondary_categories": [
+          "NEW_LEAD"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0099",
+      "sender": "convenios@universidadnacional.edu.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Convenio de practicas y capacitación",
+      "body": "Buen dia, la universidad propone un convenio de practicas supervisadas y capacitacion en gestion de riesgos para estudiantes avanzados. Adjuntamos el borrador de convenio marco.",
+      "thread_id": null,
+      "received_at": "2026-10-20T16:00:00Z",
+      "attachments": [
+        {
+          "filename": "convenio_marco.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Borrador de convenio marco universidad-aseguradora, practicas y capacitacion.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PARTNERSHIP",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "APPROVAL_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0100",
+      "sender": "alianzas@fintechpagos.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Propuesta de alianza - confirmación de reunión",
+      "body": "Confirmamos la reunion para el jueves 23/10 a las 10hs en sus oficinas. Asistiran nuestro CEO y el responsable de producto. Queda definida la agenda preliminar.",
+      "thread_id": "th-0095",
+      "received_at": "2026-10-21T09:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PARTNERSHIP",
+        "secondary_categories": [],
+        "sensitivity": [
+          "INTERNAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0101",
+      "sender": "no-reply@panificadosdelsur.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Confirmación de pedido - panificados",
+      "body": "Su pedido nro 55432 de panificados fue confirmado para entregarse el viernes en su oficina de Av. Corrientes 1234. No responda a este correo automatico.",
+      "thread_id": null,
+      "received_at": "2026-10-21T11:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "LOW"
+      }
+    },
+    {
+      "message_id": "em-0102",
+      "sender": "newsletter@revistaseguros.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Newsletter semanal del sector asegurador",
+      "body": "Resumen semanal: novedades de tarifas, mergers del sector y una nota sobre digitalizacion de siniestros. Lea la edicion completa en nuestro sitio.",
+      "thread_id": null,
+      "received_at": "2026-10-21T16:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "LOW"
+      }
+    },
+    {
+      "message_id": "em-0103",
+      "sender": "rrhh@braven.com.ar",
+      "recipients": [
+        "todos@braven.com.ar"
+      ],
+      "subject": "Invitación a capacitación interna",
+      "body": "Invitamos a todo el personal a la capacitacion sobre phishing y seguridad de la informacion el martes 28/10 a las 11hs por Teams. Confirmar asistencia.",
+      "thread_id": null,
+      "received_at": "2026-10-22T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "INTERNAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "LOW"
+      }
+    },
+    {
+      "message_id": "em-0104",
+      "sender": "soporte@proveedorcorreo.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Mantenimiento programado del servidor de correo",
+      "body": "Informamos un mantenimiento programado del servidor de correo el domingo de 2 a 6 hs. Durante ese periodo los envios pueden demorar. No es necesario responder.",
+      "thread_id": null,
+      "received_at": "2026-10-22T14:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "LOW"
+      }
+    },
+    {
+      "message_id": "em-0105",
+      "sender": "empleados@braven.com.ar",
+      "recipients": [
+        "siniestros@braven.com.ar"
+      ],
+      "subject": "Feliz cumpleaños equipo de siniestros!",
+      "body": "Hoy cumple años nuestra compañera Marta del equipo de siniestros. Festejamos a las 16hs en la sala comun con torta. Los esperamos!",
+      "thread_id": null,
+      "received_at": "2026-10-23T08:50:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "INTERNAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "LOW"
+      }
+    },
+    {
+      "message_id": "em-0106",
+      "sender": "seguimiento@enviosya.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Tu paquete está en camino",
+      "body": "Tu paquete con la camara del vehiculo esta en camino. Seguimiento nro 99881. Se entrega hoy entre 14 y 18hs en el domicilio declarado.",
+      "thread_id": null,
+      "received_at": "2026-10-23T13:15:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "LOW"
+      }
+    },
+    {
+      "message_id": "em-0107",
+      "sender": "marketing@feriasexpo.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Invitación a la expo de gestión de riesgos",
+      "body": "Lo invitamos a la expo de gestion de riesgos y seguros el 12/11 en La Rural. Registro gratuito para el sector asegurador con codigo BRAVEN2026.",
+      "thread_id": null,
+      "received_at": "2026-10-24T09:30:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [
+          "PARTNERSHIP"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "LOW"
+      }
+    },
+    {
+      "message_id": "em-0108",
+      "sender": "jpaez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Fotos del choque para el siniestro",
+      "body": "Les envio las fotos del choque tal como las tome con el celular, sin editar.",
+      "thread_id": "th-0043",
+      "received_at": "2026-10-24T10:50:00Z",
+      "attachments": [
+        {
+          "filename": "foto_siniestro_1.jpg",
+          "mime": "image/jpeg",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        },
+        {
+          "filename": "foto_siniestro_2.png",
+          "mime": "image/png",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_DOCUMENTATION",
+        "secondary_categories": [
+          "CLAIM_NEW"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0109",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Mas fotos del daño del techo",
+      "body": "Adjuntamos mas fotos del daño en el techo del edificio para el legajo del siniestro.",
+      "thread_id": "th-0045",
+      "received_at": "2026-10-24T15:30:00Z",
+      "attachments": [
+        {
+          "filename": "techo_danado.heic",
+          "mime": "image/heic",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_DOCUMENTATION",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0110",
+      "sender": "siniestros@braven.com.ar",
+      "recipients": [
+        "siniestros@braven.com.ar"
+      ],
+      "subject": "Listado de siniestros pendientes del mes",
+      "body": "Equipo, adjunto el listado de siniestros pendientes del mes con nombre, DNI y telefono del asegurado. No circular fuera del area.",
+      "thread_id": null,
+      "received_at": "2026-10-25T09:00:00Z",
+      "attachments": [
+        {
+          "filename": "pendientes_octubre.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "extracted_text": "Listado interno: 34 siniestros pendientes con datos de contacto de asegurados.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA",
+          "INTERNAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0111",
+      "sender": "siniestros@braven.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Reclamo ART con informe médico",
+      "body": "Se recibe reclamo ART del empleado J. Dominguez (DNI 33.456.222) con informe medico que detalla diagnostico de lumbalgia ciatica crónica y estudios de imagen. Elevar a reservado.",
+      "thread_id": null,
+      "received_at": "2026-10-25T11:30:00Z",
+      "attachments": [
+        {
+          "filename": "informe_medico.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Informe medico: lumbalgia con irradiancia ciatica, diagnostico crónico, reposo 15 dias.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_DOCUMENTATION",
+        "secondary_categories": [
+          "LEGAL"
+        ],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0112",
+      "sender": "legal@braven.com.ar",
+      "recipients": [
+        "legal@braven.com.ar"
+      ],
+      "subject": "Investigación interna - denuncia contra gerente",
+      "body": "Se instruye sumario interno por la denuncia contra un gerente del area comercial por presuntas irregularidades en la emision de polizas. Informacion estrictamente reservada.",
+      "thread_id": null,
+      "received_at": "2026-10-25T16:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "LEGAL",
+        "secondary_categories": [
+          "FRAUD_SUSPICION"
+        ],
+        "sensitivity": [
+          "HIGHLY_CONFIDENTIAL",
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0113",
+      "sender": "maria.jose.lopez@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Cambio de titular en el registro del automotor",
+      "body": "Hola, ya hice el cambio de titular en el registro del automotor de la patente AD678FG. Mi DNI es 36.789.123. Necesito que actualicen la poliza a mi nombre. María José López.",
+      "thread_id": null,
+      "received_at": "2026-10-26T09:15:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_CHANGE",
+        "secondary_categories": [],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0114",
+      "sender": "gerencia@braven.com.ar",
+      "recipients": [
+        "comite@braven.com.ar"
+      ],
+      "subject": "Estrategia de precios Q4 - reservado",
+      "body": "Equipo gerencial: la estrategia de precios del Q4 contempla un ajuste del 8% en autos y una campaña de retencion dirigida. No circular fuera de comite. Detalles en el acta adjunta.",
+      "thread_id": null,
+      "received_at": "2026-10-26T10:40:00Z",
+      "attachments": [
+        {
+          "filename": "acta_comite_q4.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Acta de comite: estrategia de precios Q4, ajuste 8% autos, campaña de retencion.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0115",
+      "sender": "vgomez@fibertel.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Nuevo daño: la camioneta recuperada no arranca",
+      "body": "La camioneta recuperada no arranca: hay que abrir OTRO siniestro por intento de arranque forzado, distinto al robo original. Adjunto presupuesto del electromecanico.",
+      "thread_id": "th-0044",
+      "received_at": "2026-10-26T14:20:00Z",
+      "attachments": [
+        {
+          "filename": "presupuesto_electromecanico.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Presupuesto reparacion de cableado y ECU por intento de arranque forzado $980.000.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_NEW",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION",
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0116",
+      "sender": "admin@consorcio9dejulio.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Renovacion automatica - discrepancia de prima",
+      "body": "No aceptamos la prima de renovacion: hay una discrepancia del 22% respecto de la cotizacion inicial. Si no se corrige, el consorcio iniciara acciones ante la SSN y evaluara la rescision.",
+      "thread_id": "th-0024",
+      "received_at": "2026-10-27T09:00:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "POLICY_RENEWAL",
+        "secondary_categories": [
+          "COMPLAINT",
+          "LEGAL"
+        ],
+        "sensitivity": [
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0117",
+      "sender": "alianzas@fintechpagos.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Propuesta de alianza - datos para compliance",
+      "body": "Para el KYC de la alianza necesitamos: socios con DNI y participacion accionaria, CUIT de la compañía y constancias de inscripcion. Enviamos el formulario completado.",
+      "thread_id": "th-0095",
+      "received_at": "2026-10-27T11:40:00Z",
+      "attachments": [
+        {
+          "filename": "formulario_kyc.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Formulario KYC: socios, DNI, participacion accionaria, CUIT 30-71555666-4.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "PARTNERSHIP",
+        "secondary_categories": [
+          "LEGAL"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA",
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0118",
+      "sender": "fdelgado@yahoo.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Reclamo por mala peritacion de la moto",
+      "body": "Discrepo totalmente con la peritacion de mi moto: dicen que el casco no estaba dañado cuando lo estaba. Pido re-peritaje. Todavia no consulte abogado pero estoy muy molesto.",
+      "thread_id": null,
+      "received_at": "2026-10-27T16:10:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "COMPLAINT",
+        "secondary_categories": [
+          "CLAIM_UPDATE"
+        ],
+        "sensitivity": [
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "REPLY_REQUIRED",
+          "ESCALATE"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0119",
+      "sender": "lmolina@empresaagro.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Re: Renovacion ART - pedir cotizacion comparativa",
+      "body": "Antes de renovar, pasennos la cotizacion comparativa de mercado que prometieron. Si es muy superior, vamos a pedir precios a otras aseguradoras.",
+      "thread_id": "th-0025",
+      "received_at": "2026-10-28T09:20:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "QUOTE_REQUEST",
+        "secondary_categories": [
+          "POLICY_RENEWAL"
+        ],
+        "sensitivity": [
+          "PUBLIC"
+        ],
+        "actions": [
+          "REPLY_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0120",
+      "sender": "nkirsch@gmail.com",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Escaneo de mi DNI para el legajo",
+      "body": "Les envio las fotos del DNI y del formulario firmado que me pidieron para el legajo del seguro de vida.",
+      "thread_id": null,
+      "received_at": "2026-10-28T10:30:00Z",
+      "attachments": [
+        {
+          "filename": "dni_frente.jpg",
+          "mime": "image/jpeg",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        },
+        {
+          "filename": "dni_dorso.jpg",
+          "mime": "image/jpeg",
+          "extracted_text": null,
+          "status": "not_text_extractable"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "CLAIM_DOCUMENTATION",
+        "secondary_categories": [
+          "NEW_POLICY"
+        ],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0121",
+      "sender": "rrhh@braven.com.ar",
+      "recipients": [
+        "rrhh@braven.com.ar"
+      ],
+      "subject": "Evaluaciones de desempeno - comite de recursos humanos",
+      "body": "Equipo RRHH: adjuntamos las evaluaciones de desempeno del semestre del area comercial para el comite de calificacion. Documento de circulacion interna, no reenviar.",
+      "thread_id": null,
+      "received_at": "2026-10-28T14:40:00Z",
+      "attachments": [
+        {
+          "filename": "evaluaciones_semestre.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "extracted_text": "Evaluaciones de desempeno semestrales, area comercial, 24 empleados, scores y comentarios.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "INTERNAL",
+          "PERSONAL_DATA"
+        ],
+        "actions": [
+          "NO_ACTION"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0122",
+      "sender": "rrhh@braven.com.ar",
+      "recipients": [
+        "rrhh@braven.com.ar"
+      ],
+      "subject": "Expediente reservado - licencia por salud",
+      "body": "Se abre expediente reservado de licencia extendida por tratamiento medico del empleado L. Ferreyra (legajo 4471). Documentacion clinica adjunta, acceso restringido a RRHH y legal.",
+      "thread_id": null,
+      "received_at": "2026-10-29T09:10:00Z",
+      "attachments": [
+        {
+          "filename": "documentacion_clinica.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Documentacion clinica: tratamiento oncologico en curso, certificados y estudios.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [
+          "CLAIM_DOCUMENTATION"
+        ],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "HIGHLY_CONFIDENTIAL"
+        ],
+        "actions": [
+          "DOCUMENT_REQUIRED"
+        ],
+        "priority": "HIGH"
+      }
+    },
+    {
+      "message_id": "em-0123",
+      "sender": "fraud@braven.com.ar",
+      "recipients": [
+        "fraud@braven.com.ar"
+      ],
+      "subject": "Informe final de investigacion - caso taller Lopez",
+      "body": "Informe final de investigacion: se acredita la fabricalion de presupuestos en al menos 6 siniestros, con identificacion de los asegurados participantes y montos. Distribucion restringida a comite de fraude y legal.",
+      "thread_id": null,
+      "received_at": "2026-10-29T11:25:00Z",
+      "attachments": [
+        {
+          "filename": "informe_investigacion.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Informe final caso taller Lopez: 6 siniestros fraudulentos, monto total $14.300.000, 4 asegurados implicados.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "FRAUD_SUSPICION",
+        "secondary_categories": [
+          "LEGAL"
+        ],
+        "sensitivity": [
+          "HIGHLY_CONFIDENTIAL",
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE"
+        ],
+        "priority": "CRITICAL"
+      }
+    },
+    {
+      "message_id": "em-0124",
+      "sender": "sistemas@braven.com.ar",
+      "recipients": [
+        "sistemas@braven.com.ar"
+      ],
+      "subject": "Proyecto control de acceso biometrico - datos de empleados",
+      "body": "Sistemas y RRHH: la prueba piloto del control de acceso biometrico requiere cargar huellas dactilares de 30 empleados de la sede central. Tratamos los datos como categoria sensible conforme ley 25.326.",
+      "thread_id": null,
+      "received_at": "2026-10-29T15:50:00Z",
+      "attachments": [],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [],
+        "sensitivity": [
+          "SENSITIVE_PERSONAL_DATA",
+          "INTERNAL"
+        ],
+        "actions": [
+          "APPROVAL_REQUIRED"
+        ],
+        "priority": "NORMAL"
+      }
+    },
+    {
+      "message_id": "em-0125",
+      "sender": "soporte@pasarelapagos.com.ar",
+      "recipients": [
+        "seguros@braven.com.ar"
+      ],
+      "subject": "Incidente de seguridad - datos de tarjetas expuestos",
+      "body": "Nos contactamos por un incidente en nuestra pasarela: un subconjunto de datos de tarjetas de clientes que pagaron con nuestra integracion quedo temporalmente expuesto en logs. Detalle técnico y alcance en el adjunto bajo reserva.",
+      "thread_id": null,
+      "received_at": "2026-10-30T08:20:00Z",
+      "attachments": [
+        {
+          "filename": "detalle_incidente.pdf",
+          "mime": "application/pdf",
+          "extracted_text": "Detalle del incidente: 340 tarjetas afectadas, PAN enmascarado, ventana de exposicion 6 horas.",
+          "status": "extracted"
+        }
+      ],
+      "synthetic": true,
+      "expected": {
+        "primary_category": "OTHER",
+        "secondary_categories": [
+          "FRAUD_SUSPICION",
+          "LEGAL"
+        ],
+        "sensitivity": [
+          "HIGHLY_CONFIDENTIAL",
+          "CONFIDENTIAL"
+        ],
+        "actions": [
+          "ESCALATE",
+          "URGENT"
+        ],
+        "priority": "CRITICAL"
+      }
+    }
+  ],
+  "boundary_cases": [
+    {
+      "message_id": "em-0007",
+      "reason": "lead vs quote: pide precio concreto para decidir esta semana"
+    },
+    {
+      "message_id": "em-0014",
+      "reason": "lead vs quote: hilo de cotizacion previa con consulta abierta de otro producto"
+    },
+    {
+      "message_id": "em-0019",
+      "reason": "poliza emitida con documentacion personal pendiente de conformacion"
+    },
+    {
+      "message_id": "em-0028",
+      "reason": "renovacion vs cambio de cobertura"
+    },
+    {
+      "message_id": "em-0035",
+      "reason": "cambio parcial de cobertura sin cancelar la poliza"
+    },
+    {
+      "message_id": "em-0040",
+      "reason": "cancelacion vs queja: reclamo por demora en devolucion de prima"
+    },
+    {
+      "message_id": "em-0048",
+      "reason": "claim triple: informe de perito en hilo de siniestro ya abierto"
+    },
+    {
+      "message_id": "em-0049",
+      "reason": "claim triple: agregado de documentacion a siniestro existente"
+    },
+    {
+      "message_id": "em-0055",
+      "reason": "update de siniestro con reclamo por presupuesto rechazado"
+    },
+    {
+      "message_id": "em-0056",
+      "reason": "update vs cancelacion: consulta sobre siniestro de poliza cancelada"
+    },
+    {
+      "message_id": "em-0063",
+      "reason": "facturacion con CUIT erroneo: billing con queja"
+    },
+    {
+      "message_id": "em-0072",
+      "reason": "complaint vs legal: intimacion con abogado y plazo concreto"
+    },
+    {
+      "message_id": "em-0073",
+      "reason": "complaint elevada a reclamo regulatorio SSN"
+    },
+    {
+      "message_id": "em-0078",
+      "reason": "fraude reportado por tercero con tono de queja"
+    },
+    {
+      "message_id": "em-0079",
+      "reason": "fraude confirmado derivado a legal"
+    },
+    {
+      "message_id": "em-0086",
+      "reason": "legal vs regulatorio: intimacion de organo de control"
+    },
+    {
+      "message_id": "em-0096",
+      "reason": "partnership con NDA: acuerdo de confidencialidad"
+    },
+    {
+      "message_id": "em-0110",
+      "reason": "internal vs public: listado interno con datos personales de asegurados"
+    },
+    {
+      "message_id": "em-0112",
+      "reason": "sumario interno: legal + fraude + alta confidencialidad"
+    },
+    {
+      "message_id": "em-0113",
+      "reason": "datos personales (DNI) en correo de tramite simple"
+    },
+    {
+      "message_id": "em-0115",
+      "reason": "claim triple: nuevo siniestro dentro de hilo de robo previo"
+    },
+    {
+      "message_id": "em-0116",
+      "reason": "renovacion con amenaza regulatoria concreta"
+    },
+    {
+      "message_id": "em-0118",
+      "reason": "complaint vs legal: disconformidad con peritaje sin amenaza concreta"
+    },
+    {
+      "message_id": "em-0119",
+      "reason": "quote vs renewal: cotizacion comparativa en hilo de renovacion"
+    },
+    {
+      "message_id": "em-0120",
+      "reason": "image-only: fotos de DNI para legajo"
+    },
+    {
+      "message_id": "em-0122",
+      "reason": "sensitive personal data: documentacion clinica de empleado"
+    },
+    {
+      "message_id": "em-0123",
+      "reason": "fraude + legal: informe final de investigacion restringido"
+    },
+    {
+      "message_id": "em-0124",
+      "reason": "sensitive personal data: datos biometricos de empleados"
+    },
+    {
+      "message_id": "em-0125",
+      "reason": "highly confidential: incidente de seguridad con datos de tarjetas"
+    }
+  ]
+}

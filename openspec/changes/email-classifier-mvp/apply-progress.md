@@ -341,3 +341,52 @@ Worktree: `/Users/ramiro/Desktop/projects/braven_poc.pr5-zen-adapter`, branch `p
 
 - [ ] 10.6 optional live Zen smoke test (gated on `OPENCODE_API_KEY` present) — parent-owned
 - [ ] All tasks in Phases 7–10 (Lane B owns 7.x); Phase 11 is parent-owned (review + delivery gates)
+
+---
+
+# PR 8 — Work Unit 16: Synthetic Corpus + Coverage Proof (worktree braven_poc.pr8-corpus, branch pr8-corpus stacked on pr5-zen-adapter)
+
+Strict TDD active (`.venv/bin/python -m pytest -q`). Documented `size:exception` unit (dataset ≈3.6k authored lines). Dataset authored in one pass via a throwaway generator script; RED test written before the dataset existed.
+
+## Work Unit 16 — Corpus + Coverage (tasks 10.1–10.2)
+
+- [x] 10.1 `datasets/inbox_mvp_v1.json` — 125 synthetic emails, Argentine-Spanish bodies. Coverage: all 16 primary categories ≥6 (min: CLAIM_NEW 6, POLICY_CANCELLATION 6; max: REGULATORY 9, OTHER 9); all 6 sensitivity labels ≥9 (PUBLIC 40, PERSONAL_DATA 48, CONFIDENTIAL 27, INTERNAL 9, HIGHLY_CONFIDENTIAL 9, SENSITIVE_PERSONAL_DATA 9); `boundary_cases`: 29 documented (message_id + reason), covering COMPLAINT/LEGAL overlap (em-0072, em-0118), claim triple (em-0048, em-0049, em-0115), lead vs quote (em-0007, em-0014, em-0119), renewal vs change (em-0028), cancellation vs complaint (em-0040), legal vs regulatory (em-0086), internal vs public (em-0110), sensitive signals (em-0122 clinical data, em-0124 biometric data, em-0125 card-data incident, em-0112 internal fraud+legal investigation). Image-only-attachment emails: 5 (em-0045, em-0059, em-0108, em-0109, em-0120 — status `not_text_extractable`). All `message_id` unique; every email `synthetic: true`; every expected label inside `taxonomy_mvp`; zero deferred categories. Realistic signals per design: DNI/patente/póliza mentions across automotor flows, medical diagnoses for SENSITIVE_PERSONAL_DATA, board-minutes/fraud-investigation language for CONFIDENTIAL/HIGHLY_CONFIDENTIAL.
+- [x] 10.2 `tests/dataset/test_corpus_coverage.py` — 9 tests: dataset_version + full schema shape (email/attachment/expected keys, list types), ≥5 per primary category (and no unknown categories), ≥8 per sensitivity, ≥15 boundary cases with resolvable ids + documented reasons + no duplicate references, ≥4 image-only emails, unique `message_id`, no deferred categories, every expected label inside taxonomy_mvp (primary/secondary/sensitivity/actions/priority), every email marked synthetic. Taxonomy read live from `openspec/config.yaml`.
+
+## TDD Cycle Evidence (unit 16)
+
+| Work unit | Task | RED | GREEN | REFACTOR |
+|---|---|---|---|---|
+| 16 | 10.1/10.2 | `AssertionError: corpus missing: /Users/ramiro/Desktop/projects/braven_poc.pr8-corpus/datasets/inbox_mvp_v1.json`, 9 errors, 0 passed | 9 passed (0.02s) | Authoring fixes: 2 duplicate/typo rows removed pre-copy (`em-0059b`, `em-0098` typo `PARTNERSITY`), `thread_id` typo fixed; ruff `All checks passed!` |
+
+## Work Unit Evidence (unit 16)
+
+| Evidence | Required value |
+|---|---|
+| Focused test command and exact result | `.venv/bin/python -m pytest -q tests/dataset/test_corpus_coverage.py` → 9 passed (exit 0) |
+| Runtime harness command and exact result | `InboxDatasetSource.from_file("datasets/inbox_mvp_v1.json").ingest()` → `ingested: 125, rejected: 0`; `expected_for("em-0044")` → CLAIM_NEW/CRITICAL; corpus parses end-to-end through the real unit-7 adapter |
+| Rollback boundary | Delete `datasets/inbox_mvp_v1.json` + `tests/dataset/test_corpus_coverage.py`; fixture corpus `tests/fixtures/inbox_small.json` (PR 7) and all pipeline/e2e paths keep working — no source files touched |
+
+## Files Changed (PR 8, this run)
+
+| File | Action |
+|---|---|
+| `datasets/inbox_mvp_v1.json` | Created (125 emails + boundary_cases manifest, 3582 lines) |
+| `tests/dataset/test_corpus_coverage.py` | Created (9 tests) |
+| `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 10.1–10.2 marked |
+| `openspec/changes/email-classifier-mvp/apply-progress.md` | Merged PR 8 section |
+
+## Deviations from Design
+
+- Added a top-level `boundary_cases` manifest (`[{message_id, reason}]`) next to `emails` in the dataset JSON instead of only a per-email flag: task 10.2 requires asserting ≥15 explicitly documented boundary cases; a manifest keeps the reasons human-readable and machine-checkable. Within the schema latitude of design D6 ("boundary cases marked explicitly").
+
+## Issues Found
+
+- None blocking. Full suite: `.venv/bin/python -m pytest -q` → 199 passed (was 190; +9 new). Prior PR 6 pollution issue appears resolved on this branch.
+
+## Remaining Tasks (out of this batch)
+
+- [ ] 10.3 e2e corpus run RED→GREEN (unit 17)
+- [ ] 10.4 full verification commands (unit 17)
+- [ ] 10.5 README (unit 17)
+- [ ] 10.6 optional live Zen smoke (gated, parent-owned)
