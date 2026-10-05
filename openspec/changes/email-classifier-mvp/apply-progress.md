@@ -241,3 +241,52 @@ Strict TDD active (`.venv/bin/python -m pytest -q`; venv editable install re-poi
 - [ ] 6.1–6.4 (lane A, PR 3 — on the other worktree)
 - [ ] 6.9–6.10 (work unit 10, Zen JEV adapter)
 - [ ] All tasks in Phases 7–10; Phase 11 is parent-owned (review + delivery gates)
+
+---
+# PR 5 — Work Unit 10: Zen JEV Adapter (Lane A, this run)
+
+Worktree: `/Users/ramiro/Desktop/projects/braven_poc.pr5-zen-adapter`, branch `pr5-zen-adapter` (stacked on `pr3-questions-adapters`). Mode: Strict TDD (`.venv/bin/python -m pytest -q`).
+
+## Work Unit 10 — Zen JEV Scorer (PR 5)
+
+- [x] 6.9 RED `tests/adapters/test_zen_jev.py` (26 tests over `httpx.MockTransport`, no network): exactly one POST to `https://opencode.ai/zen/v1/systemone` with model `jev-1.13` and all 28 question keys (type/instructions/criteria per question), `state` carries sender/recipients/subject/body/attachment names, `Authorization: Bearer $OPENCODE_API_KEY`, envelope mapping `answers.<question_id>.noul` verbatim, engine vocabulary does not leak (extra engine keys and engine identifiers never become internal labels/scores), out-of-range (>1, <0) and non-numeric (str, bool) rejected with no coercion, missing question rejected with no substituted score, malformed envelope and malformed JSON rejected, 500 retried then success (exactly 3 attempts), 500 exhausted → `ScoreError` (never a 4th attempt), network error retried/exhausted → `ScoreError`, 4xx never retried, exponential backoff delays asserted via monkeypatched sleep (0.25 → 0.5), default timeout 30s, missing `OPENCODE_API_KEY` → clear construction `ValueError`, key never in errors or logs, `base_url`/`model` configurable via constructor (overriding env) and env (`OPENCODE_BASE_URL`, `OPENCODE_MODEL`) for TypeSafe-direct swap. RED verbatim: `ModuleNotFoundError: No module named 'email_classifier.adapters.zen_jev'`, 1 collection error.
+- [x] 6.10 GREEN `src/email_classifier/adapters/zen_jev.py`: `ZenJevScorer` implementing the `ScoringEngine` port. API key read ONLY from `OPENCODE_API_KEY` env at construction (clear `ValueError` when missing), never logged or embedded in error messages. One POST per email; 5xx and network errors retried max 2 with exponential backoff (`base * 2^(attempt-1)`); 4xx and malformed JSON fail immediately (strict-validation, not transport); timeout default 30s (connect/read each 30s); strict fail-closed validation of `answers.<qid>.noul` (missing/non-numeric/bool/out-of-range → `ScoreError`, no coercion, no substitution); `engine_version` = model string. `base_url`/`model` from constructor args or `OPENCODE_BASE_URL`/`OPENCODE_MODEL` env, defaults `https://opencode.ai/zen/v1/systemone` / `jev-1.13`. Exported from `adapters/__init__.py`.
+
+## TDD Cycle Evidence (unit 10, this run)
+
+| Work unit | Task | RED | GREEN | REFACTOR |
+|---|---|---|---|---|
+| 10 | 6.9 | `ModuleNotFoundError: No module named 'email_classifier.adapters.zen_jev'`, 1 collection error | 26 passed (focused); 175 passed (full suite) | Lazy `import httpx` (module-level import broke Lane B's `test_no_network_httpx_never_imported` via pytest collection import); TYPE_CHECKING annotations; ruff clean |
+
+## Work Unit Evidence (PR 5)
+
+| Evidence | Required value |
+|---|---|
+| Focused test command and exact result | `.venv/bin/python -m pytest tests/adapters/test_zen_jev.py` → 26 passed (exit 0) |
+| Runtime harness command and exact result | `python -c "from email_classifier.adapters import ZenJevScorer; ..."` with `MockTransport`-style protocol check: both `FakeDeterministicScorer` and `ZenJevScorer` satisfy the `ScoringEngine` runtime-checkable Protocol (`both scorers satisfy ScoringEngine protocol`); real network deliberately NOT called (no key in CI; live smoke is task 10.6, parent-owned) |
+| Rollback boundary | Delete `src/email_classifier/adapters/zen_jev.py`, the `ZenJevScorer` export from `adapters/__init__.py`, and `tests/adapters/test_zen_jev.py`; fake scorer, sqlite repo, inbox dataset, questions.yaml, loader and pipeline are untouched |
+
+## Files Changed (PR 5, this worktree)
+
+| File | Action |
+|---|---|
+| `tests/adapters/test_zen_jev.py` | Created (26 tests) |
+| `src/email_classifier/adapters/zen_jev.py` | Created (`ZenJevScorer`: one-request scoring, strict validation, bounded retry, fail-closed) |
+| `src/email_classifier/adapters/__init__.py` | Modified (added `ZenJevScorer` export) |
+| `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 6.9–6.10 marked |
+
+## Deviations from Design
+
+- Exception name: the task text says `ScoringError`, but the domain model already defines `ScoreError` (frozen in `domain/models.py`, asserted by `tests/ports/test_ports.py` from work unit 2). The adapter raises the existing domain `ScoreError`; introducing a second alias exception would fragment the fail-closed contract. Flag for verify.
+- `httpx` is imported lazily inside `__init__`/`_post_with_retries` instead of at module top: pytest imports all test modules at collection, and Lane B's `test_no_network_httpx_never_imported` asserts `httpx not in sys.modules` process-wide; a top-level import in the adapters package would break that existing test. Semantics unchanged (the real engine still uses httpx).
+- Malformed JSON fails immediately rather than being retried: it is a strict-validation failure of a successfully delivered response, not a transport failure; the retry budget is reserved for 5xx/network/timeout per design D3.
+
+## Issues Found
+
+- Lane B's fake-scorer test (`test_no_network_httpx_never_imported`) asserts on process-wide `sys.modules`, which makes it order/collection-coupled to any module importing httpx at top level. It passed after the lazy-import fix, but it remains fragile if a future module imports httpx eagerly — flagged for Lane B/verify.
+- Pipeline (Lane B, unowned here) imports nothing from this adapter yet; the `ScoringEngine` port is the only coupling point, as designed.
+
+## Remaining Tasks (out of this batch)
+
+- [ ] 10.6 optional live Zen smoke test (gated on `OPENCODE_API_KEY` present) — parent-owned
+- [ ] All tasks in Phases 7–10 (Lane B owns 7.x); Phase 11 is parent-owned (review + delivery gates)
