@@ -196,8 +196,7 @@ def test_replay_modified_thresholds_zero_engine_calls_preserves_history(tmp_path
     report = seed_repo(repo, engine=spy)
     original_ids = tuple(report.email_ids)
     first_records = {
-        email_id: repo.get_current_classification(email_id)
-        for email_id in original_ids
+        email_id: repo.get_current_classification(email_id) for email_id in original_ids
     }
 
     from email_classifier.pipeline.replay import replay

@@ -24,15 +24,11 @@ def scores(*pairs: tuple[str, float]) -> dict[str, float]:
 
 class TestResolveBandsShape:
     def test_bands_are_keyed_by_dimension_label_pairs(self):
-        bands = resolve_bands(
-            scores(("primary_category/CLAIM_NEW", 0.96)), ThresholdConfig.mvp()
-        )
+        bands = resolve_bands(scores(("primary_category/CLAIM_NEW", 0.96)), ThresholdConfig.mvp())
         assert bands == {("primary_category", "CLAIM_NEW"): Band.AUTOMATIC}
 
     def test_band_values_are_never_taxonomy_labels(self):
-        all_labels = (
-            PRIMARY_CATEGORY_LABELS + SENSITIVITY_LABELS + ACTION_LABELS + PRIORITY_LABELS
-        )
+        all_labels = PRIMARY_CATEGORY_LABELS + SENSITIVITY_LABELS + ACTION_LABELS + PRIORITY_LABELS
         raw = scores(
             ("primary_category/CLAIM_NEW", 0.96),
             ("primary_category/FRAUD_SUSPICION", 0.80),
@@ -46,21 +42,15 @@ class TestResolveBandsShape:
 
 class TestDefaultBandBoundaries:
     def test_090_is_automatic(self):
-        bands = resolve_bands(
-            scores(("primary_category/CLAIM_NEW", 0.90)), ThresholdConfig.mvp()
-        )
+        bands = resolve_bands(scores(("primary_category/CLAIM_NEW", 0.90)), ThresholdConfig.mvp())
         assert bands[("primary_category", "CLAIM_NEW")] is Band.AUTOMATIC
 
     def test_065_is_uncertain(self):
-        bands = resolve_bands(
-            scores(("primary_category/CLAIM_NEW", 0.65)), ThresholdConfig.mvp()
-        )
+        bands = resolve_bands(scores(("primary_category/CLAIM_NEW", 0.65)), ThresholdConfig.mvp())
         assert bands[("primary_category", "CLAIM_NEW")] is Band.UNCERTAIN
 
     def test_064_is_human_review(self):
-        bands = resolve_bands(
-            scores(("primary_category/CLAIM_NEW", 0.64)), ThresholdConfig.mvp()
-        )
+        bands = resolve_bands(scores(("primary_category/CLAIM_NEW", 0.64)), ThresholdConfig.mvp())
         assert bands[("primary_category", "CLAIM_NEW")] is Band.HUMAN_REVIEW
 
 
@@ -78,9 +68,7 @@ class TestElevatedTier:
         assert bands[("sensitivity", "HIGHLY_CONFIDENTIAL")] is Band.UNCERTAIN
 
     def test_non_elevated_personal_data_stays_on_default(self):
-        bands = resolve_bands(
-            scores(("sensitivity/PERSONAL_DATA", 0.92)), ThresholdConfig.mvp()
-        )
+        bands = resolve_bands(scores(("sensitivity/PERSONAL_DATA", 0.92)), ThresholdConfig.mvp())
         assert bands[("sensitivity", "PERSONAL_DATA")] is Band.AUTOMATIC
 
 
@@ -103,9 +91,7 @@ class TestBoundaryMatrix:
             bands = resolve_bands(
                 scores(("primary_category/CLAIM_NEW", score)), ThresholdConfig.mvp()
             )
-            assert (
-                bands[("primary_category", "CLAIM_NEW")] is band
-            ), f"default tier score {score}"
+            assert bands[("primary_category", "CLAIM_NEW")] is band, f"default tier score {score}"
 
     def test_elevated_tier_matrix(self):
         expected = {
@@ -122,9 +108,9 @@ class TestBoundaryMatrix:
                 scores(("primary_category/FRAUD_SUSPICION", score)),
                 ThresholdConfig.mvp(),
             )
-            assert (
-                bands[("primary_category", "FRAUD_SUSPICION")] is band
-            ), f"elevated tier score {score}"
+            assert bands[("primary_category", "FRAUD_SUSPICION")] is band, (
+                f"elevated tier score {score}"
+            )
 
 
 class TestReviewRouting:
@@ -201,9 +187,7 @@ class TestReviewRouting:
         queued = 0
         for raw in sensitive_emails:
             bands = resolve_bands(raw, ThresholdConfig.mvp())
-            primary_band = bands.get(
-                ("primary_category", "CLAIM_NEW"), Band.HUMAN_REVIEW
-            )
+            primary_band = bands.get(("primary_category", "CLAIM_NEW"), Band.HUMAN_REVIEW)
             routing = review_routing(raw, ThresholdConfig.mvp(), primary_band)
             if routing.requires_human_review:
                 queued += 1

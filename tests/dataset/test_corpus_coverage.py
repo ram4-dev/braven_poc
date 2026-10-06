@@ -76,9 +76,7 @@ def test_dataset_version_and_schema_shape(dataset, emails):
         assert isinstance(email["attachments"], list)
         for attachment in email["attachments"]:
             missing = REQUIRED_ATTACHMENT_KEYS - set(attachment)
-            assert not missing, (
-                f"{email['message_id']}: attachment missing {missing}"
-            )
+            assert not missing, f"{email['message_id']}: attachment missing {missing}"
         expected = email["expected"]
         missing = REQUIRED_EXPECTED_KEYS - set(expected)
         assert not missing, f"{email['message_id']}: expected missing {missing}"
@@ -119,9 +117,7 @@ def test_at_least_fifteen_boundary_cases(dataset, emails):
         assert case["message_id"] in known_ids, (
             f"boundary case references unknown id {case['message_id']}"
         )
-        assert case.get("reason"), (
-            f"boundary case {case['message_id']} lacks a documented reason"
-        )
+        assert case.get("reason"), f"boundary case {case['message_id']} lacks a documented reason"
     referenced = {case["message_id"] for case in boundary}
     assert len(referenced) == len(boundary), "duplicate boundary message_id"
 
@@ -134,8 +130,7 @@ def test_at_least_four_image_only_attachment_emails(emails):
         if not attachments:
             return False
         return all(
-            attachment["mime"] in image_mimes
-            and attachment["status"] == "not_text_extractable"
+            attachment["mime"] in image_mimes and attachment["status"] == "not_text_extractable"
             for attachment in attachments
         )
 

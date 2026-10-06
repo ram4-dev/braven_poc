@@ -31,12 +31,7 @@ class TestBand:
         assert [b.value for b in Band] == ["AUTOMATIC", "UNCERTAIN", "HUMAN_REVIEW"]
 
     def test_band_is_not_a_taxonomy_label(self):
-        all_labels = (
-            PRIMARY_CATEGORY_LABELS
-            + SENSITIVITY_LABELS
-            + ACTION_LABELS
-            + PRIORITY_LABELS
-        )
+        all_labels = PRIMARY_CATEGORY_LABELS + SENSITIVITY_LABELS + ACTION_LABELS + PRIORITY_LABELS
         for band in Band:
             assert band.value not in all_labels
 

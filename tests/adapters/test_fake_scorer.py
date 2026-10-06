@@ -42,9 +42,7 @@ class TestReproducibleScores:
 
         r1 = scorer.score(email, qs)
         r2 = scorer.score(email, qs)
-        assert json.dumps(r1.scores, sort_keys=True) == json.dumps(
-            r2.scores, sort_keys=True
-        )
+        assert json.dumps(r1.scores, sort_keys=True) == json.dumps(r2.scores, sort_keys=True)
         assert repr(r1) == repr(r2)
 
     def test_different_emails_get_different_scores(self):
@@ -65,6 +63,7 @@ class TestReproducibleScores:
         # Prove the FAKE SCORER never imports httpx when scoring, regardless of
         # what other tests loaded process-wide (e.g. the zen adapter's tests).
         import email_classifier.adapters.fake_scorer as fake_module
+
         imported = []
         real_import = builtins.__import__
 
@@ -112,8 +111,11 @@ class TestSameRulesPath:
         from email_classifier.domain.rules import decide
 
         result = FakeDeterministicScorer().score(make_email(), load_question_set())
-        decision = decide(result.scores, ThresholdConfig.mvp(),
-                          engine_version=result.engine_version,
-                          question_set_version=result.question_set_version)
+        decision = decide(
+            result.scores,
+            ThresholdConfig.mvp(),
+            engine_version=result.engine_version,
+            question_set_version=result.question_set_version,
+        )
         assert decision.status == "CLASSIFIED"
         assert decision.raw_scores == result.scores

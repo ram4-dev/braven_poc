@@ -60,12 +60,7 @@ def _email() -> EmailMessage:
 
 def _full_answers() -> dict:
     """A valid engine response: one noul probability per question."""
-    return {
-        "answers": {
-            qid: {"noul": 0.5 + 0.01 * (i % 50)}
-            for i, qid in enumerate(QUESTION_IDS)
-        }
-    }
+    return {"answers": {qid: {"noul": 0.5 + 0.01 * (i % 50)} for i, qid in enumerate(QUESTION_IDS)}}
 
 
 def _json_response(payload: dict, status_code: int = 200) -> httpx.Response:
@@ -293,9 +288,7 @@ class TestRetryAndFailClosed:
         assert result.scores[QUESTION_IDS[0]] == _full_answers()["answers"][QUESTION_IDS[0]]["noul"]
 
     def test_network_error_exhausted_raises_score_error(self):
-        scorer, requests = _recorded_scorer(
-            _httpx().ConnectError("connection refused")
-        )
+        scorer, requests = _recorded_scorer(_httpx().ConnectError("connection refused"))
 
         with pytest.raises(ScoreError):
             scorer.score(_email(), QUESTIONS)
@@ -324,9 +317,7 @@ class TestRetryAndFailClosed:
             ]
         )
         slow = ZenJevScorer(
-            transport=_httpx().MockTransport(
-                lambda request: _json_response(_full_answers())
-            ),
+            transport=_httpx().MockTransport(lambda request: _json_response(_full_answers())),
             backoff_base=0.25,
         )
         del slow  # delays are asserted on the failing-then-succeeding scorer
@@ -378,17 +369,13 @@ class TestApiKeyHandling:
 
         with pytest.raises(ValueError, match="OPENCODE_API_KEY"):
             ZenJevScorer(
-                transport=_httpx().MockTransport(
-                    lambda request: _json_response(_full_answers())
-                )
+                transport=_httpx().MockTransport(lambda request: _json_response(_full_answers()))
             )
 
     def test_api_key_never_logged_or_in_errors(self, monkeypatch, caplog):
         monkeypatch.setenv("OPENCODE_API_KEY", API_KEY)
         caplog.set_level("DEBUG")
-        scorer, _ = _recorded_scorer(
-            [_json_response({"error": "boom"}, status_code=500)] * 3
-        )
+        scorer, _ = _recorded_scorer([_json_response({"error": "boom"}, status_code=500)] * 3)
 
         with pytest.raises(ScoreError) as excinfo:
             scorer.score(_email(), QUESTIONS)

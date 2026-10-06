@@ -101,10 +101,7 @@ class TestGroundTruthIsTheDataset:
         repo, _ = seeded_repo(tmp_path)
         source = InboxDatasetSource.from_file(FIXTURE)
         source.list_emails()
-        items = [
-            item_from_row(row, att)
-            for row, att in _stored_rows(repo)
-        ]
+        items = [item_from_row(row, att) for row, att in _stored_rows(repo)]
         before = compute_metrics(items, expected_map(), dataset_version="inbox_small_v1")
 
         # A reviewer "corrects" one email's primary category: stored records
@@ -129,12 +126,8 @@ class TestGroundTruthIsTheDataset:
                 }
             ],
         )
-        items_after = [
-            item_from_row(row, att) for row, att in _stored_rows(repo)
-        ]
-        after = compute_metrics(
-            items_after, expected_map(), dataset_version="inbox_small_v1"
-        )
+        items_after = [item_from_row(row, att) for row, att in _stored_rows(repo)]
+        after = compute_metrics(items_after, expected_map(), dataset_version="inbox_small_v1")
         assert after["accuracy"] == before["accuracy"]
 
 
@@ -147,9 +140,7 @@ def _stored_rows(repo):
         "                  WHERE c2.email_id = c.email_id) ORDER BY c.rowid"
     ).fetchall()
     attachments = {}
-    for att in repo._conn.execute(
-        "SELECT email_id, extraction_status FROM email_attachments"
-    ):
+    for att in repo._conn.execute("SELECT email_id, extraction_status FROM email_attachments"):
         attachments.setdefault(att["email_id"], []).append(att["extraction_status"])
     return [(row, tuple(attachments.get(row["email_id"], ()))) for row in rows]
 
@@ -438,9 +429,7 @@ class TestSeededPipelineRun:
         rows = _stored_rows(repo)
         items = [item_from_row(row, att) for row, att in rows]
         before = compute_metrics(items, expected_map(), dataset_version="d")
-        target = repo._conn.execute(
-            "SELECT email_id FROM emails ORDER BY rowid LIMIT 1"
-        ).fetchone()
+        target = repo._conn.execute("SELECT email_id FROM emails ORDER BY rowid LIMIT 1").fetchone()
         history = repo.get_classification_history(target["email_id"])
         repo.append_review(
             history[-1].classification_id,

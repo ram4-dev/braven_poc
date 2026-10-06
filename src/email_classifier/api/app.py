@@ -54,18 +54,14 @@ class DeltaIn(BaseModel):
     @classmethod
     def _known_dimension(cls, value: str) -> str:
         if value not in _FROZEN_LABELS:
-            raise ValueError(
-                f"unknown dimension {value!r}; allowed: {sorted(_FROZEN_LABELS)}"
-            )
+            raise ValueError(f"unknown dimension {value!r}; allowed: {sorted(_FROZEN_LABELS)}")
         return value
 
     @field_validator("operation")
     @classmethod
     def _known_operation(cls, value: str) -> str:
         if value not in ("set", "add", "remove"):
-            raise ValueError(
-                f"unknown operation {value!r}; allowed: set, add, remove"
-            )
+            raise ValueError(f"unknown operation {value!r}; allowed: set, add, remove")
         return value
 
 
@@ -152,9 +148,7 @@ def _labels_payload(record, thresholds: ThresholdConfig) -> list[dict[str, Any]]
         key = f"{label.dimension}/{label.label}"
         elevated = thresholds.elevated.get(key)
         review_floor = (
-            elevated.review_floor
-            if elevated is not None
-            else thresholds.default_review_floor
+            elevated.review_floor if elevated is not None else thresholds.default_review_floor
         )
         routed = (
             not label.selected
@@ -184,13 +178,9 @@ def _thresholds_from_dict(data: dict[str, Any], version: str) -> ThresholdConfig
     for row in elevated_rows:
         try:
             auto_threshold = float(row["auto_threshold"])
-            review_floor = float(
-                row.get("review_floor", default.get("review_floor", 0.65))
-            )
+            review_floor = float(row.get("review_floor", default.get("review_floor", 0.65)))
         except (KeyError, TypeError, ValueError) as exc:
-            raise ValueError(
-                f"invalid elevated threshold row {row!r}: {exc}"
-            ) from exc
+            raise ValueError(f"invalid elevated threshold row {row!r}: {exc}") from exc
         elevated[f"{row['dimension']}/{row['label']}"] = LabelThreshold(
             dimension=row["dimension"],
             label=row["label"],
@@ -201,9 +191,7 @@ def _thresholds_from_dict(data: dict[str, Any], version: str) -> ThresholdConfig
         default_auto = float(default.get("auto_threshold", 0.90))
         default_floor = float(default.get("review_floor", 0.65))
     except (TypeError, ValueError) as exc:
-        raise ValueError(
-            f"invalid default threshold row {default!r}: {exc}"
-        ) from exc
+        raise ValueError(f"invalid default threshold row {default!r}: {exc}") from exc
     return ThresholdConfig(
         default_auto_threshold=default_auto,
         default_review_floor=default_floor,
@@ -213,9 +201,7 @@ def _thresholds_from_dict(data: dict[str, Any], version: str) -> ThresholdConfig
 
 
 def _read_email_rows(repo) -> list[sqlite3.Row]:
-    return repo._conn.execute(
-        "SELECT email_id, message_id FROM emails ORDER BY rowid"
-    ).fetchall()
+    return repo._conn.execute("SELECT email_id, message_id FROM emails ORDER BY rowid").fetchall()
 
 
 def _email_ids(repo: SqliteRepository) -> list[str]:
@@ -257,22 +243,22 @@ def _enable_cross_thread_connection(repository: SqliteRepository) -> None:
 def _evaluation_item(record, message_id: str, attachment_statuses) -> EvaluationItem:
     """Stored automated values for metrics (never reviewer corrections)."""
     return EvaluationItem(
-message_id=message_id,
-status=record.status,
-primary_category=record.primary_category.value
-if record.primary_category is not None
-else None,
-secondary_categories=tuple(c.value for c in record.secondary_categories),
-sensitivity=tuple(s.value for s in record.sensitivity),
-requires_human_review=record.requires_human_review,
-queue_reason=record.queue_reason,
-received_at=record.received_at,
-classified_at=record.classified_at,
-classifier_version=record.classifier_version,
-engine_version=record.engine_version,
-question_set_version=record.question_set_version,
-threshold_set_version=record.threshold_set_version,
-attachment_statuses=tuple(attachment_statuses),
+        message_id=message_id,
+        status=record.status,
+        primary_category=record.primary_category.value
+        if record.primary_category is not None
+        else None,
+        secondary_categories=tuple(c.value for c in record.secondary_categories),
+        sensitivity=tuple(s.value for s in record.sensitivity),
+        requires_human_review=record.requires_human_review,
+        queue_reason=record.queue_reason,
+        received_at=record.received_at,
+        classified_at=record.classified_at,
+        classifier_version=record.classifier_version,
+        engine_version=record.engine_version,
+        question_set_version=record.question_set_version,
+        threshold_set_version=record.threshold_set_version,
+        attachment_statuses=tuple(attachment_statuses),
     )
 
 
@@ -391,8 +377,7 @@ def create_app(
             statuses = tuple(
                 row["extraction_status"]
                 for row in repo._conn.execute(
-                    "SELECT extraction_status FROM email_attachments"
-                    " WHERE email_id = ?",
+                    "SELECT extraction_status FROM email_attachments WHERE email_id = ?",
                     (email_id,),
                 )
             )
@@ -408,9 +393,7 @@ def create_app(
         try:
             repo.get_classification(review.classification_id)
         except Exception as exc:  # noqa: BLE001 - unknown id -> 404
-            raise HTTPException(
-                status_code=404, detail="classification not found"
-            ) from exc
+            raise HTTPException(status_code=404, detail="classification not found") from exc
         review_id = repo.append_review(
             classification_id=review.classification_id,
             status=review.status,
@@ -423,9 +406,7 @@ def create_app(
     @app.post("/api/replay")
     def post_replay(payload: ReplayIn) -> dict[str, Any]:
         if payload.thresholds is not None:
-            target = _thresholds_from_dict(
-                payload.thresholds, payload.threshold_set_version
-            )
+            target = _thresholds_from_dict(payload.thresholds, payload.threshold_set_version)
         elif thresholds is not None and payload.threshold_set_version == thresholds.version:
             target = thresholds
         else:
@@ -437,9 +418,7 @@ def create_app(
                     f"table was provided"
                 ),
             )
-        report = replay(
-            repository=repo, thresholds=target, email_ids=_email_ids(repo)
-        )
+        report = replay(repository=repo, thresholds=target, email_ids=_email_ids(repo))
         return {"replayed": report.replayed}
 
     return app

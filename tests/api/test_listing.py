@@ -13,7 +13,6 @@ Plus human-review queue scenarios: listing the queue + filtering by reason.
 And GET /api/health.
 """
 
-
 import pytest
 from fastapi.testclient import TestClient
 from tests.api.conftest import ScriptedScorer, fixture_dataset, seed
@@ -85,14 +84,10 @@ class TestListing:
             assert entry["primary_category"] == (
                 record.primary_category.value if record.primary_category else None
             )
-            assert entry["secondary_categories"] == [
-                c.value for c in record.secondary_categories
-            ]
+            assert entry["secondary_categories"] == [c.value for c in record.secondary_categories]
             assert entry["sensitivity"] == [s.value for s in record.sensitivity]
             assert entry["actions"] == [a.value for a in record.actions]
-            assert entry["priority"] == (
-                record.priority.value if record.priority else None
-            )
+            assert entry["priority"] == (record.priority.value if record.priority else None)
 
     def test_unreviewed_values_shown_unchanged(self, tmp_path):
         client, _repo, report = make_client(tmp_path)
@@ -113,9 +108,7 @@ class TestListing:
                 record.primary_category.value if record.primary_category else None
             )
 
-    def test_corrected_values_shown_as_current_with_originals_retrievable(
-        self, tmp_path
-    ):
+    def test_corrected_values_shown_as_current_with_originals_retrievable(self, tmp_path):
         client, repo, report = make_client(tmp_path)
         email_id = report.email_ids[0]
         automated = repo.get_current_classification(email_id).primary_category.value
@@ -190,15 +183,12 @@ class TestDetail:
         detail = client.get(f"/api/emails/{email_id}").json()
         assert detail["current"]["raw_scores"] == stored.raw_scores
         assert detail["current"]["classifier_version"] == stored.classifier_version
-        assert detail["current"]["threshold_set_version"] == (
-            stored.threshold_set_version
-        )
+        assert detail["current"]["threshold_set_version"] == (stored.threshold_set_version)
         assert detail["current"]["engine_version"] == stored.engine_version
         assert len(detail["current"]["applied_thresholds"]) == len(stored.raw_scores)
         for key in stored.raw_scores:
             assert detail["current"]["applied_thresholds"][key] == pytest.approx(
-                0.95 if key.endswith(("FRAUD_SUSPICION", "LEGAL", "HIGHLY_CONFIDENTIAL"))
-                else 0.90
+                0.95 if key.endswith(("FRAUD_SUSPICION", "LEGAL", "HIGHLY_CONFIDENTIAL")) else 0.90
             )
 
     def test_sensitive_non_auto_label_evidence(self, tmp_path):
@@ -234,8 +224,7 @@ class TestDetail:
         detail = client.get(f"/api/emails/{email_id}").json()
 
         label_evidence = {
-            f"{label['dimension']}/{label['label']}": label
-            for label in detail["labels"]
+            f"{label['dimension']}/{label['label']}": label for label in detail["labels"]
         }
         legal = label_evidence["primary_category/LEGAL"]
         assert legal["score"] == pytest.approx(0.80)
@@ -289,11 +278,11 @@ class TestReviewQueue:
             assert "dimensions" in entry
             assert "band" in entry and "confidence" in entry
 
-        filtered = client.get(
-            "/api/review-queue", params={"reason": "sensitive_signal"}
-        ).json()["queue"]
+        filtered = client.get("/api/review-queue", params={"reason": "sensitive_signal"}).json()[
+            "queue"
+        ]
         assert filtered, "expected at least one sensitive_signal entry"
         assert all(e["queue_reason"] == "sensitive_signal" for e in filtered)
-        assert len(filtered) < len(queue) or set(
-            e["queue_reason"] for e in queue
-        ) == {"sensitive_signal"}
+        assert len(filtered) < len(queue) or set(e["queue_reason"] for e in queue) == {
+            "sensitive_signal"
+        }

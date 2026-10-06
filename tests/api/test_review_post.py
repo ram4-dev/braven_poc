@@ -139,9 +139,7 @@ class TestCorrectPerDimension:
         client, repo, _report = seed_queued(tmp_path)
         classification_id = sensitive_queue_id(client)
         stored = repo.get_classification(classification_id)
-        existing_secondary = [
-            c.value for c in stored.secondary_categories
-        ]
+        existing_secondary = [c.value for c in stored.secondary_categories]
 
         response = client.post(
             "/api/reviews",
@@ -309,9 +307,7 @@ class TestCorrectionOutsideGroundTruth:
 class TestReplayEndpoint:
     def test_unknown_threshold_version_rejected(self, tmp_path):
         client, _repo, _report = seed_queued(tmp_path)
-        response = client.post(
-            "/api/replay", json={"threshold_set_version": "th-unknown-v99"}
-        )
+        response = client.post("/api/replay", json={"threshold_set_version": "th-unknown-v99"})
         assert response.status_code in (422, 404), response.text
 
     def test_replay_with_new_thresholds_appends_rows(self, tmp_path):
@@ -344,10 +340,8 @@ class TestReplayEndpoint:
         assert repo.counts()["classifications"] > counts_before
         for email_id in report.email_ids:
             history = repo.get_classification_history(email_id)
-            assert any(
-                rec.threshold_set_version == "th-t2" for rec in history
-            ), "expected a T2 record appended"
-            # T1 record still retrievable (append-only history).
-            assert any(
-                rec.threshold_set_version == "th-mvp" for rec in history
+            assert any(rec.threshold_set_version == "th-t2" for rec in history), (
+                "expected a T2 record appended"
             )
+            # T1 record still retrievable (append-only history).
+            assert any(rec.threshold_set_version == "th-mvp" for rec in history)

@@ -12,22 +12,48 @@ def write_yaml(tmp_path: Path, text: str) -> Path:
 
 
 _PRIMARY = [
-    "NEW_LEAD", "QUOTE_REQUEST", "NEW_POLICY", "POLICY_RENEWAL",
-    "POLICY_CHANGE", "POLICY_CANCELLATION", "CLAIM_NEW", "CLAIM_UPDATE",
-    "CLAIM_DOCUMENTATION", "PAYMENT_BILLING", "COMPLAINT",
-    "FRAUD_SUSPICION", "LEGAL", "REGULATORY", "PARTNERSHIP", "OTHER",
+    "NEW_LEAD",
+    "QUOTE_REQUEST",
+    "NEW_POLICY",
+    "POLICY_RENEWAL",
+    "POLICY_CHANGE",
+    "POLICY_CANCELLATION",
+    "CLAIM_NEW",
+    "CLAIM_UPDATE",
+    "CLAIM_DOCUMENTATION",
+    "PAYMENT_BILLING",
+    "COMPLAINT",
+    "FRAUD_SUSPICION",
+    "LEGAL",
+    "REGULATORY",
+    "PARTNERSHIP",
+    "OTHER",
 ]
 
 EXPECTED_QUESTION_IDS = (
     {f"primary_category/{label}" for label in _PRIMARY}
-    | {f"sensitivity/{label}" for label in (
-        "PUBLIC", "INTERNAL", "CONFIDENTIAL", "HIGHLY_CONFIDENTIAL",
-        "PERSONAL_DATA", "SENSITIVE_PERSONAL_DATA",
-    )}
-    | {f"action/{label}" for label in (
-        "NO_ACTION", "REPLY_REQUIRED", "DOCUMENT_REQUIRED",
-        "APPROVAL_REQUIRED", "ESCALATE", "URGENT",
-    )}
+    | {
+        f"sensitivity/{label}"
+        for label in (
+            "PUBLIC",
+            "INTERNAL",
+            "CONFIDENTIAL",
+            "HIGHLY_CONFIDENTIAL",
+            "PERSONAL_DATA",
+            "SENSITIVE_PERSONAL_DATA",
+        )
+    }
+    | {
+        f"action/{label}"
+        for label in (
+            "NO_ACTION",
+            "REPLY_REQUIRED",
+            "DOCUMENT_REQUIRED",
+            "APPROVAL_REQUIRED",
+            "ESCALATE",
+            "URGENT",
+        )
+    }
 )
 
 DISAMBIGUATION_PAIRS = [
@@ -39,8 +65,12 @@ DISAMBIGUATION_PAIRS = [
 ]
 
 DEFERRED_LABELS = [
-    "CLAIM_PAYMENT", "CLAIM_REJECTION", "UNDERWRITING",
-    "BROKER_AGENT", "REINSURANCE", "SUPPLIER",
+    "CLAIM_PAYMENT",
+    "CLAIM_REJECTION",
+    "UNDERWRITING",
+    "BROKER_AGENT",
+    "REINSURANCE",
+    "SUPPLIER",
 ]
 
 
@@ -95,10 +125,10 @@ class TestLoadValid:
             # in its true or false criteria (the boundary is explicit).
             text_a = qa.criteria_true + " " + qa.criteria_false
             text_b = qb.criteria_true + " " + qb.criteria_false
-            assert a.replace("_", " ").lower() in text_b.lower() or \
-                b.replace("_", " ").lower() in text_a.lower(), (
-                f"no disambiguation criteria between {a} and {b}"
-            )
+            assert (
+                a.replace("_", " ").lower() in text_b.lower()
+                or b.replace("_", " ").lower() in text_a.lower()
+            ), f"no disambiguation criteria between {a} and {b}"
 
 
 class TestLoadTimeValidation:
@@ -120,9 +150,7 @@ class TestLoadTimeValidation:
     def test_missing_label_rejected(self, tmp_path):
         from email_classifier.config.loader import ConfigError, load_questions
 
-        missing_one = MINIMAL_VALID.replace(
-            "  - question_id: primary_category/OTHER\n", "", 1
-        )
+        missing_one = MINIMAL_VALID.replace("  - question_id: primary_category/OTHER\n", "", 1)
         with pytest.raises(ConfigError) as excinfo:
             load_questions(write_yaml(tmp_path, missing_one))
         assert "OTHER" in str(excinfo.value)
@@ -132,8 +160,7 @@ class TestLoadTimeValidation:
 
         dup = MINIMAL_VALID.replace(
             "  - question_id: primary_category/OTHER\n",
-            "  - question_id: primary_category/OTHER\n"
-            "  - question_id: primary_category/OTHER\n",
+            "  - question_id: primary_category/OTHER\n  - question_id: primary_category/OTHER\n",
             1,
         )
         with pytest.raises(ConfigError):
@@ -178,38 +205,66 @@ class TestStoredVersionStability:
         assert a == b
 
 
-MINIMAL_VALID = """\
+MINIMAL_VALID = (
+    """\
 questions:
-""" + "\n".join(
-    f"""  - question_id: primary_category/{label}
+"""
+    + "\n".join(
+        f"""  - question_id: primary_category/{label}
     type: noul
     instructions: Does the email belong to {label}?
     criteria_true: matches {label}
     criteria_false: does not match {label}"""
-    for label in [
-        "NEW_LEAD", "QUOTE_REQUEST", "NEW_POLICY", "POLICY_RENEWAL",
-        "POLICY_CHANGE", "POLICY_CANCELLATION", "CLAIM_NEW", "CLAIM_UPDATE",
-        "CLAIM_DOCUMENTATION", "PAYMENT_BILLING", "COMPLAINT",
-        "FRAUD_SUSPICION", "LEGAL", "REGULATORY", "PARTNERSHIP", "OTHER",
-    ]
-) + "\n" + "\n".join(
-    f"""  - question_id: sensitivity/{label}
+        for label in [
+            "NEW_LEAD",
+            "QUOTE_REQUEST",
+            "NEW_POLICY",
+            "POLICY_RENEWAL",
+            "POLICY_CHANGE",
+            "POLICY_CANCELLATION",
+            "CLAIM_NEW",
+            "CLAIM_UPDATE",
+            "CLAIM_DOCUMENTATION",
+            "PAYMENT_BILLING",
+            "COMPLAINT",
+            "FRAUD_SUSPICION",
+            "LEGAL",
+            "REGULATORY",
+            "PARTNERSHIP",
+            "OTHER",
+        ]
+    )
+    + "\n"
+    + "\n".join(
+        f"""  - question_id: sensitivity/{label}
     type: noul
     instructions: Is the email {label}?
     criteria_true: is {label}
     criteria_false: is not {label}"""
-    for label in [
-        "PUBLIC", "INTERNAL", "CONFIDENTIAL", "HIGHLY_CONFIDENTIAL",
-        "PERSONAL_DATA", "SENSITIVE_PERSONAL_DATA",
-    ]
-) + "\n" + "\n".join(
-    f"""  - question_id: action/{label}
+        for label in [
+            "PUBLIC",
+            "INTERNAL",
+            "CONFIDENTIAL",
+            "HIGHLY_CONFIDENTIAL",
+            "PERSONAL_DATA",
+            "SENSITIVE_PERSONAL_DATA",
+        ]
+    )
+    + "\n"
+    + "\n".join(
+        f"""  - question_id: action/{label}
     type: noul
     instructions: Does the email require {label}?
     criteria_true: requires {label}
     criteria_false: does not require {label}"""
-    for label in [
-        "NO_ACTION", "REPLY_REQUIRED", "DOCUMENT_REQUIRED",
-        "APPROVAL_REQUIRED", "ESCALATE", "URGENT",
-    ]
-) + "\n"
+        for label in [
+            "NO_ACTION",
+            "REPLY_REQUIRED",
+            "DOCUMENT_REQUIRED",
+            "APPROVAL_REQUIRED",
+            "ESCALATE",
+            "URGENT",
+        ]
+    )
+    + "\n"
+)

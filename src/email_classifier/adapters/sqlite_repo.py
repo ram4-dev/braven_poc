@@ -208,9 +208,7 @@ _LABEL_DIMENSION_KEYS = {
 }
 
 
-def _project(
-    record: StoredClassification, review: StoredReview
-) -> StoredClassification:
+def _project(record: StoredClassification, review: StoredReview) -> StoredClassification:
     """Apply one review's deltas over the automated values (human-review spec:
     'dashboard reads deltas over automated values as current')."""
     primary = record.primary_category
@@ -227,27 +225,19 @@ def _project(
             if delta.operation == "add" and delta.corrected_value is not None:
                 secondary.append(PrimaryCategory(delta.corrected_value))
             elif delta.operation == "remove" and delta.original_value is not None:
-                secondary = [
-                    c for c in secondary if c.value != delta.original_value
-                ]
+                secondary = [c for c in secondary if c.value != delta.original_value]
             elif delta.operation == "set":
                 secondary = [
-                    PrimaryCategory(v)
-                    for v in (delta.corrected_value or "").split(",")
-                    if v
+                    PrimaryCategory(v) for v in (delta.corrected_value or "").split(",") if v
                 ]
         elif dimension == "sensitivity":
             if delta.operation == "add" and delta.corrected_value is not None:
                 sensitivity.append(Sensitivity(delta.corrected_value))
             elif delta.operation == "remove" and delta.original_value is not None:
-                sensitivity = [
-                    s for s in sensitivity if s.value != delta.original_value
-                ]
+                sensitivity = [s for s in sensitivity if s.value != delta.original_value]
             elif delta.operation == "set":
                 sensitivity = [
-                    Sensitivity(v)
-                    for v in (delta.corrected_value or "").split(",")
-                    if v
+                    Sensitivity(v) for v in (delta.corrected_value or "").split(",") if v
                 ]
         elif dimension == "actions":
             if delta.operation == "add" and delta.corrected_value is not None:
@@ -255,9 +245,7 @@ def _project(
             elif delta.operation == "remove" and delta.original_value is not None:
                 actions = [a for a in actions if a.value != delta.original_value]
             elif delta.operation == "set":
-                actions = [
-                    Action(v) for v in (delta.corrected_value or "").split(",") if v
-                ]
+                actions = [Action(v) for v in (delta.corrected_value or "").split(",") if v]
         elif dimension == "priority":
             if delta.corrected_value is not None:
                 priority = Priority(delta.corrected_value)
@@ -419,9 +407,7 @@ class SqliteRepository:
                 decision.confidence,
                 decision.band.value if decision.band is not None else None,
                 1 if decision.requires_human_review else 0,
-                decision.primary_category.value
-                if decision.primary_category is not None
-                else None,
+                decision.primary_category.value if decision.primary_category is not None else None,
                 json.dumps([c.value for c in decision.secondary_categories]),
                 json.dumps([s.value for s in decision.sensitivity]),
                 json.dumps([a.value for a in decision.actions]),
@@ -454,15 +440,11 @@ class SqliteRepository:
                     threshold = elevated.auto_threshold
                 else:
                     threshold = thresholds.default_auto_threshold
-            rows.append(
-                (_uuid(), classification_id, dimension, label, score, threshold, 0)
-            )
+            rows.append((_uuid(), classification_id, dimension, label, score, threshold, 0))
         selected: set[tuple[str, str]] = set()
         if decision.primary_category is not None:
             selected.add(("primary_category", decision.primary_category.value))
-        selected.update(
-            ("secondary_categories", c.value) for c in decision.secondary_categories
-        )
+        selected.update(("secondary_categories", c.value) for c in decision.secondary_categories)
         selected.update(("sensitivity", s.value) for s in decision.sensitivity)
         selected.update(("actions", a.value) for a in decision.actions)
         if decision.priority is not None:
@@ -489,9 +471,7 @@ class SqliteRepository:
     # --- reads (classification-storage: latest-record read model) ----------
 
     def get_email(self, email_id: str) -> StoredEmail:
-        row = self._conn.execute(
-            "SELECT * FROM emails WHERE email_id = ?", (email_id,)
-        ).fetchone()
+        row = self._conn.execute("SELECT * FROM emails WHERE email_id = ?", (email_id,)).fetchone()
         return StoredEmail(
             email_id=row["email_id"],
             message_id=row["message_id"],

@@ -9,6 +9,7 @@ This is a demonstration, not a test: exit code is always 0 unless the pipeline
 raises. The machine-checked invariants live in tests/e2e/test_corpus_run.py
 (make test-e2e).
 """
+
 import json
 import pathlib
 import tempfile
@@ -92,9 +93,7 @@ def main() -> None:
         default_review_floor=0.55,
         version="th-demo-t2",
     )
-    replay_report = replay(
-        repository=repo, thresholds=t2, email_ids=list(report.email_ids)
-    )
+    replay_report = replay(repository=repo, thresholds=t2, email_ids=list(report.email_ids))
     history = repo.get_classification_history(first_id)
     print(f"rows appended by replay : {replay_report.replayed}")
     print(f"history for first email : {len(history)} records (T1 + T2, append-only)")
@@ -117,9 +116,7 @@ def main() -> None:
     items = []
     for email_id, message_id in (
         (r["email_id"], r["message_id"])
-        for r in repo._conn.execute(
-            "SELECT email_id, message_id FROM emails ORDER BY rowid"
-        )
+        for r in repo._conn.execute("SELECT email_id, message_id FROM emails ORDER BY rowid")
     ):
         rec = repo.get_classification_history(email_id)[-1]
         statuses = tuple(
@@ -152,8 +149,7 @@ def main() -> None:
     metrics = compute_metrics(items, expected, dataset_version="v1")
     accuracy = metrics["accuracy"]
     print(
-        f"accuracy (automated, current config):"
-        f" {accuracy['numerator']}/{accuracy['denominator']}"
+        f"accuracy (automated, current config): {accuracy['numerator']}/{accuracy['denominator']}"
     )
     print("\nsensitive classes (fail-closed priority):")
     for label, v in metrics["sensitive_classes"].items():

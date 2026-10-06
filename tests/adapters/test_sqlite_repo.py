@@ -78,8 +78,7 @@ class TestSchemaIsAppendOnly:
     def test_all_six_tables_exist(self, repo, tmp_path):
         conn = sqlite3.connect(tmp_path / "pipeline.sqlite3")
         names = {
-            row[0]
-            for row in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")
+            row[0] for row in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")
         }
         assert {
             "emails",
@@ -253,9 +252,7 @@ class TestPerLabelDecisionRecords:
 class TestRelabelingAppends:
     def test_reclassification_appends_and_preserves_previous(self, repo):
         email_id = repo.append_email(make_email(), source="dataset")
-        first_id = repo.append_classified(
-            email_id, make_decision(), engine_request_id="req-1"
-        )
+        first_id = repo.append_classified(email_id, make_decision(), engine_request_id="req-1")
         second_id = repo.append_classified(
             email_id,
             make_decision(
@@ -321,9 +318,7 @@ class TestLatestRecordReadModel:
     def test_three_records_latest_is_current_and_history_intact(self, repo):
         email_id = repo.append_email(make_email(), source="dataset")
         ids = [
-            repo.append_classified(
-                email_id, make_decision(), engine_request_id=f"req-{n}"
-            )
+            repo.append_classified(email_id, make_decision(), engine_request_id=f"req-{n}")
             for n in (1, 2, 3)
         ]
         current = repo.get_current_classification(email_id)

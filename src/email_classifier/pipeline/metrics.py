@@ -77,13 +77,9 @@ def _ratio(numerator: int, denominator: int) -> float | None:
     return numerator / denominator if denominator else None
 
 
-def _precision_recall(
-    expected_ids: set[str], predicted_ids: set[str]
-) -> dict:
+def _precision_recall(expected_ids: set[str], predicted_ids: set[str]) -> dict:
     true_positive = len(expected_ids & predicted_ids)
-    precision = (
-        true_positive / len(predicted_ids) if predicted_ids else None
-    )
+    precision = true_positive / len(predicted_ids) if predicted_ids else None
     recall = true_positive / len(expected_ids) if expected_ids else None
     return {
         "true_positive_count": true_positive,
@@ -112,8 +108,7 @@ def compute_metrics(
         1
         for i in classified_items
         if i.primary_category is not None
-        and i.primary_category
-        == expected.get(i.message_id, {}).get("primary_category")
+        and i.primary_category == expected.get(i.message_id, {}).get("primary_category")
     )
     accuracy = {
         "numerator": correct,
@@ -129,11 +124,7 @@ def compute_metrics(
             for i in items
             if expected.get(i.message_id, {}).get("primary_category") == label
         }
-        predicted_ids = {
-            i.message_id
-            for i in classified_items
-            if i.primary_category == label
-        }
+        predicted_ids = {i.message_id for i in classified_items if i.primary_category == label}
         per_category[label] = _precision_recall(expected_ids, predicted_ids)
 
     # --- sensitive classes: separate P/R + false-negative rate --------------
@@ -144,22 +135,19 @@ def compute_metrics(
             for i in items
             if label in expected.get(i.message_id, {}).get("sensitivity", [])
         }
-        predicted_ids = {
-            i.message_id for i in classified_items if label in i.sensitivity
-        }
+        predicted_ids = {i.message_id for i in classified_items if label in i.sensitivity}
         entry = _precision_recall(expected_ids, predicted_ids)
         # A false negative = expected but not predicted. Silent miss = the
         # email produced no review entry at all; an email routed to review
         # (e.g. sensitive signal between floor and auto threshold) is a
         # human-reviewed case, not a silent miss.
         fn_ids = expected_ids - predicted_ids
-        silent = {i.message_id for i in items if i.message_id in fn_ids
-                  and not i.requires_human_review}
+        silent = {
+            i.message_id for i in items if i.message_id in fn_ids and not i.requires_human_review
+        }
         entry["false_negative_count"] = len(fn_ids)
         entry["silent_miss_count"] = len(silent)
-        entry["false_negative_rate"] = (
-            len(silent) / len(expected_ids) if expected_ids else None
-        )
+        entry["false_negative_rate"] = len(silent) / len(expected_ids) if expected_ids else None
         sensitive[label] = entry
 
     # --- review rate (raw counts; failed emails included) -------------------
@@ -184,10 +172,7 @@ def compute_metrics(
                 end = end.replace(tzinfo=None)
         return (end - start).total_seconds()
 
-    per_email = [
-        {"message_id": i.message_id, "seconds": _latency_for(i)}
-        for i in items
-    ]
+    per_email = [{"message_id": i.message_id, "seconds": _latency_for(i)} for i in items]
 
     def _aggregate(latencies: list[float]) -> dict:
         return {
@@ -196,9 +181,7 @@ def compute_metrics(
         }
 
     measured = [s for s in map(_latency_for, items) if s is not None]
-    failed_measured = [
-        s for s in map(_latency_for, failed_items) if s is not None
-    ]
+    failed_measured = [s for s in map(_latency_for, failed_items) if s is not None]
     latency = {
         "per_email": per_email,
         "aggregate": _aggregate(measured),
@@ -213,9 +196,7 @@ def compute_metrics(
         "processed": processed,
         "share": _ratio(len(other_items), processed),
         "no_category_floor_cleared_count": len(no_floor),
-        "no_category_floor_cleared_share": _ratio(
-            len(no_floor), len(other_items)
-        ),
+        "no_category_floor_cleared_share": _ratio(len(no_floor), len(other_items)),
     }
 
     # --- version attribution --------------------------------------------------
@@ -228,12 +209,7 @@ def compute_metrics(
     }
 
     # --- known limitations: attachment gap ------------------------------------
-    non_text = sum(
-        1
-        for i in items
-        for status in i.attachment_statuses
-        if status != "extracted"
-    )
+    non_text = sum(1 for i in items for status in i.attachment_statuses if status != "extracted")
     limitations = {
         "non_text_attachments_excluded": True,
         "statement": _LIMITATION_STATEMENT,

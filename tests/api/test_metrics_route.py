@@ -20,9 +20,7 @@ FIXTURE = Path("tests/fixtures/inbox_small.json")
 
 def fixture_ground_truth():
     data = json.loads(FIXTURE.read_text(encoding="utf-8"))
-    expected = {
-        item["message_id"]: item.get("expected") or {} for item in data["emails"]
-    }
+    expected = {item["message_id"]: item.get("expected") or {} for item in data["emails"]}
     return expected, data["dataset_version"]
 
 
@@ -62,15 +60,11 @@ class TestMetricsRoute:
         assert report["limitations"]["non_text_attachments_excluded"] is True
         assert report["limitations"]["affected_attachment_count"] == 1
 
-    def test_metrics_use_stored_automated_values_not_corrections(
-        self, tmp_path
-    ):
+    def test_metrics_use_stored_automated_values_not_corrections(self, tmp_path):
         client, repo = seeded_client(tmp_path)
         # Reviewer "rewrites" every primary category; the report must stay
         # computed from the stored automated values + dataset truth.
-        row = repo._conn.execute(
-            "SELECT email_id FROM emails ORDER BY rowid LIMIT 1"
-        ).fetchone()
+        row = repo._conn.execute("SELECT email_id FROM emails ORDER BY rowid LIMIT 1").fetchone()
         history = repo.get_classification_history(row["email_id"])
         repo.append_review(
             history[-1].classification_id,

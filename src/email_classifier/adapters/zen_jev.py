@@ -76,9 +76,7 @@ class ZenJevScorer:
             "User-Agent": "poc-classifier/0.1.0",
             "x-opencode-session": "email-classifier-mvp",
         }
-        self._client = httpx.Client(
-            timeout=timeout, transport=transport, headers=headers
-        )
+        self._client = httpx.Client(timeout=timeout, transport=transport, headers=headers)
 
     def score(self, email: EmailMessage, questions: QuestionSet) -> ScoreResult:
         payload = {
@@ -110,9 +108,7 @@ class ZenJevScorer:
             email.body,
         ]
         if email.attachments:
-            attachment_lines = "\n".join(
-                f"[attachment: {a.filename}]" for a in email.attachments
-            )
+            attachment_lines = "\n".join(f"[attachment: {a.filename}]" for a in email.attachments)
             parts.append(attachment_lines)
         return "\n\n".join(parts)
 
@@ -126,38 +122,28 @@ class ZenJevScorer:
                 response = self._client.post(self._base_url, json=payload)
             except httpx.HTTPError:
                 if attempt == MAX_RETRIES:
-                    raise ScoreError(
-                        "scoring engine unreachable after retries"
-                    ) from None
+                    raise ScoreError("scoring engine unreachable after retries") from None
                 continue
             if response.status_code >= 500:
                 if attempt == MAX_RETRIES:
                     raise ScoreError(
-                        f"scoring engine returned status {response.status_code} "
-                        "after retries"
+                        f"scoring engine returned status {response.status_code} after retries"
                     )
                 continue
             if response.status_code >= 400:
                 raise ScoreError(
-                    f"scoring engine rejected the request (status "
-                    f"{response.status_code})"
+                    f"scoring engine rejected the request (status {response.status_code})"
                 )
             try:
                 return response.json()
             except ValueError:
                 # Malformed JSON is a strict-validation failure, not a
                 # transport failure: fail closed immediately, no retry.
-                raise ScoreError(
-                    "scoring engine returned malformed JSON"
-                ) from None
+                raise ScoreError("scoring engine returned malformed JSON") from None
         raise ScoreError("scoring engine failed after retries")  # pragma: no cover
 
-    def _validated_scores(
-        self, response: Any, questions: QuestionSet
-    ) -> dict[str, float]:
-        if not isinstance(response, dict) or not isinstance(
-            response.get("answers"), dict
-        ):
+    def _validated_scores(self, response: Any, questions: QuestionSet) -> dict[str, float]:
+        if not isinstance(response, dict) or not isinstance(response.get("answers"), dict):
             raise ScoreError("engine response is missing the 'answers' envelope")
         answers = response["answers"]
         scores: dict[str, float] = {}
@@ -169,14 +155,10 @@ class ZenJevScorer:
             value = answer["noul"]
             # bool is an int subclass: reject it explicitly as non-numeric.
             if isinstance(value, bool) or not isinstance(value, (int, float)):
-                raise ScoreError(
-                    f"engine returned a non-numeric probability for {qid!r}"
-                )
+                raise ScoreError(f"engine returned a non-numeric probability for {qid!r}")
             probability = float(value)
             if not 0.0 <= probability <= 1.0:
-                raise ScoreError(
-                    f"engine returned an out-of-range probability for {qid!r}"
-                )
+                raise ScoreError(f"engine returned an out-of-range probability for {qid!r}")
             scores[qid] = probability
         return scores
 

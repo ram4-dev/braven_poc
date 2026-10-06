@@ -134,9 +134,7 @@ class TestEngineSwapWithoutPolicyChanges:
             # structure and status, same threshold/question versions — only
             # the engine version, scores and rule outcomes differ.
             assert isinstance(dec_a, type(dec_b))
-            assert tuple(f.name for f in fields(dec_a)) == tuple(
-                f.name for f in fields(dec_b)
-            )
+            assert tuple(f.name for f in fields(dec_a)) == tuple(f.name for f in fields(dec_b))
             assert dec_a.status == dec_b.status == "CLASSIFIED"
             assert dec_a.classifier_version != dec_b.classifier_version
             assert dec_a.question_set_version == dec_b.question_set_version
@@ -147,14 +145,8 @@ class TestEngineSwapWithoutPolicyChanges:
             assert len(dec_a.raw_scores) == len(dec_b.raw_scores) == 28
             # Per-label scores remain available for both engines (no aggregate
             # replaces the per-label scores).
-            assert all(
-                isinstance(v, float) and 0.0 <= v <= 1.0
-                for v in dec_a.raw_scores.values()
-            )
-            assert all(
-                isinstance(v, float) and 0.0 <= v <= 1.0
-                for v in dec_b.raw_scores.values()
-            )
+            assert all(isinstance(v, float) and 0.0 <= v <= 1.0 for v in dec_a.raw_scores.values())
+            assert all(isinstance(v, float) and 0.0 <= v <= 1.0 for v in dec_b.raw_scores.values())
 
 
 class TestSourceReplacement:
@@ -204,9 +196,7 @@ class TestNoSilentDrop:
         assert report.queued >= 1
 
         # The failed email is present in storage, not dropped.
-        by_message = {
-            repo.get_email(eid).message_id: eid for eid in report.email_ids
-        }
+        by_message = {repo.get_email(eid).message_id: eid for eid in report.email_ids}
         failed_record = repo.get_current_classification(by_message[failing_id])
         assert failed_record.status == "FAILED"
         assert failed_record.primary_category is None
@@ -216,9 +206,7 @@ class TestNoSilentDrop:
         # also contain legitimately queued classified emails (sensitive/uncertain
         # bands) — the failed one must be present with its own reason.
         queue = repo.list_review_queue()
-        failed_entry = next(
-            (e for e in queue if e.message_id == failing_id), None
-        )
+        failed_entry = next((e for e in queue if e.message_id == failing_id), None)
         assert failed_entry is not None
         assert failed_entry.queue_reason == "scoring_failed"
 

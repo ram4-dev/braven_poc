@@ -3,6 +3,7 @@
 Reads OPENCODE_API_KEY from .env (gitignored). Run:
     set -a; source .env; set +a; .venv/bin/python scripts/live_corpus.py
 """
+
 import json
 import os
 import pathlib
@@ -55,9 +56,7 @@ except (OSError, json.JSONDecodeError) as exc:
 expected = {e["message_id"]: e["expected"] for e in dataset["emails"]}
 
 items = []
-rows = repo._conn.execute(
-    "SELECT email_id, message_id FROM emails ORDER BY rowid"
-).fetchall()
+rows = repo._conn.execute("SELECT email_id, message_id FROM emails ORDER BY rowid").fetchall()
 for row in rows:
     email_id, message_id = row["email_id"], row["message_id"]
     record = repo.get_classification_history(email_id)[-1]
@@ -91,10 +90,7 @@ for row in rows:
 
 report = compute_metrics(items, expected, dataset_version="v1")
 accuracy = report["accuracy"]
-print(
-    f"accuracy: {accuracy['numerator']}/{accuracy['denominator']}"
-    f" = {accuracy['share']}"
-)
+print(f"accuracy: {accuracy['numerator']}/{accuracy['denominator']} = {accuracy['share']}")
 print("\nsensitive classes:")
 for label, v in report["sensitive_classes"].items():
     print(
