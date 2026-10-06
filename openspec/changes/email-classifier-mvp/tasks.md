@@ -115,7 +115,7 @@ Unit numbering = PR numbering. Units 2–17 are stacked on the previous one; `fe
 - [x] 10.3 RED then GREEN `tests/e2e/test_corpus_run.py`: full corpus through the pipeline with `FakeDeterministicScorer` — item count, exactly one classification per email, zero silent drops for sensitive signals, failed emails stored + queued, metrics report version-attributed. <!-- sdd-owner: implementation -->
 - [x] 10.4 Run `python -m pytest -q`, `python -m pytest --cov=email_classifier --cov-report=term-missing`, `ruff check .`, `python -m pip install -e .`; record command output as apply-phase evidence. <!-- sdd-owner: implementation -->
 - [x] 10.5 Add `README.md` with install/run/test/replay instructions and the fake-vs-live scorer switch. <!-- sdd-owner: implementation -->
-- [ ] 10.6 Optional, gated: live Zen smoke test of `answers.<qid>.noul` when `OPENCODE_API_KEY` is present (skipped otherwise); record the result as a design open-question resolution. <!-- sdd-owner: implementation -->
+- [x] 10.6 Optional, gated: live Zen smoke test of `answers.<qid>.noul` when `OPENCODE_API_KEY` is present (skipped otherwise); record the result as a design open-question resolution. (DONE 2026-10-05: envelope verified live (`answers.<qid>.noul` exactly as research.md); adapter required User-Agent + x-opencode-session headers (403/1010 otherwise) — fixed; full 125-email corpus run with jev-1.13: accuracy 83/125=66.4%, 0 sensitive-class FN, review rate 79.2%, 0 failures. Evidence in scripts/live_corpus.py run log.) <!-- sdd-owner: implementation -->
 
 ## Phase 11: Post-Apply Gates (parent-owned)
 
