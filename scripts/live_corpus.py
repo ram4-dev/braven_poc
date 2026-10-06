@@ -3,6 +3,7 @@
 Reads OPENCODE_API_KEY from .env (gitignored). Run:
     set -a; source .env; set +a; .venv/bin/python scripts/live_corpus.py
 """
+import json
 import os
 import pathlib
 import tempfile
@@ -12,15 +13,16 @@ from email_classifier.adapters.inbox_dataset import InboxDatasetSource
 from email_classifier.adapters.sqlite_repo import SqliteRepository
 from email_classifier.adapters.zen_jev import ZenJevScorer
 from email_classifier.config.loader import load_questions, load_thresholds
+from email_classifier.pipeline.metrics import EvaluationItem, compute_metrics
 from email_classifier.pipeline.pipeline import Pipeline
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-_key = None
-env_file = ROOT / ".env"
-if env_file.exists() and not os.environ.get("OPENCODE_API_KEY"):
-    _key = env_file.read_text().strip().split("=", 1)[1]
-    os.environ["OPENCODE_API_KEY"] = _key
+if env_file.exists() if (env_file := ROOT / ".env") else False:
+    pass
+if not os.environ.get("OPENCODE_API_KEY") and (ROOT / ".env").exists():
+    key = (ROOT / ".env").read_text().strip().split("=", 1)[1]
+    os.environ["OPENCODE_API_KEY"] = key
 
 tmp = pathlib.Path(tempfile.mkdtemp())
 repo = SqliteRepository(tmp / "live.sqlite3")
@@ -39,26 +41,26 @@ p = Pipeline(
 rep = p.run()
 elapsed = time.time() - t0
 
-print(f"live run: ingested={rep.ingested} classified={rep.classified} "
-      f"failed={rep.failed} queued={rep.queued} in {elapsed:.1f}s")
+print(
+    f"live run: ingested={rep.ingested} classified={rep.classified} "
+    f"failed={rep.failed} queued={rep.queued} in {elapsed:.1f}s"
+)
 
-# Persist metrics-relevant artifacts for inspection
-import json
-
-data = json.load(open(ROOT / "datasets/inbox_mvp_v1.json"))
-expected = {e["message_id"]: e["expected"] for e in data["emails"]}
-
-from email_classifier.pipeline.metrics import EvaluationItem, compute_metrics
+# Metrics over the live run, using the dataset's frozen expected labels.
+dataset_path = ROOT / "datasets/inbox_mvp_v1.json"
+try:
+    dataset = json.loads(dataset_path.read_text(encoding="utf-8"))
+except (OSError, json.JSONDecodeError) as exc:
+    raise SystemExit(f"cannot read dataset at {dataset_path}: {exc}") from exc
+expected = {e["message_id"]: e["expected"] for e in dataset["emails"]}
 
 items = []
-for email_id, message_id in (
-    (r["email_id"], r["message_id"])
-    for r in repo._conn.execute(
-        "SELECT email_id, message_id FROM emails ORDER BY rowid"
-    )
-):
-    history = repo.get_classification_history(email_id)
-    record = history[-1]
+rows = repo._conn.execute(
+    "SELECT email_id, message_id FROM emails ORDER BY rowid"
+).fetchall()
+for row in rows:
+    email_id, message_id = row["email_id"], row["message_id"]
+    record = repo.get_classification_history(email_id)[-1]
     statuses = tuple(
         r["extraction_status"]
         for r in repo._conn.execute(
@@ -88,20 +90,28 @@ for email_id, message_id in (
     )
 
 report = compute_metrics(items, expected, dataset_version="v1")
-print(f"accuracy: {report['accuracy']['numerator']}/{report['accuracy']['denominator']} "
-      f"= {report['accuracy']['share']}")
+accuracy = report["accuracy"]
+print(
+    f"accuracy: {accuracy['numerator']}/{accuracy['denominator']}"
+    f" = {accuracy['share']}"
+)
 print("\nsensitive classes:")
 for label, v in report["sensitive_classes"].items():
-    print(f"  {label}: FN rate={v['false_negative_rate']} TP={v['true_positive_count']} "
-          f"expected={v['expected_count']}")
+    print(
+        f"  {label}: FN rate={v['false_negative_rate']}"
+        f" TP={v['true_positive_count']} expected={v['expected_count']}"
+    )
 print("\nper-category (top by recall):")
-rows = sorted(
+ranked = sorted(
     ((k, v) for k, v in report["per_category"].items() if v["expected_count"]),
     key=lambda kv: -(kv[1]["recall"] or 0),
 )
-for k, v in rows[:8]:
-    print(f"  {k}: P={v['precision'] and round(v['precision'], 2)} "
-          f"R={v['recall'] and round(v['recall'], 2)} "
-          f"(TP={v['true_positive_count']}/{v['expected_count']} pred={v['predicted_count']})")
+for k, v in ranked[:8]:
+    print(
+        f"  {k}: P={v['precision'] and round(v['precision'], 2)}"
+        f" R={v['recall'] and round(v['recall'], 2)}"
+        f" (TP={v['true_positive_count']}/{v['expected_count']}"
+        f" pred={v['predicted_count']})"
+    )
 print("\nreview rate:", report["review_rate"])
 print("versions:", report["versions"])

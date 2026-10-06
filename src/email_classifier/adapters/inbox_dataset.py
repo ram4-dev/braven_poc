@@ -46,7 +46,10 @@ class InboxDatasetSource:
 
     @classmethod
     def from_file(cls, path: str | Path) -> InboxDatasetSource:
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        try:
+            data = json.loads(Path(path).read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError(f"cannot read dataset file {path}: {exc}") from exc
         if not isinstance(data, dict) or not isinstance(data.get("emails"), list):
             raise ValueError(f"dataset file {path} must contain an 'emails' list")
         return cls(emails=data["emails"])
