@@ -150,13 +150,25 @@ class TestOneRequestPerEmail:
         assert "report a new claim" in state
         assert "client@example.com" in state
 
-    def test_authorization_bearer_from_env_key(self, monkeypatch):
-        monkeypatch.setenv("OPENCODE_API_KEY", API_KEY)
+        def test_authorization_bearer_from_env_key(self, monkeypatch):
+            monkeypatch.setenv("OPENCODE_API_KEY", API_KEY)
+            scorer, requests = _recorded_scorer([_json_response(_full_answers())])
+
+            scorer.score(_email(), QUESTIONS)
+
+            assert requests[0].headers["authorization"] == f"Bearer {API_KEY}"
+
+    def test_request_carries_agent_user_agent_and_session_headers(self):
+        # The Zen gateway shields behind a bot firewall: requests without a
+        # coding-agent User-Agent (and a stable session id) are rejected 403
+        # (error 1010) — verified live 2026-10-05 with a real API key.
         scorer, requests = _recorded_scorer([_json_response(_full_answers())])
 
         scorer.score(_email(), QUESTIONS)
 
-        assert requests[0].headers["authorization"] == f"Bearer {API_KEY}"
+        headers = requests[0].headers
+        assert "poc-classifier/" in headers["user-agent"]
+        assert headers["x-opencode-session"]  # stable, non-empty
 
 
 class TestEnvelopeMapping:

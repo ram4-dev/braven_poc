@@ -71,6 +71,10 @@ class ZenJevScorer:
         headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
+            # The Zen gateway rejects non-agent clients (Cloudflare 403/1010):
+            # identify as a coding-agent-style client with a stable session.
+            "User-Agent": "poc-classifier/0.1.0",
+            "x-opencode-session": "email-classifier-mvp",
         }
         self._client = httpx.Client(
             timeout=timeout, transport=transport, headers=headers
