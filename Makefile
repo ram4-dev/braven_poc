@@ -4,7 +4,7 @@
 PYTHON ?= .venv/bin/python
 RUFF ?= .venv/bin/ruff
 
-.PHONY: install test test-e2e test-rules test-adapters test-api lint coverage live replay-help
+.PHONY: install test test-e2e demo test-rules test-adapters test-api lint coverage live
 
 ## install: set up the venv package in editable mode (run once after cloning)
 install:
@@ -38,6 +38,10 @@ lint:
 ## coverage: full suite with coverage report
 coverage:
 	$(PYTHON) -m pytest --cov=email_classifier --cov-report=term-missing
+
+## demo: run the full corpus offline and print every stage (inspectable output)
+demo:
+	$(PYTHON) scripts/e2e_demo.py
 
 ## live: run the 125-email corpus through the REAL JEV engine
 ## (requires OPENCODE_API_KEY in .env or the environment; costs tokens)
