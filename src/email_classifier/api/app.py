@@ -180,18 +180,33 @@ def _thresholds_from_dict(data: dict[str, Any], version: str) -> ThresholdConfig
     """Build a ThresholdConfig from an inline JSON table (replay request)."""
     default = data.get("default") or {}
     elevated_rows = data.get("elevated") or []
-    elevated = {
-        f"{row['dimension']}/{row['label']}": LabelThreshold(
+    elevated = {}
+    for row in elevated_rows:
+        try:
+            auto_threshold = float(row["auto_threshold"])
+            review_floor = float(
+                row.get("review_floor", default.get("review_floor", 0.65))
+            )
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(
+                f"invalid elevated threshold row {row!r}: {exc}"
+            ) from exc
+        elevated[f"{row['dimension']}/{row['label']}"] = LabelThreshold(
             dimension=row["dimension"],
             label=row["label"],
-            auto_threshold=float(row["auto_threshold"]),
-            review_floor=float(row.get("review_floor", default.get("review_floor", 0.65))),
+            auto_threshold=auto_threshold,
+            review_floor=review_floor,
         )
-        for row in elevated_rows
-    }
+    try:
+        default_auto = float(default.get("auto_threshold", 0.90))
+        default_floor = float(default.get("review_floor", 0.65))
+    except (TypeError, ValueError) as exc:
+        raise ValueError(
+            f"invalid default threshold row {default!r}: {exc}"
+        ) from exc
     return ThresholdConfig(
-        default_auto_threshold=float(default.get("auto_threshold", 0.90)),
-        default_review_floor=float(default.get("review_floor", 0.65)),
+        default_auto_threshold=default_auto,
+        default_review_floor=default_floor,
         elevated=elevated,
         version=version,
     )

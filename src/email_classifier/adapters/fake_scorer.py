@@ -42,7 +42,7 @@ class FakeDeterministicScorer:
                     for a in email.attachments
                 ),
             )
-            scores[question.question_id] = (seed % (1 << 48)) / float(1 << 48)
+            scores[question.question_id] = (seed % (1 << 48)) / (1 << 48)
         return ScoreResult(
             scores=scores,
             engine_version=_ENGINE_VERSION,

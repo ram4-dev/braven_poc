@@ -2,6 +2,14 @@
   "pythonVersion": "3.12",
   "venvPath": ".",
   "venv": ".venv",
-  "include": ["src", "tests", "scripts"],
-  "exclude": ["**/__pycache__", ".venv"]
+  "include": [
+    "src",
+    "tests",
+    "scripts"
+  ],
+  "exclude": [
+    "**/__pycache__",
+    ".venv"
+  ],
+  "pythonPath": ".venv/bin/python"
 }
