@@ -444,7 +444,7 @@ class SqliteRepository:
         decision: Decision,
         thresholds: ThresholdConfig | None,
     ) -> None:
-        rows: list[tuple[str, str, str, float | None, float | None, int]] = []
+        rows: list[tuple[str, str, str, str, float, float | None, int]] = []
         for key, score in decision.raw_scores.items():
             dimension, _, label = key.partition("/")
             threshold = None
@@ -477,7 +477,7 @@ class SqliteRepository:
                 threshold,
                 1 if (dimension, label) in selected else 0,
             )
-            for label_id, cid, dimension, label, score, threshold, _ in rows
+            for label_id, cid, dimension, label, score, threshold, _flag in rows
         ]
         self._conn.executemany(
             "INSERT INTO classification_labels (label_id, classification_id,"

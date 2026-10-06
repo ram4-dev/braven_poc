@@ -1,6 +1,7 @@
 # Apply Progress: email-classifier-mvp (PR 1 — work units 1–2; PR 2 — units 3–5; PR 3 — units 6–7)
 
 ---
+
 # PR 6 — Work Units 11–12 (worktree braven_poc.pr6-pipeline, branch pr6-pipeline)
 
 Strict TDD active (`.venv/bin/python -m pytest -q`). Unit 11 (tasks 7.1–7.2) was completed by a prior timed-out run and orchestrator-verified; its checkboxes are marked here with the evidence it left behind. Unit 12 (tasks 7.3–7.4) completed this run.
@@ -21,14 +22,14 @@ Strict TDD active (`.venv/bin/python -m pytest -q`). Unit 11 (tasks 7.1–7.2) w
 ## TDD Cycle Evidence (PR 6)
 
 | Work unit | Task | RED | GREEN | REFACTOR |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 11 | 7.1 | `ModuleNotFoundError`, 8 failed (prior run) | 8 passed (orchestrator-verified) | N/A |
 | 12 | 7.3 | `ModuleNotFoundError: No module named 'email_classifier.pipeline.replay'`, 7 failed | 7 passed; intermediate failures fixed: `AttributeError: list_email_ids` (API redesign → email_ids param), duplicate-rerun counted `replayed == 4` → skip-already-replayed check → `replayed == 0` | Import order cleanup; ruff clean |
 
 ## Work Unit Evidence (PR 6)
 
 | Evidence | Required value |
-|---|---|
+| --- | --- |
 | Focused test command and exact result (unit 12) | `.venv/bin/python -m pytest tests/pipeline/test_replay.py` → 7 passed (exit 0) |
 | Focused test command and exact result (unit 11) | `.venv/bin/python -m pytest tests/pipeline/test_pipeline.py` → 8 passed |
 | Runtime harness command and exact result (unit 12) | Real SQLite file per test in `tmp_path`; pipeline run (fixture, 4 emails) → replay → history/current read model asserted end to end; zero-engine asserted via CountingScorer spy |
@@ -37,7 +38,7 @@ Strict TDD active (`.venv/bin/python -m pytest -q`). Unit 11 (tasks 7.1–7.2) w
 ## Files Changed (PR 6, this run)
 
 | File | Action |
-|---|---|
+| --- | --- |
 | `tests/pipeline/test_replay.py` | Created (7 tests) |
 | `src/email_classifier/pipeline/replay.py` | Created (`replay`, `ReplayReport`) |
 | `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 7.1–7.4 marked |
@@ -56,7 +57,7 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 ## Work Unit 6 — Versioned 28-Question Set Config + Loader (PR 3)
 
 - [x] 5.3 RED `tests/config/test_questions_loader.py` (17 tests): 28 questions one per MVP label, noul type + instructions + true/false criteria per question, shipped YAML loads, SHA-256-prefix version reported, wording change bumps version, disambiguation criteria present between COMPLAINT/LEGAL, CLAIM triple, NEW_LEAD/QUOTE_REQUEST (asserted against the shipped YAML), deferred labels rejected naming each of the 6, missing label rejected, duplicate rejected, non-noul rejected, missing criteria rejected. RED verbatim: `ImportError: cannot import name 'load_questions' from 'email_classifier.config.loader'`, 17 failed.
-- [x] 5.4 GREEN `src/email_classifier/config/questions.yaml` (28 nouls with real insurance-domain criteria; paired questions cross-reference their counterpart in criteria) + `load_questions` in `src/email_classifier/config/loader.py` (dimension/label validation against the frozen taxonomy, deferred-label rejection, duplicate rejection, non-empty criteria, missing/extra label rejection, version = SHA-256(raw)[:8]). Focused: 17 passed. Runtime harness: `28 8439d61e`.
+- [x] 5.4 GREEN `src/email_classifier/config/questions.yaml` (28 nouls with real insurance-domain criteria; paired questions cross-reference their counterpart in criteria) + `load_questions` in `src/email_classifier/config/loader.py` (dimension/label validation against the frozen taxonomy, deferred-label rejection, duplicate rejection, non-empty criteria, missing/extra label rejection, version = SHA-256[raw](:8)). Focused: 17 passed. Runtime harness: `28 8439d61e`.
 
 ## Work Unit 7 — Offline Adapters: Fake Scorer + Dataset Inbox (PR 3)
 
@@ -67,14 +68,14 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 ## TDD Cycle Evidence (units 6–7, this worktree)
 
 | Work unit | Task | RED | GREEN | REFACTOR |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 6 | 5.3 | `ImportError: cannot import name 'load_questions'`, 17 failed | 17 passed; runtime `28 8439d61e` | Disambiguation-criteria assertion moved to the shipped YAML (synthetic fixture intentionally lacks cross-references); ruff clean |
 | 7 | 6.1/6.3 | `ModuleNotFoundError: No module named 'email_classifier.adapters'`, 14 failed | 14 passed | Synthetic-detection rule simplified to explicit `synthetic: false` flag (dataset is synthetic by construction); ruff F841/UP037 fixes |
 
 ## Work Unit Evidence (units 6–7)
 
 | Evidence | Required value |
-|---|---|
+| --- | --- |
 | Focused test command and exact result (unit 6) | `.venv/bin/python -m pytest tests/config/test_questions_loader.py` → 17 passed (exit 0) |
 | Runtime harness command and exact result (unit 6) | `python -c "...load_questions('src/email_classifier/config/questions.yaml'); print(len(qs.questions), qs.version)"` → `28 8439d61e` |
 | Rollback boundary (unit 6) | Delete `src/email_classifier/config/questions.yaml` + `load_questions` from `config/loader.py` + `tests/config/test_questions_loader.py` (thresholds loader stays) |
@@ -85,7 +86,7 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 ## Files Changed (PR 3, pr3-questions-adapters worktree)
 
 | File | Action |
-|---|---|
+| --- | --- |
 | `tests/config/test_questions_loader.py` | Created (17 tests) |
 | `src/email_classifier/config/questions.yaml` | Created (28 nouls + disambiguation criteria) |
 | `src/email_classifier/config/loader.py` | Modified (added `load_questions`, `ACTION_LABELS`/`DEFERRED_CATEGORY_LABELS` imports) |
@@ -106,6 +107,7 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 - Worktree venv inherits the parent checkout's editable path; every new stacked worktree needs one `uv pip install -e . --no-deps -p .venv/bin/python` before pytest resolves the right sources.
 
 ---
+
 ## Work Unit 3 — Banding + Review Routing (PR 2, prior continuation run)
 
 - [x] 3.1 RED `tests/domain/test_rules_banding.py` — 19 tests incl. 7×2 boundary matrix (0.40/0.6499/0.65/0.8999/0.90/0.9499/0.95, default + elevated tiers). RED: `ModuleNotFoundError: No module named 'email_classifier.domain.rules'`.
@@ -121,12 +123,12 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 ## Work Unit 5 — Thresholds Config + Loader (tasks 5.1–5.2 only; 5.3+ is PR 3)
 
 - [x] 5.1 RED `tests/config/test_thresholds_loader.py` (8 tests): valid table loads (default + 3 elevated rows), shipped YAML loads, floor ≥ auto rejected naming the label, unknown label rejected, unknown dimension rejected, elevation without paired floor rejected naming LEGAL, version = SHA-256 8-char prefix, differing configs → differing versions. RED verbatim: `ModuleNotFoundError: No module named 'email_classifier.config'`, 8 failed.
-- [x] 5.2 GREEN `src/email_classifier/config/thresholds.yaml` + `load_thresholds` in `src/email_classifier/config/loader.py` (YAML → domain `ThresholdConfig`; `ConfigError` for all rejections; version = SHA-256(raw file bytes)[:8]). Focused: 8 passed. Runtime harness: `python -c "...load_thresholds('src/email_classifier/config/thresholds.yaml').version"` → `35d4c41e`. Tasks 5.3–5.4 deliberately NOT done (questions.yaml is PR 3).
+- [x] 5.2 GREEN `src/email_classifier/config/thresholds.yaml` + `load_thresholds` in `src/email_classifier/config/loader.py` (YAML → domain `ThresholdConfig`; `ConfigError` for all rejections; version = SHA-256[raw file bytes](:8)). Focused: 8 passed. Runtime harness: `python -c "...load_thresholds('src/email_classifier/config/thresholds.yaml').version"` → `35d4c41e`. Tasks 5.3–5.4 deliberately NOT done (questions.yaml is PR 3).
 
 ## TDD Cycle Evidence (units 3–5, this worktree)
 
 | Work unit | Task | RED | GREEN | REFACTOR |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 3 | 3.1–3.3 | `ModuleNotFoundError: No module named 'email_classifier.domain.rules'` | 19 passed (banding) | Boundary matrix added; suite stayed green |
 | 4 | 4.1/4.3 | 4 failed, 25 passed (per-label auto threshold ignored; pairwise precedence leak) | 29 passed (selection file); 76 total | Ruff E741/E501 fixes (`lambda l` → `lambda lb`); suite stayed green |
 | 5 | 5.1 | `ModuleNotFoundError: No module named 'email_classifier.config'`, 8 failed | 8 passed; 84 total; ruff clean | Import-graph runtime test pollution fix (purge forbidden roots before import); loader I001 import-sort --fix |
@@ -134,18 +136,18 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 ## Work Unit Evidence (units 4–5)
 
 | Evidence | Required value |
-|---|---|
+| --- | --- |
 | Focused test command and exact result (unit 4) | `.venv/bin/python -m pytest tests/domain/test_rules_selection.py` → 29 passed (exit 0) |
 | Runtime harness command and exact result (unit 4) | N/A — pure functions, no I/O by design |
 | Rollback boundary (unit 4) | Remove selection/implication/precedence code from `domain/rules.py` + `tests/domain/test_rules_selection.py` (banding code from unit 3 stays) |
 | Focused test command and exact result (unit 5) | `.venv/bin/python -m pytest tests/config/test_thresholds_loader.py` → 8 passed (exit 0) |
 | Runtime harness command and exact result (unit 5) | `python -c "from email_classifier.config.loader import load_thresholds as l; print(l('src/email_classifier/config/thresholds.yaml').version)"` → `35d4c41e` |
-| Rollback boundary (unit 5) | Delete `src/email_classifier/config/` (thresholds.yaml, loader.py, __init__.py) + `tests/config/` |
+| Rollback boundary (unit 5) | Delete `src/email_classifier/config/` (thresholds.yaml, loader.py, **init**.py) + `tests/config/` |
 
 ## Files Changed (this continuation, pr2-rules-core worktree)
 
 | File | Action |
-|---|---|
+| --- | --- |
 | `src/email_classifier/domain/rules.py` | Created (prior run) + fixed: per-label auto eligibility, pairwise ambiguity demotion, version attribution |
 | `tests/domain/test_rules_banding.py` | Created (prior run, 19 tests) |
 | `tests/domain/test_rules_selection.py` | Created (prior run) + extended: elevated-auto + pairwise-precedence + version-attribution tests (29 total) |
@@ -188,7 +190,7 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 ## TDD Cycle Evidence
 
 | Work unit | Task | RED | GREEN | REFACTOR |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | 1.2/1.3 | `ModuleNotFoundError: No module named 'email_classifier'` (collection error) | `python -m pytest -q` → `1 passed` | N/A — harness minimal |
 | 2 | 2.1/2.2 | `ModuleNotFoundError: No module named 'email_classifier.domain'` (2 collection errors) | `26 passed` (models 19 + ports 7) | Ruff UP042 fix: `(str, Enum)` → `(enum.StrEnum)`; suite stayed green (`28 passed`), `ruff check .` clean |
 | 2 | 2.3 | Import-graph test ran against already-pure code (verification test, not a RED-first feature test; purity is enforced going forward) | `2 passed` | N/A |
@@ -196,7 +198,7 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 ## Work Unit Evidence
 
 | Evidence | Required value |
-|---|---|
+| --- | --- |
 | Focused test command and exact result (unit 1) | `python -m pytest -q` → 1 passed (exit 0) |
 | Runtime harness command and exact result (unit 1) | `python -m pip install -e .` (into venv) → installed successfully; import of `email_classifier.__version__` proven by smoke test |
 | Rollback boundary (unit 1) | Delete `pyproject.toml`, `src/email_classifier/`, `tests/test_smoke.py`; revert `.gitignore` `.venv/` line |
@@ -207,7 +209,7 @@ Worktree (units 1–2): `/Users/ramiro/Desktop/projects/braven_poc.pr1-harness-d
 ## Files Changed
 
 | File | Action |
-|---|---|
+| --- | --- |
 | `pyproject.toml` | Created |
 | `.gitignore` | Modified (added `.venv/`) |
 | `src/email_classifier/__init__.py` | Created |
@@ -253,14 +255,14 @@ Strict TDD active (`.venv/bin/python -m pytest -q`; venv editable install re-poi
 ## TDD Cycle Evidence (PR 4)
 
 | Work unit | Task | RED | GREEN | REFACTOR |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 8 | 6.5 | `ModuleNotFoundError: No module named 'email_classifier.adapters'` (22 errors) | 22 passed; 106 total | Ruff I001/E501 fixes + test rewrites (engine_request_id moved from Decision to repo arg; UNIQUE proven via raw SQL); suite stayed green |
 | 9 | 6.7 | `NotImplementedError` + projection failures (11 failed, 1 passed) | 12 passed; 118 total | Ruff F841 fix; suite stayed green |
 
 ## Work Unit Evidence (PR 4)
 
 | Evidence | Required value |
-|---|---|
+| --- | --- |
 | Focused test command and exact result (unit 8) | `.venv/bin/python -m pytest tests/adapters/test_sqlite_repo.py` → 22 passed (exit 0) |
 | Runtime harness command and exact result (unit 8) | Real SQLite file in `tmp_path` exercised by every test (no mocks); CHECK/UNIQUE constraints proven via raw `sqlite3` INSERT rejection |
 | Rollback boundary (unit 8) | Remove `sqlite_repo.py` classification surface (all but review methods) + `tests/adapters/test_sqlite_repo.py`; DB file is throwaway |
@@ -271,7 +273,7 @@ Strict TDD active (`.venv/bin/python -m pytest -q`; venv editable install re-poi
 ## Files Changed (PR 4, this worktree)
 
 | File | Action |
-|---|---|
+| --- | --- |
 | `src/email_classifier/adapters/__init__.py` | Created (docstring only) |
 | `src/email_classifier/adapters/sqlite_repo.py` | Created (DDL + append-only writes + read model + review persistence/queue/projection) |
 | `tests/adapters/test_sqlite_repo.py` | Created (22 tests) |
@@ -294,6 +296,7 @@ Strict TDD active (`.venv/bin/python -m pytest -q`; venv editable install re-poi
 - [ ] All tasks in Phases 7–10; Phase 11 is parent-owned (review + delivery gates)
 
 ---
+
 # PR 5 — Work Unit 10: Zen JEV Adapter (Lane A, this run)
 
 Worktree: `/Users/ramiro/Desktop/projects/braven_poc.pr5-zen-adapter`, branch `pr5-zen-adapter` (stacked on `pr3-questions-adapters`). Mode: Strict TDD (`.venv/bin/python -m pytest -q`).
@@ -312,7 +315,7 @@ Worktree: `/Users/ramiro/Desktop/projects/braven_poc.pr5-zen-adapter`, branch `p
 ## Work Unit Evidence (PR 5)
 
 | Evidence | Required value |
-|---|---|
+| --- | --- |
 | Focused test command and exact result | `.venv/bin/python -m pytest tests/adapters/test_zen_jev.py` → 26 passed (exit 0) |
 | Runtime harness command and exact result | `python -c "from email_classifier.adapters import ZenJevScorer; ..."` with `MockTransport`-style protocol check: both `FakeDeterministicScorer` and `ZenJevScorer` satisfy the `ScoringEngine` runtime-checkable Protocol (`both scorers satisfy ScoringEngine protocol`); real network deliberately NOT called (no key in CI; live smoke is task 10.6, parent-owned) |
 | Rollback boundary | Delete `src/email_classifier/adapters/zen_jev.py`, the `ZenJevScorer` export from `adapters/__init__.py`, and `tests/adapters/test_zen_jev.py`; fake scorer, sqlite repo, inbox dataset, questions.yaml, loader and pipeline are untouched |
@@ -320,7 +323,7 @@ Worktree: `/Users/ramiro/Desktop/projects/braven_poc.pr5-zen-adapter`, branch `p
 ## Files Changed (PR 5, this worktree)
 
 | File | Action |
-|---|---|
+| --- | --- |
 | `tests/adapters/test_zen_jev.py` | Created (26 tests) |
 | `src/email_classifier/adapters/zen_jev.py` | Created (`ZenJevScorer`: one-request scoring, strict validation, bounded retry, fail-closed) |
 | `src/email_classifier/adapters/__init__.py` | Modified (added `ZenJevScorer` export) |
@@ -362,7 +365,7 @@ Strict TDD active (`.venv/bin/python -m pytest -q`). Documented `size:exception`
 ## Work Unit Evidence (unit 16)
 
 | Evidence | Required value |
-|---|---|
+| --- | --- |
 | Focused test command and exact result | `.venv/bin/python -m pytest -q tests/dataset/test_corpus_coverage.py` → 9 passed (exit 0) |
 | Runtime harness command and exact result | `InboxDatasetSource.from_file("datasets/inbox_mvp_v1.json").ingest()` → `ingested: 125, rejected: 0`; `expected_for("em-0044")` → CLAIM_NEW/CRITICAL; corpus parses end-to-end through the real unit-7 adapter |
 | Rollback boundary | Delete `datasets/inbox_mvp_v1.json` + `tests/dataset/test_corpus_coverage.py`; fixture corpus `tests/fixtures/inbox_small.json` (PR 7) and all pipeline/e2e paths keep working — no source files touched |
@@ -370,7 +373,7 @@ Strict TDD active (`.venv/bin/python -m pytest -q`). Documented `size:exception`
 ## Files Changed (PR 8, this run)
 
 | File | Action |
-|---|---|
+| --- | --- |
 | `datasets/inbox_mvp_v1.json` | Created (125 emails + boundary_cases manifest, 3582 lines) |
 | `tests/dataset/test_corpus_coverage.py` | Created (9 tests) |
 | `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 10.1–10.2 marked |
@@ -412,7 +415,7 @@ Strict TDD active (`.venv/bin/python -m pytest -q`). Work units 1–16 already p
 ## Work Unit Evidence (unit 17)
 
 | Evidence | Required value |
-|---|---|
+| --- | --- |
 | Focused test command and exact result | `.venv/bin/python -m pytest tests/e2e/test_corpus_run.py` → 5 passed (exit 0, 1.43s) |
 | Runtime harness command and exact result | Full battery (below) — full corpus (125 real dataset emails) runs through the real pipeline into a real SQLite file in tmp_path with no mocks; coverage suite re-runs the e2e path |
 | Rollback boundary | Delete `tests/e2e/test_corpus_run.py` and `README.md`; no source, dataset, config, or other-test files touched |
@@ -427,7 +430,7 @@ Strict TDD active (`.venv/bin/python -m pytest -q`). Work units 1–16 already p
 ## Files Changed (PR 9, this run)
 
 | File | Action |
-|---|---|
+| --- | --- |
 | `tests/e2e/test_corpus_run.py` | Created (5 e2e tests over the full 125-email corpus) |
 | `README.md` | Created (repo root docs) |
 | `openspec/changes/email-classifier-mvp/tasks.md` | Checkboxes 10.3–10.5 marked |
